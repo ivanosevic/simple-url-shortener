@@ -20,7 +20,9 @@ dependencies {
     implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.32.Final'
+    implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.3'
 
+    implementation group: 'org.fusesource.jansi', name: 'jansi', version: '1.17.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
