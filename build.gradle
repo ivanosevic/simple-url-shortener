@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+mainClassName = 'edu.pucmm.eict.Main'
+
+group 'edu.pucmm.eict'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    implementation group: 'io.javalin', name: 'javalin-bundle', version: '3.13.9'
+    implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
+    implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.32.Final'
+
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+}
+
+test {
+    useJUnitPlatform()
+}
