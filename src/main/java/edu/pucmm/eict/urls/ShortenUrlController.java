@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ShortenUrlController extends Controller {
-    private final ShortenUrlService shortenUrlService;
-    private final ShortenedUrlDtoConverter converter;
+
     private final MyValidator validator;
+    private final ShortenedUrlDtoConverter converter;
+    private final ShortenUrlService shortenUrlService;
 
     public ShortenUrlController(Javalin app) {
         super(app);

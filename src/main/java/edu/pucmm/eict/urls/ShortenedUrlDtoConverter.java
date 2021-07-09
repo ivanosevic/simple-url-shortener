@@ -17,11 +17,6 @@ public class ShortenedUrlDtoConverter {
         dto.setCode(shortenedUrl.getCode());
         dto.setToUrl(shortenedUrl.getToUrl());
         dto.setName(shortenedUrl.getName());
-        if(shortenedUrl.getUser() == null) {
-            dto.setUsername(null);
-        } else {
-            dto.setUsername(shortenedUrl.getUser().getUsername());
-        }
         dto.setNewUrl(appProperties.getRedirectDomain(shortenedUrl.getCode()));
         return dto;
     }

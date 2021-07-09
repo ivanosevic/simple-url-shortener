@@ -1,6 +1,15 @@
 $(document).ready(function () {
     // We must create Clipboard...
-    new ClipboardJS('a');
+    const clipboard = new ClipboardJS('.copyable');
+
+    // Clipboard after copied successfully
+    clipboard.on('success', function (e) {
+        alertify.notify('Copied! :)', 'success', 5);
+    });
+
+    clipboard.on('error', function (e) {
+        alertify.notify('Error copying :(', 'error', 5);
+    });
 
     // Event delegator for asking the API for a QR CODE.
     $(document).on('click', '.qr-code', function (e) {
