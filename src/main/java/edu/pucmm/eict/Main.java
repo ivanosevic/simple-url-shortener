@@ -5,7 +5,9 @@ import edu.pucmm.eict.bootstrap.DataBootstrap;
 import edu.pucmm.eict.bootstrap.DatabaseBootstrap;
 import edu.pucmm.eict.common.ApplicationProperties;
 import edu.pucmm.eict.common.ErrorController;
+import edu.pucmm.eict.common.StaticFileController;
 import edu.pucmm.eict.security.SecurityConfig;
+import edu.pucmm.eict.urls.ShortenUrlController;
 import io.javalin.Javalin;
 import io.javalin.plugin.rendering.JavalinRenderer;
 import io.javalin.plugin.rendering.template.JavalinVelocity;
@@ -36,6 +38,8 @@ public class Main {
 
         new SecurityConfig(app).applyConfig();
         new ErrorController(app).applyRoutes();
+        new StaticFileController(app).applyRoutes();
         new AuthController(app).applyRoutes();
+        new ShortenUrlController(app).applyRoutes();
     }
 }

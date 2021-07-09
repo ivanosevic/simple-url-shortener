@@ -18,7 +18,7 @@ public class ShortenedUrl implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(length = 100, nullable = false)
+    @Column(nullable = false)
     private String name;
 
     private String code;

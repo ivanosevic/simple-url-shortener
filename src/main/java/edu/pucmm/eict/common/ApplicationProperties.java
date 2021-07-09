@@ -114,4 +114,8 @@ public class ApplicationProperties {
     public String getEncryptPass() {
         return encryptPass;
     }
+
+    public String getRedirectDomain(String code) {
+        return this.domain + "/r/" + code;
+    }
 }

@@ -17,4 +17,3 @@ public class ReferrerDao extends Dao<Referrer, Long> {
         return instance;
     }
 }
-

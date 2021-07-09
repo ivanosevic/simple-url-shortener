@@ -77,7 +77,6 @@ public class AuthController extends Controller {
         var data = new HashMap<String, Object>();
 
         if(!errors.isEmpty()) {
-            log.info("Errors: {}", errors);
             data.put("formErrors", errors);
             ctx.status(400).render("templates/signup.vm", data);
             return;
