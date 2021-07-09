@@ -51,7 +51,15 @@ public class ShortenUrlService {
     @Transactional
     public ShortenedUrl doShort(String url, String name, User user) {
         ShortenedUrl shortenedUrl = new ShortenedUrl();
-        if(!urlHelper.isValid(url)) {
+
+        // Check if URL has HTTP prefix...
+        String newUrl = url;
+        if(!urlHelper.hasUrlPrefix(url)) {
+            newUrl = "http://" + url;
+        }
+
+        // Check if given URL is valid...
+        if(!urlHelper.isValid(newUrl)) {
             throw new InvalidUrlException("The given url is invalid.");
         }
 
@@ -62,7 +70,7 @@ public class ShortenUrlService {
         }
 
         shortenedUrl.setUser(user);
-        shortenedUrl.setToUrl(url);
+        shortenedUrl.setToUrl(newUrl);
         ShortenedUrl saved = shortenedUrlDao.create(shortenedUrl);
 
         // Now, we get the ID of the new entity to hash it and give it as a code

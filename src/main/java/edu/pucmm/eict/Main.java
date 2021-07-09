@@ -7,6 +7,7 @@ import edu.pucmm.eict.common.ApplicationProperties;
 import edu.pucmm.eict.common.ErrorController;
 import edu.pucmm.eict.common.StaticFileController;
 import edu.pucmm.eict.security.SecurityConfig;
+import edu.pucmm.eict.urls.RedirectController;
 import edu.pucmm.eict.urls.ShortenUrlController;
 import io.javalin.Javalin;
 import io.javalin.plugin.rendering.JavalinRenderer;
@@ -41,5 +42,6 @@ public class Main {
         new StaticFileController(app).applyRoutes();
         new AuthController(app).applyRoutes();
         new ShortenUrlController(app).applyRoutes();
+        new RedirectController(app).applyRoutes();
     }
 }

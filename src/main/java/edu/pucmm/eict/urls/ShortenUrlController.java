@@ -6,10 +6,7 @@ import edu.pucmm.eict.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ShortenUrlController extends Controller {
 
@@ -27,6 +24,9 @@ public class ShortenUrlController extends Controller {
     private void shortenUrlView(Context ctx) {
         var data = new HashMap<String, Object>();
         List<ShortenedUrlDto> urls = ctx.sessionAttribute("urls");
+        if(urls != null) {
+            Collections.reverse(urls);
+        }
         data.put("urls", urls);
         ctx.status(200).render("templates/index.vm", data);
     }
