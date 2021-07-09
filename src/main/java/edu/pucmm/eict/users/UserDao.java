@@ -7,8 +7,17 @@ import java.util.Optional;
 
 public class UserDao extends Dao<User, Long> {
 
-    public UserDao() {
+    private static UserDao instance;
+
+    private UserDao() {
         super(User.class);
+    }
+
+    public static UserDao getInstance() {
+        if (instance == null) {
+            instance = new UserDao();
+        }
+        return instance;
     }
 
     public List<User> findAll() {

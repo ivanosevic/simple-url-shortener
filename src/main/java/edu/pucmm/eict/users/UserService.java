@@ -1,9 +1,7 @@
 package edu.pucmm.eict.users;
 
-import org.jasypt.util.password.PasswordEncryptor;
+import edu.pucmm.eict.common.MyEncryptor;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.HashSet;
@@ -11,18 +9,24 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@Singleton
 public class UserService {
 
+    private static UserService instance;
     private final UserDao userDao;
     private final RoleDao roleDao;
-    private final PasswordEncryptor passwordEncryptor;
+    private final MyEncryptor myEncryptor;
 
-    @Inject
-    public UserService(UserDao userDao, RoleDao roleDao, PasswordEncryptor passwordEncryptor) {
-        this.userDao = userDao;
-        this.roleDao = roleDao;
-        this.passwordEncryptor = passwordEncryptor;
+    private UserService() {
+        userDao = UserDao.getInstance();
+        roleDao = RoleDao.getInstance();
+        myEncryptor = MyEncryptor.getInstance();
+    }
+
+    public static UserService getInstance() {
+        if (instance == null) {
+            instance = new UserService();
+        }
+        return instance;
     }
 
     public Optional<User> findByUsername(String username) {
@@ -43,8 +47,8 @@ public class UserService {
             throw new UserAlreadyExistsException("User with email: " + form.getEmail() + " already exists");
         }
 
-        String encryptedPassword = passwordEncryptor.encryptPassword(form.getPassword());
-        User user = new User(form.getUsername(), form.getEmail(), encryptedPassword, form.getName(), form.getLastname());
+        String hashedPassword = myEncryptor.hash(form.getPassword());
+        User user = new User(form.getUsername(), form.getEmail(), hashedPassword, form.getName(), form.getLastname());
         form.getRoles().forEach(s -> {
             var role = roleDao.findByName(s).orElseThrow(() -> new EntityNotFoundException("Role: " +  s + " couldn't be found."));
             user.getRoles().add(role);
@@ -66,15 +70,12 @@ public class UserService {
             throw new UserAlreadyExistsException("User with email: " + form.getEmail() + " already exists");
         }
 
-        String encryptedPassword = passwordEncryptor.encryptPassword(form.getPassword());
-
         Set<Role> roles = new HashSet<>();
         form.getRoles().forEach(s -> {
             var role = roleDao.findByName(s).orElseThrow(() -> new EntityNotFoundException("Role: " +  s + " couldn't be found."));
             roles.add(role);
         });
 
-        user.setPassword(encryptedPassword);
         user.setUsername(form.getUsername());
         user.setEmail(form.getEmail());
         user.setName(form.getName());

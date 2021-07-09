@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Simple Url Shortener | Log in</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css"/>
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/css/global.css">
+  <link rel="stylesheet" type="text/css" href="/css/auth.css">
+</head>
+<body>
+
+<main class="container h-100">
+  <div class="row align-items-center justify-content-center h-100">
+    <div class="col-12 col-sm-12 col-md-10 col-lg-7 rounded-circle align-items-center">
+      <form action="/auth/signup" method="post" accept-charset="UTF-8">
+        <div class="card p-5">
+
+          <!-- Form title -->
+          <p class="mt-3 mb-3 text-center fs-3 display-3 fw-bold">Sign up</p>
+
+          <!-- Name field -->
+          #set($eName = $formErrors.get('name'))
+          <div class="mb-3 #if($eLastname) has-validation #end">
+            <label for="name">Name</label>
+            <div class="input-group mb-3">
+              <i class="input-group-text bi bi-info-circle"></i>
+              <input id="name" name="name" type="text" class="form-control p-2  #if($eLastname) is-invalid #end"
+                     minlength="3" maxlength="100" required>
+              #if($eName)
+                #foreach($error in $eName)
+                  <div class="invalid-feedback">$error</div>
+                #end
+              #end
+            </div>
+          </div>
+
+          <!-- Lastname field -->
+          #set($eLastname = $formErrors.get('lastname'))
+          <div class="mb-3 #if($eLastname) has-validation #end">
+            <label for="lastname">Lastname</label>
+            <div class="input-group mb-3">
+              <i class="input-group-text bi bi-info-circle"></i>
+              <input id="lastname" name="lastname" type="text" class="form-control p-2 #if($eLastname) is-invalid #end"
+                     minlength="3" maxlength="100"
+                     required>
+              #if($eLastname)
+                #foreach($error in $eLastname)
+                  <div class="invalid-feedback">$error</div>
+                #end
+              #end
+            </div>
+          </div>
+
+          <!-- Username field -->
+          #set($eUsername = $formErrors.get('username'))
+          <div class="mb-3 #if($eUsername) has-validation #end">
+            <label for="username">Username</label>
+            <div class="input-group mb-3">
+              <i class="input-group-text bi bi-person-circle"></i>
+              <input id="username" name="username" type="text"
+                     class="form-control #if($eUsername) is-invalid #end p-2" minlength="3" maxlength="50"
+                     required>
+              #if($eUsername)
+                #foreach($error in $eUsername)
+                  <div class="invalid-feedback">$error</div>
+                #end
+              #end
+            </div>
+          </div>
+
+          <!-- Email field -->
+          #set($eEmail = $formErrors.get('email'))
+          <div class="mb-3 #if($eEmail) has-validation #end">
+            <label for="email">Email</label>
+            <div class="input-group mb-3">
+              <i class="input-group-text bi bi-mailbox"></i>
+              <input id="email" name="email" type="email" class="form-control p-2 #if($eEmail) is-invalid #end p-2"
+                     maxlength="320" required>
+              #if($eEmail)
+                #foreach($error in $eEmail)
+                  <div class="invalid-feedback">$error</div>
+                #end
+              #end
+            </div>
+          </div>
+
+          <!-- Password field -->
+          #set($ePassword = $formErrors.get('password'))
+          <div class="mb-3 #if($ePassword) has-validation #end">
+            <label for="password">Password</label>
+            <div class="input-group mb-3">
+              <i class="input-group-text bi bi-lock"></i>
+              <input id="password" name="password" type="password" class="form-control p-2" minlength="6" maxlength="16"
+                     required>
+              #if($ePassword)
+                #foreach($error in $ePassword)
+                  <div class="invalid-feedback">$error</div>
+                #end
+              #end
+            </div>
+          </div>
+
+          <!-- Submit log in form -->
+          <button type="submit" class="btn btn-primary mt-3 mb-3 signup">Sign up</button>
+
+          <div class="text-center mt-3 mb-3"><span>Already have an account?</span>
+            <a href="/app/login" class="text-decoration-none">Log in</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

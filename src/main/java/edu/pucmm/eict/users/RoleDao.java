@@ -2,14 +2,21 @@ package edu.pucmm.eict.users;
 
 import edu.pucmm.eict.common.Dao;
 
-import javax.inject.Singleton;
 import java.util.Optional;
 
-@Singleton
 public class RoleDao extends Dao<Role, Integer> {
 
-    public RoleDao() {
+    private static RoleDao instance;
+
+    private RoleDao() {
         super(Role.class);
+    }
+
+    public static RoleDao getInstance() {
+        if (instance == null) {
+            instance = new RoleDao();
+        }
+        return instance;
     }
 
     public Optional<Role> findByName(String name) {

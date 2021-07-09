@@ -1,32 +1,27 @@
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import edu.pucmm.eict.AppModule;
-import edu.pucmm.eict.DbModule;
-import edu.pucmm.eict.bootstrap.DataBootstrap;
-import edu.pucmm.eict.common.CommonModule;
 import edu.pucmm.eict.users.User;
 import edu.pucmm.eict.users.UserAlreadyExistsException;
 import edu.pucmm.eict.users.UserForm;
 import edu.pucmm.eict.users.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Slf4j
 public class UserTests {
 
-    private final UserService userService;
+    private static final Logger log = LoggerFactory.getLogger(UserTests.class);
+    private UserService userService;
 
     public UserTests() {
-        Injector injector = Guice.createInjector(new AppModule(), new DbModule(), new CommonModule());
-        injector.getInstance(DataBootstrap.class).inserts();
-        userService = injector.getInstance(UserService.class);
+
     }
 
     @Test
@@ -38,7 +33,7 @@ public class UserTests {
         f1.setUsername("User1");
         f1.setPassword("User1");
         f1.setEmail("user1@email.com");
-        f1.setRoles(List.of("APP_USER"));
+        f1.setRoles(Set.of("APP_USER"));
         User created = userService.create(f1);
         User fetch = userService.findByUsername("User1").orElseThrow(EntityNotFoundException::new);
         assertEquals(fetch.getId(), created.getId());
@@ -53,7 +48,7 @@ public class UserTests {
         f1.setUsername("User1");
         f1.setPassword("User1");
         f1.setEmail("user1@email.com");
-        f1.setRoles(List.of("APP_USER"));
+        f1.setRoles(Set.of("APP_USER"));
 
         UserForm f2 = new UserForm();
         f2.setName("User2");
@@ -61,7 +56,7 @@ public class UserTests {
         f2.setUsername("User1");
         f2.setPassword("User2");
         f2.setEmail("user1@email.com");
-        f2.setRoles(List.of("APP_USER"));
+        f2.setRoles(Set.of("APP_USER"));
 
 
         UserForm f3 = new UserForm();
@@ -70,7 +65,7 @@ public class UserTests {
         f3.setUsername("User3");
         f3.setPassword("User3");
         f3.setEmail("user1@email.com");
-        f3.setRoles(List.of("APP_USER"));
+        f3.setRoles(Set.of("APP_USER"));
 
         UserForm f4 = new UserForm();
         f4.setName("User4");
@@ -78,7 +73,7 @@ public class UserTests {
         f4.setUsername("User4");
         f4.setPassword("User4");
         f4.setEmail("user4@email.com");
-        f4.setRoles(List.of("APP_USER"));
+        f4.setRoles(Set.of("APP_USER"));
 
         userService.create(f1);
 
@@ -108,7 +103,7 @@ public class UserTests {
         f1.setUsername("User1");
         f1.setPassword("User1");
         f1.setEmail("user1@email.com");
-        f1.setRoles(List.of("APP_USER"));
+        f1.setRoles(Set.of("APP_USER"));
 
         UserForm f2 = new UserForm();
         f2.setName("User2");
@@ -116,7 +111,7 @@ public class UserTests {
         f2.setUsername("User2");
         f2.setPassword("User2");
         f2.setEmail("User2@email.com");
-        f2.setRoles(List.of("APP_USER"));
+        f2.setRoles(Set.of("APP_USER"));
 
 
         UserForm f3 = new UserForm();
@@ -125,7 +120,7 @@ public class UserTests {
         f3.setUsername("User3");
         f3.setPassword("User3");
         f3.setEmail("User3@email.com");
-        f3.setRoles(List.of("APP_USER"));
+        f3.setRoles(Set.of("APP_USER"));
 
         UserForm f4 = new UserForm();
         f4.setName("User4");
@@ -133,7 +128,7 @@ public class UserTests {
         f4.setUsername("User4");
         f4.setPassword("User4");
         f4.setEmail("user4@email.com");
-        f4.setRoles(List.of("APP_USER"));
+        f4.setRoles(Set.of("APP_USER"));
 
         List<UserForm> formList = List.of(f1, f2, f3, f4);
         var usersCreated = formList.stream().map(userService::create).collect(Collectors.toList());
