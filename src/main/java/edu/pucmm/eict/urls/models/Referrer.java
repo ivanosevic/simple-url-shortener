@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +14,7 @@ public class Referrer implements Serializable {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "shortened_url_id")
-    private ShortenedUrl shortenedUrl;
+    private ShortURL shortURL;
 
     @Column(length = 15, nullable = false)
     private String accessIp;
@@ -54,12 +54,12 @@ public class Referrer implements Serializable {
         this.id = id;
     }
 
-    public ShortenedUrl getShortenedUrl() {
-        return shortenedUrl;
+    public ShortURL getShortenedUrl() {
+        return shortURL;
     }
 
-    public void setShortenedUrl(ShortenedUrl shortenedUrl) {
-        this.shortenedUrl = shortenedUrl;
+    public void setShortenedUrl(ShortURL shortURL) {
+        this.shortURL = shortURL;
     }
 
     public String getAccessIp() {
@@ -119,11 +119,11 @@ public class Referrer implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Referrer referrer = (Referrer) o;
-        return id == referrer.id && Objects.equals(shortenedUrl, referrer.shortenedUrl) && Objects.equals(accessIp, referrer.accessIp) && Objects.equals(browser, referrer.browser) && Objects.equals(platform, referrer.platform) && Objects.equals(country, referrer.country) && Objects.equals(clickedAt, referrer.clickedAt);
+        return id == referrer.id && Objects.equals(shortURL, referrer.shortURL) && Objects.equals(accessIp, referrer.accessIp) && Objects.equals(browser, referrer.browser) && Objects.equals(platform, referrer.platform) && Objects.equals(country, referrer.country) && Objects.equals(clickedAt, referrer.clickedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, shortenedUrl, accessIp, browser, platform, country, clickedAt);
+        return Objects.hash(id, shortURL, accessIp, browser, platform, country, clickedAt);
     }
 }

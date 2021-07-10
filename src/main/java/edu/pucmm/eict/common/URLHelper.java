@@ -6,18 +6,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class UrlHelper {
+public class URLHelper {
 
-    private static UrlHelper instance;
+    private static URLHelper instance;
     private final UrlValidator validator;
 
-    private UrlHelper() {
+    private URLHelper() {
         validator = new UrlValidator();
     }
 
-    public static UrlHelper getInstance() {
+    public static URLHelper getInstance() {
         if (instance == null) {
-            instance = new UrlHelper();
+            instance = new URLHelper();
         }
         return instance;
     }

@@ -1,4 +1,4 @@
-package edu.pucmm.eict.validation;
+package edu.pucmm.eict.common.validation;
 
 import edu.pucmm.eict.users.UserDao;
 

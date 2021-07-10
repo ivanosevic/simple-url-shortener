@@ -1,13 +1,17 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.models;
 
-public class ShortenedUrlDto {
+import java.util.UUID;
+
+public class SessionURL {
     private Long id;
     private String name;
     private String code;
     private String toUrl;
     private String newUrl;
+    private String temporaryCode;
 
-    public ShortenedUrlDto() {
+    public SessionURL() {
+        temporaryCode = UUID.randomUUID().toString().replace("-", "");
     }
 
     public Long getId() {
@@ -48,5 +52,13 @@ public class ShortenedUrlDto {
 
     public void setNewUrl(String newUrl) {
         this.newUrl = newUrl;
+    }
+
+    public String getTemporaryCode() {
+        return temporaryCode;
+    }
+
+    public void setTemporaryCode(String temporaryCode) {
+        this.temporaryCode = temporaryCode;
     }
 }

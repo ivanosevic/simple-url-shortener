@@ -1,29 +1,34 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.controllers;
 
 import edu.pucmm.eict.common.Controller;
 import edu.pucmm.eict.common.MyValidator;
+import edu.pucmm.eict.urls.converter.SessionURLConverter;
+import edu.pucmm.eict.urls.models.SessionURL;
+import edu.pucmm.eict.urls.models.ShortForm;
+import edu.pucmm.eict.urls.models.ShortURL;
+import edu.pucmm.eict.urls.services.ShortURLService;
 import edu.pucmm.eict.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.util.*;
 
-public class ShortenUrlController extends Controller {
+public class ShortURLController extends Controller {
 
     private final MyValidator validator;
-    private final ShortenedUrlDtoConverter converter;
-    private final ShortenUrlService shortenUrlService;
+    private final SessionURLConverter converter;
+    private final ShortURLService shortURLService;
 
-    public ShortenUrlController(Javalin app) {
+    public ShortURLController(Javalin app) {
         super(app);
-        this.converter = ShortenedUrlDtoConverter.getInstance();
-        this.shortenUrlService = ShortenUrlService.getInstance();
+        this.converter = SessionURLConverter.getInstance();
+        this.shortURLService = ShortURLService.getInstance();
         this.validator = MyValidator.getInstance();
     }
 
     private void shortenUrlView(Context ctx) {
         var data = new HashMap<String, Object>();
-        List<ShortenedUrlDto> urls = ctx.sessionAttribute("urls");
+        List<SessionURL> urls = ctx.sessionAttribute("urls");
         if(urls != null) {
             Collections.reverse(urls);
         }
@@ -47,11 +52,11 @@ public class ShortenUrlController extends Controller {
         }
 
         // Create the url
-        ShortenedUrl shortenedUrl = shortenUrlService.doShort(form.getUrl(), form.getName(), user);
-        ShortenedUrlDto dto = converter.convert(shortenedUrl);
+        ShortURL shortURL = shortURLService.cut(form.getUrl(), form.getName(), user);
+        SessionURL dto = converter.convert(shortURL);
 
         // Now we save it to the session
-        List<ShortenedUrlDto> urls = ctx.sessionAttribute("urls");
+        List<SessionURL> urls = ctx.sessionAttribute("urls");
         if(urls == null) {
             urls = new ArrayList<>();
             ctx.sessionAttribute("urls", urls);
@@ -64,7 +69,7 @@ public class ShortenUrlController extends Controller {
 
     private void generateQr(Context ctx) {
         String code = ctx.pathParam("code", String.class).get();
-        String base64Image = shortenUrlService.getQrCodeBase64(code);
+        String base64Image = shortURLService.getQrCodeBase64(code);
         var image = new HashMap<String, String>();
         image.put("imageBase64", base64Image);
         ctx.json(image);

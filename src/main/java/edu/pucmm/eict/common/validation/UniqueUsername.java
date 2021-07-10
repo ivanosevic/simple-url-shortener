@@ -1,4 +1,4 @@
-package edu.pucmm.eict.validation;
+package edu.pucmm.eict.common.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,12 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UrlValidator.class)
+@Constraint(validatedBy = UniqueUsernameValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
-public @interface Url {
+public @interface UniqueUsername {
 
-    String message() default "Unable to shorten that link. It is not a valid url.";
+    String message() default "There is already a user with this username";
 
     Class<?>[] groups() default {};
 

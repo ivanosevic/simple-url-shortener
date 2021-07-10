@@ -1,8 +1,12 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.services;
 
-import edu.pucmm.eict.common.ApiCaller;
-import edu.pucmm.eict.common.IpApiResponse;
+import edu.pucmm.eict.common.apicalls.ApiCaller;
+import edu.pucmm.eict.common.apicalls.IpApiResponse;
 import edu.pucmm.eict.common.UAAnalyzer;
+import edu.pucmm.eict.urls.dao.ReferrerDao;
+import edu.pucmm.eict.urls.dao.ShortURLDao;
+import edu.pucmm.eict.urls.models.Referrer;
+import edu.pucmm.eict.urls.models.ShortURL;
 import nl.basjes.parse.useragent.UserAgent;
 
 import javax.persistence.EntityNotFoundException;
@@ -13,11 +17,11 @@ public class ReferrerService {
     private static ReferrerService instance;
     private final ApiCaller apiCaller;
     private final UAAnalyzer analyzer;
-    private final ShortenedUrlDao shortenedUrlDao;
+    private final ShortURLDao shortURLDao;
     private final ReferrerDao referrerDao;
 
     private ReferrerService() {
-        shortenedUrlDao = ShortenedUrlDao.getInstance();
+        shortURLDao = ShortURLDao.getInstance();
         referrerDao = ReferrerDao.getInstance();
         apiCaller = ApiCaller.getInstance();
         analyzer = UAAnalyzer.getInstance();
@@ -31,8 +35,8 @@ public class ReferrerService {
     }
 
     @Transactional
-    public ShortenedUrl newReferrer(String code, String ip, String uaHeader) {
-        ShortenedUrl shortenedUrl = shortenedUrlDao.findByCode(code).orElseThrow(EntityNotFoundException::new);
+    public ShortURL newReferrer(String code, String ip, String uaHeader) {
+        ShortURL shortURL = shortURLDao.findByCode(code).orElseThrow(EntityNotFoundException::new);
 
         // Do API calls to get stats
         IpApiResponse geoStats = apiCaller.getGeoStats(ip);
@@ -43,11 +47,11 @@ public class ReferrerService {
         String browser = userAgent.getValue("AgentName");
         Referrer referrer = new Referrer(ip, platform, browser, geoStats.getCountry());
 
-        referrer.setShortenedUrl(shortenedUrl);
+        referrer.setShortenedUrl(shortURL);
         referrerDao.create(referrer);
 
-        long increment = shortenedUrl.getVisitCount() + 1;
-        shortenedUrl.setVisitCount(increment);
-        return shortenedUrlDao.update(shortenedUrl);
+        long increment = shortURL.getVisitCount() + 1;
+        shortURL.setVisitCount(increment);
+        return shortURLDao.update(shortURL);
     }
 }

@@ -1,6 +1,7 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.controllers;
 
 import edu.pucmm.eict.common.Controller;
+import edu.pucmm.eict.urls.services.ReferrerService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -15,8 +16,8 @@ public class RedirectController extends Controller {
 
     private void performRedirect(Context ctx) {
         String code = ctx.pathParam("code", String.class).get();
-        var shortenedUrl = referrerService.newReferrer(code, ctx.req.getRemoteAddr(), ctx.userAgent());
-        ctx.redirect(shortenedUrl.getToUrl());
+        var shortURL = referrerService.newReferrer(code, ctx.req.getRemoteAddr(), ctx.userAgent());
+        ctx.redirect(shortURL.getToUrl());
     }
 
     @Override

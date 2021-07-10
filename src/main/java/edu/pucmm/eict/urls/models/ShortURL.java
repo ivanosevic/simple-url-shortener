@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.models;
 
 import edu.pucmm.eict.users.User;
 
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class ShortenedUrl implements Serializable {
+public class ShortURL implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +35,10 @@ public class ShortenedUrl implements Serializable {
     @Column(nullable = false)
     private Boolean active;
 
-    public ShortenedUrl() {
+    public ShortURL() {
     }
 
-    public ShortenedUrl(User user, String name, String code, String toUrl) {
+    public ShortURL(User user, String name, String code, String toUrl) {
         this.user = user;
         this.name = name;
         this.code = code;
@@ -118,7 +118,7 @@ public class ShortenedUrl implements Serializable {
 
     @Override
     public String toString() {
-        return "ShortenedUrl{" +
+        return "ShortURL{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
@@ -130,7 +130,7 @@ public class ShortenedUrl implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ShortenedUrl that = (ShortenedUrl) o;
+        ShortURL that = (ShortURL) o;
         return Objects.equals(code, that.code);
     }
 

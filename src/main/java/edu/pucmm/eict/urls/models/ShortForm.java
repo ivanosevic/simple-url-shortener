@@ -1,14 +1,14 @@
-package edu.pucmm.eict.urls;
+package edu.pucmm.eict.urls.models;
 
-import edu.pucmm.eict.validation.Url;
+import edu.pucmm.eict.common.validation.URL;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class ShortForm {
 
+    @URL
     @NotBlank(message = "URL can't be empty")
-    @Url
     private String url;
 
     @Size(max = 255, message = "Name has to be less than 255 characters")

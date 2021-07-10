@@ -1,4 +1,4 @@
-package edu.pucmm.eict.common;
+package edu.pucmm.eict.common.apicalls;
 
 public class IpApiResponse {
 

@@ -1,4 +1,4 @@
-package edu.pucmm.eict.validation;
+package edu.pucmm.eict.common.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,12 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UniqueUsernameValidator.class)
+@Constraint(validatedBy = UniqueEmailValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
-public @interface UniqueUsername {
+public @interface UniqueEmail {
 
-    String message() default "There is already a user with this username";
+    String message() default "There is already a user with this email";
 
     Class<?>[] groups() default {};
 

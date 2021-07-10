@@ -1,4 +1,4 @@
-package edu.pucmm.eict.common;
+package edu.pucmm.eict.common.apicalls;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

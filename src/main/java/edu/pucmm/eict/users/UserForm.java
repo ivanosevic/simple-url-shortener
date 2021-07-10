@@ -1,7 +1,7 @@
 package edu.pucmm.eict.users;
 
-import edu.pucmm.eict.validation.UniqueEmail;
-import edu.pucmm.eict.validation.UniqueUsername;
+import edu.pucmm.eict.common.validation.UniqueEmail;
+import edu.pucmm.eict.common.validation.UniqueUsername;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
