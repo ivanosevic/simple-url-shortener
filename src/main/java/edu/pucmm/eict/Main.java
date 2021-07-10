@@ -6,6 +6,8 @@ import edu.pucmm.eict.bootstrap.DatabaseBootstrap;
 import edu.pucmm.eict.common.ApplicationProperties;
 import edu.pucmm.eict.common.ErrorController;
 import edu.pucmm.eict.common.StaticFileController;
+import edu.pucmm.eict.dashboard.DashboardInterceptor;
+import edu.pucmm.eict.dashboard.UserZoneController;
 import edu.pucmm.eict.security.SecurityConfig;
 import edu.pucmm.eict.urls.RedirectController;
 import edu.pucmm.eict.urls.ShortenUrlController;
@@ -43,5 +45,7 @@ public class Main {
         new AuthController(app).applyRoutes();
         new ShortenUrlController(app).applyRoutes();
         new RedirectController(app).applyRoutes();
+        new DashboardInterceptor(app).applyRoutes();
+        new UserZoneController(app).applyRoutes();
     }
 }

@@ -2,10 +2,7 @@ package edu.pucmm.eict.auth;
 
 import edu.pucmm.eict.common.Controller;
 import edu.pucmm.eict.common.MyValidator;
-import edu.pucmm.eict.users.Role;
-import edu.pucmm.eict.users.User;
-import edu.pucmm.eict.users.UserForm;
-import edu.pucmm.eict.users.UserService;
+import edu.pucmm.eict.users.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.slf4j.Logger;
@@ -22,12 +19,14 @@ public class AuthController extends Controller {
     private final MyValidator myValidator;
     private final AuthService authService;
     private final UserService userService;
+    private final UserDao userDao;
 
     public AuthController(Javalin app) {
         super(app);
         myValidator = MyValidator.getInstance();
         authService = AuthService.getInstance();
         userService = UserService.getInstance();
+        userDao = UserDao.getInstance();
     }
 
     private void loginView(Context ctx) {
@@ -36,6 +35,14 @@ public class AuthController extends Controller {
 
     private void signupView(Context ctx) {
         ctx.status(200).render("templates/signup.vm");
+    }
+
+    private void redirectToDashboard(User user, Context ctx) {
+        if(user.getRoles().contains(Role.ADMIN)) {
+            ctx.redirect("/app/admin-panel");
+        }  else {
+            ctx.redirect("/app/dashboard");
+        }
     }
 
     private void processLogin(Context ctx) {
@@ -54,11 +61,7 @@ public class AuthController extends Controller {
         ctx.req.changeSessionId();
 
         // After login sucessfully, redirect...
-        if(user.getRoles().contains(Role.ADMIN)) {
-            ctx.redirect("/admin-zone/dashboard");
-        } else {
-            ctx.redirect("/app/dashboard");
-        }
+        redirectToDashboard(user, ctx);
     }
 
     private void processSignup(Context ctx) {
@@ -83,12 +86,19 @@ public class AuthController extends Controller {
         }
 
         // Create the user
-        User user = userService.create(form);
+        userService.create(form);
+        ctx.redirect("/app/login");
+    }
 
-        // Immediately sign in the user.
-        ctx.sessionAttribute("user", user);
-        ctx.req.changeSessionId();
-        ctx.redirect("/app/dashboard");
+    private void logout(Context ctx) {
+        User user = ctx.sessionAttribute("user");
+        if(user != null) {
+            user.setSecret(null);
+            userDao.update(user);
+            ctx.req.getSession().invalidate();
+            ctx.removeCookie("remember-me");
+            ctx.redirect("/");
+        }
     }
 
     private void handleBadCredentials(Exception ex, Context ctx) {
@@ -103,6 +113,7 @@ public class AuthController extends Controller {
         app.get("/app/signup", this::signupView);
         app.post("/auth/login", this::processLogin);
         app.post("/auth/signup", this::processSignup);
+        app.get("/auth/logout", this::logout);
         app.exception(BadCredentialsException.class, this::handleBadCredentials);
     }
 }

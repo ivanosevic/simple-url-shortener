@@ -1,0 +1,11 @@
+#macro(sidebar)
+<div class="border-end bg-white" id="sidebar-wrapper">
+  <div class="sidebar-heading border-bottom bg-light">Admin Panel</div>
+  <div class="list-group list-group-flush">
+    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/app/admin-panel">Dashboard</a>
+    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/app/shortened-links">All Shortened Links</a>
+    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/app/shortened-links">My Shortened Links</a>
+    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/app/users">Users</a>
+  </div>
+</div>
+#end

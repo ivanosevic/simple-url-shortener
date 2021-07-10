@@ -27,6 +27,8 @@ $(document).ready(function () {
                     imageWidth: 400,
                     imageHeight: 400,
                     imageAlt: data.redirectUrl,
+                    showConfirmButton: false,
+                    showCloseButton: true
                 });
             },
             error: function (data) {
