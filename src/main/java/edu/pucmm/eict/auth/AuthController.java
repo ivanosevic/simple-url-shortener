@@ -5,8 +5,6 @@ import edu.pucmm.eict.common.MyValidator;
 import edu.pucmm.eict.users.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +13,6 @@ import java.util.Set;
 
 public class AuthController extends Controller {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     private final MyValidator myValidator;
     private final AuthService authService;
     private final UserService userService;

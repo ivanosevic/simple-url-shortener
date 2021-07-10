@@ -2,50 +2,28 @@ package edu.pucmm.eict.common;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class Dao<T, PK extends Serializable> {
 
-    private final ApplicationProperties appProperties;
+    private final MyEmf myEmf;
     private static EntityManagerFactory emf;
     protected Class<T> entityClass;
 
     public Dao(Class<T> entityClass) {
         this.entityClass = entityClass;
-        this.appProperties = ApplicationProperties.getInstance();
+        this.myEmf = MyEmf.getInstance();
         if(emf == null) {
-            emf = buildEmf();
+            emf = myEmf.getEmf();
         }
     }
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
-    }
-
-    private EntityManagerFactory buildEmf() {
-        String driver = appProperties.getDbDriver();
-        String url = appProperties.getDbUrl();
-        String user = appProperties.getDbUsername();
-        String password = appProperties.getDbPassword();
-        String showSql = appProperties.getShowSql();
-        String dialect = appProperties.getDbDialect();
-        String ddl = appProperties.getGenerateDdl();
-        Map<String, String> properties = new HashMap<>();
-        properties.put("hibernate.dialect", dialect);
-        properties.put("javax.persistence.jdbc.driver", driver);
-        properties.put("javax.persistence.jdbc.url", url);
-        properties.put("javax.persistence.jdbc.user", user);
-        properties.put("javax.persistence.jdbc.password", password);
-        properties.put("hibernate.show_sql", showSql);
-        properties.put("hibernate.hbm2ddl.auto", ddl);
-        return Persistence.createEntityManagerFactory("main-unit", properties);
     }
 
     public T create(T entity) {

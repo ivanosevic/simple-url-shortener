@@ -22,6 +22,7 @@ public class ApplicationProperties {
     private final String showSql;
     private final String generateDdl;
     private final String encryptPass;
+    private final String mapsApiKey;
 
     private ApplicationProperties() {
         properties = loadPropertiesFile();
@@ -37,6 +38,7 @@ public class ApplicationProperties {
         showSql = properties.getProperty("app.db.show-sql");
         generateDdl = properties.getProperty("app.db.generate-ddl");
         encryptPass = properties.getProperty("app.encrypt.pass");
+        mapsApiKey = properties.getProperty("app.google.maps-api-key");
     }
 
     public static ApplicationProperties getInstance() {
@@ -117,5 +119,9 @@ public class ApplicationProperties {
 
     public String getRedirectDomain(String code) {
         return this.domain + "/r/" + code;
+    }
+
+    public String getMapsApiKey() {
+        return mapsApiKey;
     }
 }
