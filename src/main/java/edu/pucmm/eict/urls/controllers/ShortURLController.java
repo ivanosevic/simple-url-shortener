@@ -2,36 +2,34 @@ package edu.pucmm.eict.urls.controllers;
 
 import edu.pucmm.eict.common.Controller;
 import edu.pucmm.eict.common.MyValidator;
-import edu.pucmm.eict.urls.converter.SessionURLConverter;
 import edu.pucmm.eict.urls.models.SessionURL;
 import edu.pucmm.eict.urls.models.ShortForm;
 import edu.pucmm.eict.urls.models.ShortURL;
+import edu.pucmm.eict.urls.services.SessionURLService;
 import edu.pucmm.eict.urls.services.ShortURLService;
 import edu.pucmm.eict.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 public class ShortURLController extends Controller {
 
     private final MyValidator validator;
-    private final SessionURLConverter converter;
     private final ShortURLService shortURLService;
+    private final SessionURLService sessionURLService;
 
     public ShortURLController(Javalin app) {
         super(app);
-        this.converter = SessionURLConverter.getInstance();
-        this.shortURLService = ShortURLService.getInstance();
         this.validator = MyValidator.getInstance();
+        this.shortURLService = ShortURLService.getInstance();
+        this.sessionURLService = SessionURLService.getInstance();
     }
 
     private void shortenUrlView(Context ctx) {
+        List<SessionURL> urls = sessionURLService.findSessionURLs(ctx);
         var data = new HashMap<String, Object>();
-        List<SessionURL> urls = ctx.sessionAttribute("urls");
-        if(urls != null) {
-            Collections.reverse(urls);
-        }
         data.put("urls", urls);
         ctx.status(200).render("templates/index.vm", data);
     }
@@ -51,17 +49,11 @@ public class ShortURLController extends Controller {
             return;
         }
 
-        // Create the url
+        // Create the URL
         ShortURL shortURL = shortURLService.cut(form.getUrl(), form.getName(), user);
-        SessionURL dto = converter.convert(shortURL);
 
-        // Now we save it to the session
-        List<SessionURL> urls = ctx.sessionAttribute("urls");
-        if(urls == null) {
-            urls = new ArrayList<>();
-            ctx.sessionAttribute("urls", urls);
-        }
-        urls.add(dto);
+        // Add it to the session
+        sessionURLService.addSessionURL(ctx, shortURL);
 
         // Return to the original route
         ctx.redirect("/");
@@ -75,10 +67,19 @@ public class ShortURLController extends Controller {
         ctx.json(image);
     }
 
+    private void showTempStatistics(Context ctx) {
+        String tempCode = ctx.pathParam("tempCode", String.class).get();
+        SessionURL sessionURL = sessionURLService.findByTemporaryId(ctx, tempCode).orElseThrow(EntityNotFoundException::new);
+        var data = new HashMap<String, Object>();
+        data.put("url", sessionURL);
+        ctx.status(200).render("templates/temp-statistics.vm", data);
+    }
+
     @Override
     public void applyRoutes() {
         app.get("/", this::shortenUrlView);
         app.post("/short", this::shortUrl);
         app.get("/qr/:code", this::generateQr);
+        app.get("/statistics/temp/:tempCode", this::showTempStatistics);
     }
 }

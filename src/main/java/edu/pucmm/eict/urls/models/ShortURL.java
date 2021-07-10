@@ -24,7 +24,7 @@ public class ShortURL implements Serializable {
     private String code;
 
     @Column(length = 2048, nullable = false)
-    private String toUrl;
+    private String toURL;
 
     @Column(nullable = false)
     private long visitCount;
@@ -38,11 +38,11 @@ public class ShortURL implements Serializable {
     public ShortURL() {
     }
 
-    public ShortURL(User user, String name, String code, String toUrl) {
+    public ShortURL(User user, String name, String code, String toURL) {
         this.user = user;
         this.name = name;
         this.code = code;
-        this.toUrl = toUrl;
+        this.toURL = toURL;
     }
 
     @PrePersist
@@ -84,12 +84,12 @@ public class ShortURL implements Serializable {
         this.code = code;
     }
 
-    public String getToUrl() {
-        return toUrl;
+    public String getToURL() {
+        return toURL;
     }
 
-    public void setToUrl(String toUrl) {
-        this.toUrl = toUrl;
+    public void setToURL(String toURL) {
+        this.toURL = toURL;
     }
 
     public long getVisitCount() {
@@ -122,7 +122,7 @@ public class ShortURL implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
-                ", toUrl='" + toUrl + '\'' +
+                ", toUrl='" + toURL + '\'' +
                 '}';
     }
 

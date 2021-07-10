@@ -73,7 +73,7 @@ public class ShortURLService {
         }
 
         shortURL.setUser(user);
-        shortURL.setToUrl(newUrl);
+        shortURL.setToURL(newUrl);
         ShortURL saved = shortURLDao.create(shortURL);
 
         // Now, we get the ID of the new entity to hash it and give it as a code

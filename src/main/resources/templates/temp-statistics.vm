@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Temporary Statistics For ${url.NewUrl}</title>
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
+</head>
+
+<body>
+<p>Temporary Statistics Page for ${url.Name}</p>
+<p>Code: ${url.Code}</p>
+<p>Redirects to: ${url.NewUrl}</p>
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

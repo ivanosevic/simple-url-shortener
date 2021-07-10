@@ -89,7 +89,7 @@
             </div>
             <!-- QR Code -->
             <div class="col-12 col-md-1 col-lg-1 url-actions d-grip gap-2 mb-2">
-              <a class="btn btn-sm d-block btn-outline-dark">
+              <a class="btn btn-sm d-block btn-outline-dark" href="/statistics/temp/${url.TemporaryCode}" target="_blank">
                 <i class="fa fa-chart-pie fs-6"></i>
               </a>
             </div>

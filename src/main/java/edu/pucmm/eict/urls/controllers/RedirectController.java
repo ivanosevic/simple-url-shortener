@@ -17,7 +17,7 @@ public class RedirectController extends Controller {
     private void performRedirect(Context ctx) {
         String code = ctx.pathParam("code", String.class).get();
         var shortURL = referrerService.newReferrer(code, ctx.req.getRemoteAddr(), ctx.userAgent());
-        ctx.redirect(shortURL.getToUrl());
+        ctx.redirect(shortURL.getToURL());
     }
 
     @Override
