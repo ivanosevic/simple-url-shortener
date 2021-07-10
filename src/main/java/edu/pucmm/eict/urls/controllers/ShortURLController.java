@@ -5,6 +5,7 @@ import edu.pucmm.eict.common.Controller;
 import edu.pucmm.eict.common.MyValidator;
 import edu.pucmm.eict.reports.ReportService;
 import edu.pucmm.eict.reports.URLGroupByCountry;
+import edu.pucmm.eict.reports.URLGroupByPlataform;
 import edu.pucmm.eict.urls.models.SessionURL;
 import edu.pucmm.eict.urls.models.ShortForm;
 import edu.pucmm.eict.urls.models.ShortURL;
@@ -82,8 +83,10 @@ public class ShortURLController extends Controller {
         Long amountClicks = reportService.amountClicks(sessionURL.getId());
         Long amountUniqueClicks = reportService.amountUniqueClicks(sessionURL.getId());
         Long clicksLastDay = reportService.amountClicksDuringLastDay(sessionURL.getId());
+        List<URLGroupByPlataform> urlGroupByPlatform = reportService.URLGroupByPlatform(sessionURL.getId());
         String topCountryClicks = reportService.topCountryByClicks(sessionURL.getId());
         String urlGroupByCountriesJson = JavalinJson.toJson(urlGroupByCountries);
+        String urlGroupByPlatformJson = JavalinJson.toJson(urlGroupByPlatform);
         String mapsApiKey = ApplicationProperties.getInstance().getMapsApiKey();
 
         // Data to be sent to the view
@@ -95,7 +98,8 @@ public class ShortURLController extends Controller {
         data.put("amountUniqueClicks", amountUniqueClicks);
         data.put("clicksLastDay", clicksLastDay);
         data.put("topCountryClicks", topCountryClicks);
-        ctx.status(200).render("templates/reports/temp-statistics.vm", data);
+        data.put("urlGroupByPlatform", urlGroupByPlatformJson);
+        ctx.status(200).render("templates/reports/statistic-in-session.vm", data);
     }
 
     @Override

@@ -8,7 +8,6 @@ import javax.persistence.Tuple;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ReportService {
 
@@ -32,6 +31,16 @@ public class ReportService {
             String country = (String) t.get(0);
             Long quantity = (Long) t.get(1);
             data.add(new URLGroupByCountry(country, quantity));
+        }
+        return data;
+    }
+
+    private List<URLGroupByPlataform> tupleToURLGroupByMonth(List<Tuple> result) {
+        List<URLGroupByPlataform> data = new ArrayList<>();
+        for(var t : result) {
+            String platform = (String) t.get(0);
+            Long quantity = (Long) t.get(1);
+            data.add(new URLGroupByPlataform(platform, quantity));
         }
         return data;
     }
@@ -123,6 +132,22 @@ public class ReportService {
                     .setParameter("endDate", endDate)
                     .getResultList()
                     .stream().findFirst().get();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<URLGroupByPlataform> URLGroupByPlatform(Long shortUrlId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            List<Tuple> result = em.createQuery("SELECT r.platform, COUNT(*) FROM Referrer r " +
+                    "JOIN r.shortURL as shortURL " +
+                    "WHERE shortURL.id = :shortUrlId and shortURL.active = :active " +
+                    "GROUP BY r.platform", Tuple.class)
+                    .setParameter("shortUrlId", shortUrlId)
+                    .setParameter("active", true)
+                    .getResultList();
+            return tupleToURLGroupByMonth(result);
         } finally {
             em.close();
         }

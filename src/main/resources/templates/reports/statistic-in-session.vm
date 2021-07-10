@@ -1,0 +1,77 @@
+#* @vtlvariable name="MyMapsApiKey" type="java.lang.String" *#
+#* @vtlvariable name="urlGroupByCountries" type="java.lang.String" *#
+#* @vtlvariable name="urlGroupByPlatform" type="java.lang.String" *#
+#* @vtlvariable name="clicksLastDay" type="java.lang.Long" *#
+#* @vtlvariable name="topCountryClicks" type="java.lang.String" *#
+#* @vtlvariable name="amountUniqueClicks" type="java.lang.Long" *#
+#* @vtlvariable name="amountClicks" type="java.lang.Long" *#
+#* @velocityproperties path="../../application.properties" runtime_root="../../../resources" *#
+#parse("templates/reports/summary-info.vm")
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Temporary Statistics For ${url.NewUrl}</title>
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
+</head>
+
+<body class="bg-light">
+
+<header class="shadow-sm p-3 mb-4 bg-body rounded">
+  <h1 class="display-6">URL Statistics</h1>
+  <p class="lead">URL Statistics for <strong>${url.NewUrl}</strong></p>
+</header>
+
+<main id="report" class="container">
+  <div class="row p-2">
+    <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$amountClicks</p>
+      <p class="lead text-center">Clicks</p>
+    </div>
+
+    <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$amountUniqueClicks</p>
+      <p class="lead text-center">Unique Clicks</p>
+    </div>
+
+    <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$clicksLastDay</p>
+      <p class="lead text-center">Clicks during last 24 hours</p>
+    </div>
+
+    <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$topCountryClicks</p>
+      <p class="lead text-center">Top country by clicks</p>
+    </div>
+  </div>
+
+  <div class="row p-2 col-sm mb-3 shadow-sm p-2 bg-body rounded">
+    <div class="col-sm mb-3">
+      <p class="lead text-center">Clicks by country</p>
+      <div id="shorten-links-by-country" style="width: 100%; height: 400px;"></div>
+    </div>
+    <div class="col-sm">
+      <p class="lead text-center">Clicks by platform</p>
+      <div id="clicks-by-platform" style="width: 100%; height: 400px;"></div>
+    </div>
+  </div>
+</main>
+
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/vendor/googlecharts/loader.js"></script>
+<script type="text/javascript">
+  const MapsApiKey = '${MyMapsApiKey}';
+  const URLGroupByCountryData = ${urlGroupByCountries};
+  const URLGroupByPlatform = ${urlGroupByPlatform};
+</script>
+<script type="text/javascript" src="/js/statistics.js"></script>
+</body>
+</html>
