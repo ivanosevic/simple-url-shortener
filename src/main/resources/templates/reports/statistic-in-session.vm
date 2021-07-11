@@ -1,10 +1,6 @@
 #* @vtlvariable name="MyMapsApiKey" type="java.lang.String" *#
-#* @vtlvariable name="urlGroupByCountries" type="java.lang.String" *#
-#* @vtlvariable name="urlGroupByPlatform" type="java.lang.String" *#
-#* @vtlvariable name="clicksLastDay" type="java.lang.Long" *#
-#* @vtlvariable name="topCountryClicks" type="java.lang.String" *#
-#* @vtlvariable name="amountUniqueClicks" type="java.lang.Long" *#
-#* @vtlvariable name="amountClicks" type="java.lang.Long" *#
+#* @vtlvariable name="url" type="edu.pucmm.eict.urls.models.SessionURL" *#
+#* @vtlvariable name="report" type="edu.pucmm.eict.reports.BasicURLReport" *#
 #* @velocityproperties path="../../application.properties" runtime_root="../../../resources" *#
 #parse("templates/reports/summary-info.vm")
 
@@ -18,6 +14,7 @@
   <title>Temporary Statistics For ${url.NewUrl}</title>
   <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/leaflet/leaflet.css">
   <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
 </head>
 
@@ -31,22 +28,22 @@
 <main id="report" class="container">
   <div class="row p-2">
     <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$amountClicks</p>
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$report.Clicks</p>
       <p class="lead text-center">Clicks</p>
     </div>
 
     <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$amountUniqueClicks</p>
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$report.UniqueClicks</p>
       <p class="lead text-center">Unique Clicks</p>
     </div>
 
     <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$clicksLastDay</p>
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$report.ClicksDuringDay</p>
       <p class="lead text-center">Clicks during last 24 hours</p>
     </div>
 
     <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$topCountryClicks</p>
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$report.TopCountryByClicks</p>
       <p class="lead text-center">Top country by clicks</p>
     </div>
   </div>
@@ -56,9 +53,20 @@
       <p class="lead text-center">Clicks by country</p>
       <div id="shorten-links-by-country" style="width: 100%; height: 400px;"></div>
     </div>
-    <div class="col-sm">
+  </div>
+
+  <div class="row p-2 col-sm mb-3 shadow-sm p-2 bg-body rounded">
+    <div class="col-sm-4">
       <p class="lead text-center">Clicks by platform</p>
-      <div id="clicks-by-platform" style="width: 100%; height: 400px;"></div>
+      <canvas id="clicks-by-platform"></canvas>
+    </div>
+    <div class="col-sm-4">
+      <p class="lead text-center">Clicks by browser</p>
+      <canvas id="clicks-by-browser"></canvas>
+    </div>
+    <div class="col-sm-4">
+      <p class="lead text-center">Clicks by OS</p>
+      <canvas id="clicks-by-os"></canvas>
     </div>
   </div>
 </main>
@@ -66,11 +74,14 @@
 <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
 <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/vendor/googlecharts/loader.js"></script>
+<script type="text/javascript" src="/vendor/chartjs/chart.min.js"></script>
+<script type="text/javascript" src="/vendor/leaflet/leaflet.js"></script>
+
 <script type="text/javascript">
-  const MapsApiKey = '${MyMapsApiKey}';
-  const URLGroupByCountryData = ${urlGroupByCountries};
-  const URLGroupByPlatform = ${urlGroupByPlatform};
+  const urlGroupByCountryData = $report.clicksByCountry;
+  const urlGroupByPlatform = $report.clicksByPlatform;
+  const urlGroupByBrowser = $report.clicksByBrowser;
+  const urlGroupByOS = $report.clicksByOS;
 </script>
 <script type="text/javascript" src="/js/statistics.js"></script>
 </body>

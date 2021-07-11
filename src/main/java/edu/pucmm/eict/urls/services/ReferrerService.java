@@ -45,9 +45,10 @@ public class ReferrerService {
         UserAgent userAgent = analyzer.parse(uaHeader);
         String platform = userAgent.getValue("DeviceClass");
         String browser = userAgent.getValue("AgentName");
-        Referrer referrer = new Referrer(ip, platform, browser, geoStats.getCountry());
+        String os = userAgent.getValue("OperatingSystemName");
+        Referrer referrer = new Referrer(ip, browser, platform, os, geoStats.getCountry());
 
-        referrer.setShortenedUrl(shortURL);
+        referrer.setShortURL(shortURL);
         referrerDao.create(referrer);
 
         long increment = shortURL.getVisitCount() + 1;

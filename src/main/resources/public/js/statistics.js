@@ -1,52 +1,76 @@
 $(document).ready(function () {
-    google.charts.load('current', {
-        'packages': ['geochart', 'corechart'],
-        'mapsApiKey': MapsApiKey
+    const platformData = separateLabelAndData(urlGroupByPlatform);
+    const platformElement = document.getElementById('clicks-by-platform');
+    const platformChart = new Chart(platformElement, {
+        type: 'pie',
+        data: {
+            labels: platformData.label,
+            datasets: [{
+                label: 'Clicks by platform',
+                data: platformData.dataset,
+                backgroundColor: arrayColors(urlGroupByPlatform.length)
+            }],
+            hoverOffset: 4
+        }
     });
 
-    google.charts.setOnLoadCallback(drawURLGroupByCountryData);
-    google.charts.setOnLoadCallback(drawURLGroupByPlatform);
+    const browserData = separateLabelAndData(urlGroupByBrowser);
+    const browserElement = document.getElementById('clicks-by-browser').getContext("2d");
+    browserElement.canvas.width = 300;
+    browserElement.canvas.height = 300;
+    const browserChart = new Chart(browserElement, {
+        type: 'doughnut',
+        data: {
+            labels: browserData.label,
+            datasets: [{
+                label: 'Clicks by Browser',
+                data: browserData.dataset,
+                backgroundColor: arrayColors(urlGroupByBrowser.length)
+            }],
+            hoverOffset: 4
+        }
+    });
 
-    $(window).resize(function () {
-        drawURLGroupByCountryData();
-        drawURLGroupByPlatform();
+    const osData = separateLabelAndData(urlGroupByOS);
+    const osElement = document.getElementById('clicks-by-os');
+    const osChart = new Chart(osElement, {
+        type: 'pie',
+        data: {
+            labels: osData.label,
+            datasets: [{
+                data: osData.dataset,
+                backgroundColor: arrayColors(urlGroupByOS.length)
+            }],
+            hoverOffset: 4
+        }
     });
 });
 
-
-function prepareURLGroupByCountryData() {
-    let data = URLGroupByCountryData;
-    let result = [];
-    result.push(['Country', 'Clicks'])
-    for (let i = 0; i < data.length; i++) {
-        result.push([data[i].country, data[i].quantity])
+function separateLabelAndData(data) {
+    let myLabels = [];
+    let myData = [];
+    for(let i = 0; i < data.length; i++) {
+        myLabels.push(data[i].first);
+        myData.push(data[i].second);
     }
-    return result;
-}
-
-
-function drawURLGroupByCountryData() {
-    let mapChartData = prepareURLGroupByCountryData();
-    const data = google.visualization.arrayToDataTable(mapChartData);
-    const options = {}
-    const chart = new google.visualization.GeoChart(document.getElementById('shorten-links-by-country'));
-    chart.draw(data, options);
-}
-
-function prepareURLGroupByPlatform() {
-    let data = URLGroupByPlatform;
-    let result = [];
-    result.push(['Platform', 'Clicks'])
-    for (let i = 0; i < data.length; i++) {
-        result.push([data[i].platform, data[i].quantity])
+    return {
+        label: myLabels,
+        dataset: myData
     }
-    return result;
 }
 
-function drawURLGroupByPlatform() {
-    let pieChartData = prepareURLGroupByPlatform();
-    const data = google.visualization.arrayToDataTable(pieChartData);
-    const options = {}
-    const chart = new google.visualization.PieChart(document.getElementById('clicks-by-platform'));
-    chart.draw(data, options);
+function randomColor() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return "rgba(" + r + "," + g + "," + b + ", 0.5)";
+}
+
+function arrayColors(n) {
+    let colors = [];
+    for(let i = 0; i < n; i++) {
+        let color = randomColor();
+        colors.push(color);
+    }
+    return colors;
 }

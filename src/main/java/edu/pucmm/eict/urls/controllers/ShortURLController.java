@@ -1,11 +1,8 @@
 package edu.pucmm.eict.urls.controllers;
 
-import edu.pucmm.eict.common.ApplicationProperties;
 import edu.pucmm.eict.common.Controller;
 import edu.pucmm.eict.common.MyValidator;
 import edu.pucmm.eict.reports.ReportService;
-import edu.pucmm.eict.reports.URLGroupByCountry;
-import edu.pucmm.eict.reports.URLGroupByPlataform;
 import edu.pucmm.eict.urls.models.SessionURL;
 import edu.pucmm.eict.urls.models.ShortForm;
 import edu.pucmm.eict.urls.models.ShortURL;
@@ -14,24 +11,22 @@ import edu.pucmm.eict.urls.services.ShortURLService;
 import edu.pucmm.eict.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import io.javalin.plugin.json.JavalinJson;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShortURLController extends Controller {
 
     private final MyValidator validator;
     private final ShortURLService shortURLService;
     private final SessionURLService sessionURLService;
-    private final ReportService reportService;
 
     public ShortURLController(Javalin app) {
         super(app);
         this.validator = MyValidator.getInstance();
         this.shortURLService = ShortURLService.getInstance();
         this.sessionURLService = SessionURLService.getInstance();
-        this.reportService = ReportService.getInstance();
     }
 
     private void shortenUrlView(Context ctx) {
@@ -74,39 +69,10 @@ public class ShortURLController extends Controller {
         ctx.json(image);
     }
 
-    private void showTempStatistics(Context ctx) {
-        String tempCode = ctx.pathParam("tempCode", String.class).get();
-        SessionURL sessionURL = sessionURLService.findByTemporaryId(ctx, tempCode).orElseThrow(EntityNotFoundException::new);
-
-        // Getting report information...
-        List<URLGroupByCountry> urlGroupByCountries = reportService.URLsGroupByCountry(sessionURL.getId());
-        Long amountClicks = reportService.amountClicks(sessionURL.getId());
-        Long amountUniqueClicks = reportService.amountUniqueClicks(sessionURL.getId());
-        Long clicksLastDay = reportService.amountClicksDuringLastDay(sessionURL.getId());
-        List<URLGroupByPlataform> urlGroupByPlatform = reportService.URLGroupByPlatform(sessionURL.getId());
-        String topCountryClicks = reportService.topCountryByClicks(sessionURL.getId());
-        String urlGroupByCountriesJson = JavalinJson.toJson(urlGroupByCountries);
-        String urlGroupByPlatformJson = JavalinJson.toJson(urlGroupByPlatform);
-        String mapsApiKey = ApplicationProperties.getInstance().getMapsApiKey();
-
-        // Data to be sent to the view
-        var data = new HashMap<String, Object>();
-        data.put("url", sessionURL);
-        data.put("urlGroupByCountries", urlGroupByCountriesJson);
-        data.put("MyMapsApiKey", mapsApiKey);
-        data.put("amountClicks", amountClicks);
-        data.put("amountUniqueClicks", amountUniqueClicks);
-        data.put("clicksLastDay", clicksLastDay);
-        data.put("topCountryClicks", topCountryClicks);
-        data.put("urlGroupByPlatform", urlGroupByPlatformJson);
-        ctx.status(200).render("templates/reports/statistic-in-session.vm", data);
-    }
-
     @Override
     public void applyRoutes() {
         app.get("/", this::shortenUrlView);
         app.post("/short", this::shortUrl);
         app.get("/qr/:code", this::generateQr);
-        app.get("/statistics/temp/:tempCode", this::showTempStatistics);
     }
 }

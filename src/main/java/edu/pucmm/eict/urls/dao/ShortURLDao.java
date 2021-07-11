@@ -31,4 +31,16 @@ public class ShortURLDao extends Dao<ShortURL, Long> {
             em.close();
         }
     }
+
+    public Optional<ShortURL> findById(Long id) {
+        var em = this.getEntityManager();
+        try {
+            return em.createQuery("SELECT s FROM ShortURL s WHERE s.id = :id AND s.active = :active", ShortURL.class)
+                    .setParameter("id", id)
+                    .setParameter("active", true)
+                    .getResultList().stream().findFirst();
+        } finally {
+            em.close();
+        }
+    }
 }

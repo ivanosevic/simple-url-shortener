@@ -29,16 +29,20 @@ public class Referrer implements Serializable {
     private String country;
 
     @Column(nullable = false)
+    private String operatingSystem;
+
+    @Column(nullable = false)
     private LocalDateTime clickedAt;
 
     public Referrer() {
     }
 
-    public Referrer(String accessIp, String browser, String platform, String country) {
+    public Referrer(String accessIp, String browser, String platform, String operatingSystem, String country) {
         this.accessIp = accessIp;
         this.browser = browser;
         this.platform = platform;
         this.country = country;
+        this.operatingSystem = operatingSystem;
     }
 
     @PrePersist
@@ -54,11 +58,11 @@ public class Referrer implements Serializable {
         this.id = id;
     }
 
-    public ShortURL getShortenedUrl() {
+    public ShortURL getShortURL() {
         return shortURL;
     }
 
-    public void setShortenedUrl(ShortURL shortURL) {
+    public void setShortURL(ShortURL shortURL) {
         this.shortURL = shortURL;
     }
 
@@ -92,6 +96,14 @@ public class Referrer implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getOperatingSystem() {
+        return operatingSystem;
+    }
+
+    public void setOperatingSystem(String operatingSystem) {
+        this.operatingSystem = operatingSystem;
     }
 
     public LocalDateTime getClickedAt() {

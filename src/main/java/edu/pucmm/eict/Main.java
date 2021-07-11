@@ -8,6 +8,7 @@ import edu.pucmm.eict.common.ErrorController;
 import edu.pucmm.eict.common.StaticFileController;
 import edu.pucmm.eict.dashboard.DashboardInterceptor;
 import edu.pucmm.eict.dashboard.UserZoneController;
+import edu.pucmm.eict.reports.ReportController;
 import edu.pucmm.eict.security.SecurityConfig;
 import edu.pucmm.eict.urls.controllers.RedirectController;
 import edu.pucmm.eict.urls.controllers.ShortURLController;
@@ -47,5 +48,6 @@ public class Main {
         new RedirectController(app).applyRoutes();
         new DashboardInterceptor(app).applyRoutes();
         new UserZoneController(app).applyRoutes();
+        new ReportController(app).applyRoutes();
     }
 }
