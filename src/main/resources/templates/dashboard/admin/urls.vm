@@ -1,4 +1,3 @@
-#* @vtlvariable name="adminReport" type="edu.pucmm.eict.reports.AdminReport" *#
 #* @velocityproperties path="../../../application.properties" runtime_root="../../../../resources" *#
 
 #parse("templates/dashboard/admin/navbar.vm")
@@ -11,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Admin Panel</title>
+  <title>Urls</title>
 
   ## Bootstrap + + favicon + FA
   <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
@@ -39,31 +38,11 @@
     <!-- Page content-->
     <div class="container-fluid">
       <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
-        <h1 class="fs-2 display-6">Dashboard</h1>
+        <h1 class="fs-2 display-6">Shortened Links</h1>
       </header>
 
-      <main id="report" class="container mt-4">
-        <div class="row p-2">
-          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$adminReport.totalClicks</p>
-            <p class="lead text-center">Clicks</p>
-          </div>
+      <main id="urls" class="container mt-4">
 
-          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$adminReport.TotalUsers</p>
-            <p class="lead text-center">Users</p>
-          </div>
-
-          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$adminReport.TotalLinks</p>
-            <p class="lead text-center">Shortened URLs</p>
-          </div>
-
-          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
-            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold">$adminReport.TotalLinksLastDay</p>
-            <p class="lead text-center">Shortened URLs last 24 hours</p>
-          </div>
-        </div>
       </main>
     </div>
   </div>

@@ -163,4 +163,64 @@ public class ReportDao {
             em.close();
         }
     }
+
+    public Long totalUsers() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            LocalDateTime endDate = LocalDateTime.now();
+            LocalDateTime startDate = endDate.minusDays(1);
+            String query = "SELECT COUNT(*) FROM User u WHERE u.deletedAt = :active";
+            return em.createQuery(query, Long.class)
+                    .setParameter("active", 0L)
+                    .getResultList()
+                    .stream().findFirst().get();
+        } finally {
+            em.close();
+        }
+    }
+
+    public Long totalLinks() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            LocalDateTime endDate = LocalDateTime.now();
+            LocalDateTime startDate = endDate.minusDays(1);
+            String query = "SELECT COUNT(*) FROM ShortURL s WHERE s.active = :active";
+            return em.createQuery(query, Long.class)
+                    .setParameter("active", true)
+                    .getResultList()
+                    .stream().findFirst().get();
+        } finally {
+            em.close();
+        }
+    }
+
+    public Long totalClicks() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT COUNT(*) FROM Referrer r";
+            return em.createQuery(query, Long.class)
+                    .getResultList()
+                    .stream().findFirst().get();
+        } finally {
+            em.close();
+        }
+    }
+
+    public Long totalLinksLastDay() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            LocalDateTime endDate = LocalDateTime.now();
+            LocalDateTime startDate = endDate.minusDays(1);
+            String query = "SELECT COUNT(*) FROM ShortURL s " +
+                    "WHERE s.active = :active AND s.createdAt BETWEEN :startDate AND :endDate";
+            return em.createQuery(query, Long.class)
+                    .setParameter("active", true)
+                    .setParameter("startDate", startDate)
+                    .setParameter("endDate", endDate)
+                    .getResultList()
+                    .stream().findFirst().get();
+        } finally {
+            em.close();
+        }
+    }
 }

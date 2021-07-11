@@ -35,4 +35,12 @@ public class ReportService {
         String clicksByOS = JavalinJson.toJson(reportDao.URLGroupByOS(shortURLId));
         return new BasicURLReport(clicks, uniqueClicks, clicksDuringDay, topCountryByClicks, clicksByBrowser, clicksByPlatform, clicksByCountry, clicksByOS);
     }
+
+    public AdminReport adminReport() {
+        long users = reportDao.totalUsers();
+        long clicks = reportDao.totalClicks();
+        long links = reportDao.totalLinks();
+        long linksLastDay = reportDao.totalLinksLastDay();
+        return new AdminReport(clicks, users, links, linksLastDay);
+    }
 }

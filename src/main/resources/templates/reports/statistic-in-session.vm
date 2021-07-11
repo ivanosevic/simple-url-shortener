@@ -15,6 +15,12 @@
   <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/leaflet/leaflet.css">
+
+  ##  Alertify JS
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/bootstrap.min.css">
   <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
 </head>
 
@@ -74,11 +80,14 @@
 <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
 <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/vendor/alertifyjs/alertify.min.js"></script>
+<script type="text/javascript" src="/vendor/axios/axios.min.js"></script>
 <script type="text/javascript" src="/vendor/chartjs/chart.min.js"></script>
 <script type="text/javascript" src="/vendor/leaflet/leaflet.js"></script>
+<script type="text/javascript" src="/vendor/leaflet/leaflet-providers.js"></script>
 
 <script type="text/javascript">
-  const urlGroupByCountryData = $report.clicksByCountry;
+  const urlGroupByCountry = $report.clicksByCountry;
   const urlGroupByPlatform = $report.clicksByPlatform;
   const urlGroupByBrowser = $report.clicksByBrowser;
   const urlGroupByOS = $report.clicksByOS;

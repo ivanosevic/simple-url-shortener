@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    // Leaflet map...
+    let geoDataCall = getCountryGeoLocations();
+    geoDataCall.then(data => {
+        const myMap = L.map('shorten-links-by-country').setView([51.505, -0.09], 3);
+        const myGeoData = rebuildGeoLocationData(urlGroupByCountry, data);
+        L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(myMap);
+        L.geoJson(myGeoData, {style: style}).addTo(myMap);
+    });
+
+    // Charts with chart js
     const platformData = separateLabelAndData(urlGroupByPlatform);
     const platformElement = document.getElementById('clicks-by-platform');
     const platformChart = new Chart(platformElement, {
@@ -49,7 +59,7 @@ $(document).ready(function () {
 function separateLabelAndData(data) {
     let myLabels = [];
     let myData = [];
-    for(let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         myLabels.push(data[i].first);
         myData.push(data[i].second);
     }
@@ -68,9 +78,60 @@ function randomColor() {
 
 function arrayColors(n) {
     let colors = [];
-    for(let i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         let color = randomColor();
         colors.push(color);
     }
     return colors;
+}
+
+function getCountryGeoLocations() {
+    return axios.get('/json/geocountries.json')
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            alertify.notify('Error fetching map coordinates. Map will show, but with no data.', 'error', 5);
+            return Promise.reject(err);
+        });
+}
+
+function rebuildGeoLocationData(myData, geoCountryData) {
+    let features = geoCountryData.features;
+    let myFeatures = [];
+    console.log(features);
+    for (let i = 0; i < features.length; i++) {
+        for (let j = 0; j < myData.length; j++) {
+            if (features[i].properties.name === myData[j].first) {
+                features[i].properties["density"] = myData[j].second;
+                myFeatures.push(features[i]);
+            }
+        }
+    }
+    return {
+        type: "FeatureCollection",
+        features: myFeatures
+    }
+}
+
+function getColor(d) {
+    return d > 1000 ? '#800026' :
+        d > 500 ? '#BD0026' :
+            d > 200 ? '#E31A1C' :
+                d > 100 ? '#FC4E2A' :
+                    d > 50 ? '#FD8D3C' :
+                        d > 20 ? '#FEB24C' :
+                            d > 10 ? '#FED976' :
+                                '#FFEDA0';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
 }
