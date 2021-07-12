@@ -44,6 +44,8 @@ dependencies {
     implementation group: 'com.google.zxing', name: 'core', version: '3.4.1'
     implementation group: 'com.google.zxing', name: 'javase', version: '3.4.1'
 
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.0.3'
+
     // validator utils
     implementation group: 'commons-validator', name: 'commons-validator', version: '1.7'
 }

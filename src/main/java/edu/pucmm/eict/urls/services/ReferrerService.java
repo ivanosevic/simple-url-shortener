@@ -1,8 +1,8 @@
 package edu.pucmm.eict.urls.services;
 
+import edu.pucmm.eict.common.UAAnalyzer;
 import edu.pucmm.eict.common.apicalls.ApiCaller;
 import edu.pucmm.eict.common.apicalls.IpApiResponse;
-import edu.pucmm.eict.common.UAAnalyzer;
 import edu.pucmm.eict.urls.dao.ReferrerDao;
 import edu.pucmm.eict.urls.dao.ShortURLDao;
 import edu.pucmm.eict.urls.models.Referrer;

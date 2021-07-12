@@ -8,6 +8,8 @@ import edu.pucmm.eict.urls.exceptions.InvalidURLException;
 import edu.pucmm.eict.urls.models.ShortURL;
 import edu.pucmm.eict.users.User;
 import io.seruco.encoding.base62.Base62;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -15,6 +17,7 @@ import java.util.Optional;
 
 public class ShortURLService {
 
+    private static final Logger log = LoggerFactory.getLogger(ShortURLService.class);
     private static ShortURLService instance;
     private final URLHelper urlHelper;
     private final ShortURLDao shortURLDao;
@@ -59,7 +62,6 @@ public class ShortURLService {
     @Transactional
     public ShortURL cut(String url, String name, User user) {
         ShortURL shortURL = new ShortURL();
-
         // Check if URL has HTTP prefix.
         // If not, we attach the http prefix, because port 80 may also
         // redirect to https
@@ -86,6 +88,7 @@ public class ShortURLService {
         // Now, we get the ID of the new entity to hash it and give it as a code
         String code = generateCode(saved.getId());
         saved.setCode(code);
+        log.info("Shorted URL Successfully: {}", saved);
         return shortURLDao.update(saved);
     }
 }

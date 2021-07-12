@@ -1,6 +1,8 @@
 package edu.pucmm.eict.users;
 
 import edu.pucmm.eict.common.MyEncryptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -11,6 +13,7 @@ import java.util.Set;
 
 public class UserService {
 
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private static UserService instance;
     private final UserDao userDao;
     private final RoleDao roleDao;
@@ -39,6 +42,7 @@ public class UserService {
 
     @Transactional
     public User create(UserForm form) {
+        log.info("Creating a new user with form: {}", form);
         if(userDao.findByUsername(form.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("User with username: " + form.getUsername() + " already exists");
         }
@@ -53,6 +57,7 @@ public class UserService {
             var role = roleDao.findByName(s).orElseThrow(() -> new EntityNotFoundException("Role: " +  s + " couldn't be found."));
             user.getRoles().add(role);
         });
+        log.info("User created successfully: {}", form);
         return userDao.create(user);
     }
 
@@ -79,9 +84,11 @@ public class UserService {
 
     @Transactional
     public User grantOrRemovePrivileges(Long id) {
+        log.info("Changing roles of user with id: {}", id);
         User user = userDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Username: " + id + " couldn't be found."));
         User admin = userDao.findByUsername("Admin").orElseThrow(EntityNotFoundException::new);
         if(user.equals(admin)) {
+            log.info("Can't revert the roles of administrator user: {}", id);
             throw new UserGrantPrivilegeException("This user's privileges can't be removed.");
         }
         if(user.isAdmin()) {
@@ -91,19 +98,23 @@ public class UserService {
             user.getRoles().remove(Role.APP_USER);
             user.getRoles().add(Role.ADMIN);
         }
+        log.info("Reverted the roles of user with id: {}", id);
         return userDao.update(user);
     }
 
     @Transactional
     public User delete(Long id) {
+        log.info("Trying to delete user with id: {}", id);
         User user = userDao.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User id: " + id + " couldn't be found."));
         User admin = userDao.findByUsername("Admin").orElseThrow(EntityNotFoundException::new);
         if(user.equals(admin)) {
+            log.info("Can't delete administrator user.");
             throw new UserDeleteException("This user can't be deleted from the system.");
         }
         Long deletedAt = System.currentTimeMillis();
         user.setDeletedAt(deletedAt);
+        log.info("Deleted user with id: {}", id);
         return userDao.update(user);
     }
 }
