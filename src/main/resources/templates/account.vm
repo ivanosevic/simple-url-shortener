@@ -1,0 +1,108 @@
+#* @vtlvariable name="user" type="edu.pucmm.eict.users.User" *#
+#* @vtlvariable name="deleted_url_successfully" type="java.lang.String" *#
+#* @vtlvariable name="baseUrl" type="java.lang.String" *#
+#* @vtlvariable name="urlPage" type="edu.pucmm.eict.common.Page" *#
+#* @vtlvariable name="url" type="edu.pucmm.eict.urls.models.ShortURL" *#
+#* @velocityproperties path="../../../application.properties" runtime_root="../../../../resources" *#
+
+#parse("templates/dashboard/user/navbar.vm")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>My URLs | Simple URL Shortener</title>
+
+  ## Bootstrap + + favicon + FA
+  <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
+
+  ## Sweet Alert 2 JS
+  <link rel="stylesheet" type="text/css" href="/vendor/sweetalert2/sweetalert2.min.css">
+
+  ##  Alertify JS
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/bootstrap.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="d-flex h-100" id="wrapper">
+  <!-- Page content wrapper-->
+  <div id="page-content-wrapper" class="bg-light">
+    <!-- Top navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+        #if($user.isAdmin())
+          <a href="/app/admin-panel" class="btn btn-outline-dark">Go back Home</a>
+        #else
+          <a href="/app/shortened-urls" class="btn btn-outline-dark">Go back home</a>
+        #end
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">Welcome, $user.Username</a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/app/account">Account Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/auth/logout">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page content-->
+    <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
+      <h1 class="fs-2 display-6">My account</h1>
+    </header>
+    <div class="container-fluid">
+      <main id="urls" class="container mt-4">
+        <div class="row container-fluid">
+          <div class="col-md-12 col-lg-12">
+            <section class="card mb-1">
+              <div class="card-body">
+                <div class="row container-fluid">
+                  <div class="col-sm-12 col-md-2 mb-3 d-flex align-items-center justify-content-center">
+                    #if($user.isAdmin())
+                      <li class="fa fa-user-nurse fa-5x"></li>
+                    #else
+                      <li class="fa fa-user fa-5x"></li>
+                    #end
+                  </div>
+                  <div class="col-sm-12 col-md-10 user-info">
+                    <ul class="list-group list-group-flush text-sm-center text-md-start text-lg-start">
+                      <li class="list-group-item">User: $user.username</li>
+                      <li class="list-group-item">Name: $user.name $user.lastname</li>
+                      <li class="list-group-item">Email: $user.email</li>
+                      <li class="list-group-item mb-3">Joined at: $user.joinedAt</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/vendor/sweetalert2/sweetalert2.min.js"></script>
+<script type="text/javascript" src="/vendor/alertifyjs/alertify.min.js"></script>
+<script type="text/javascript" src="/js/urls.js"></script>
+</body>
+</html>

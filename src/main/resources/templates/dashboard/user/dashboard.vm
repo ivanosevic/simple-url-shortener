@@ -5,6 +5,7 @@
 #* @velocityproperties path="../../../application.properties" runtime_root="../../../../resources" *#
 
 #parse("templates/dashboard/user/navbar.vm")
+#parse("templates/short-modal.vm")
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,9 +49,32 @@
     </header>
     <div class="container-fluid">
       <main id="urls" class="container mt-4">
-        #if($deleted_url_successfully)
-          <div class="alert alert-success">The URL was deleted sucessfully.</div>
-        #end
+        <div class="row container-fluid mb-3">
+          <div class="col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">Short URL</div>
+              <div class="card-body">
+                #set($errorsUrl = $formErrors.get('url'))
+                <section class="row mb-3">
+                  <div class="col">
+                    <form method="post" action="/app/short" accept-charset="UTF-8">
+                      <div class="input-group  #if($errorsUrl) has-validation #end">
+                        <input id="url" name="url" type="text" class="form-control form-control-lg #if($errorsUrl) is-invalid #end"
+                               placeholder="Enter your long link here." required/>
+                        <button class="input-group-text" type="submit">Shorten</button>
+                        #if($errorsUrl)
+                          #foreach($error in $errorsUrl)
+                            <div class="invalid-feedback">$error</div>
+                          #end
+                        #end
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row container-fluid">
           <div class="col-md-12 col-lg-12">
             #if($urlPage.empty)
@@ -65,12 +89,17 @@
                     <div class="row container-fluid">
                       <div class="col-12">
                         <ul class="list-group list-group-flush text-sm-center text-md-start text-lg-start">
-                          <li class="list-group-item">Link: <a href="$redirectUrl">$redirectUrl</a></li>
+                          <li class="list-group-item">Link: <a href="$redirectUrl" target="_blank">$redirectUrl</a></li>
                           <li class="list-group-item">Name: $url.name</li>
-                          <li class="list-group-item">Redirects to: $url.toURL</li>
+                          #if($url.toURL.length() > 60)
+                            <li class="list-group-item">Redirects to: $url.toURL.substring(0, 50) ...</li>
+                          #else
+                            <li class="list-group-item">Redirects to: $url.toURL</li>
+                          #end
                           <li class="list-group-item mb-3">Created At: $url.createdAt</li>
                           <li class="list-group-item d-grid gap-2 d-sm-block d-md-block d-lg-block">
-                            <a href="/qr/$url.Code" class="qr-code btn btn-outline-dark fa fa-qrcode fs-6" data-code-id="$url.code"></a>
+                            <a href="/qr/$url.Code" class="qr-code btn btn-outline-dark fa fa-qrcode fs-6"
+                               data-code-id="$url.code"></a>
                             <a href="/statistics/$url.Code" class="btn btn-outline-info fa fa-chart-pie fs-6"
                                target="_blank"></a>
                           </li>
@@ -88,14 +117,14 @@
                     <ul class="pagination justify-content-end">
                       <li class="page-item #if($urlPage.first) disabled #end">
                         <a class="page-link" #if($urlPage.first) tabindex="-1" #end
-                           href="/app/admin-panel/urls?page=$before" aria-label="Previous">
+                           href="/app/shortened-urls?page=$before" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                           <span class="sr-only">Previous</span>
                         </a>
                       </li>
                       <li class="page-item #if($urlPage.last) disabled #end">
                         <a class="page-link" #if($urlPage.last) tabindex="-1" #end
-                           href="/app/admin-panel/urls?page=$next" aria-label="Next">
+                           href="/app/shortened-urls?page=$next" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                           <span class="sr-only">Next</span>
                         </a>

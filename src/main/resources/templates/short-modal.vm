@@ -1,0 +1,36 @@
+#macro(shortModal)
+<!-- Short URL Modal -->
+<div class="modal fade" id="short-url-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Short URL</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        #set($errorsUrl = $formErrors.get('url'))
+        <section class="row mb-3">
+          <div class="col">
+            <form method="post" action="/short" accept-charset="UTF-8" id="short-url-form" name="short-url-form">
+              <div class="input-group  #if($errorsUrl) has-validation #end">
+                <input id="url" name="url" type="text" class="form-control form-control-lg #if($errorsUrl) is-invalid #end"
+                       placeholder="Enter your long link here." required/>
+                #if($errorsUrl)
+                  #foreach($error in $errorsUrl)
+                    <div class="invalid-feedback">$error</div>
+                  #end
+                #end
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" form="short-url-form" class="btn btn-primary">Short</button>
+      </div>
+    </div>
+  </div>
+</div>
+#end

@@ -2,27 +2,28 @@ package edu.pucmm.eict.dashboard;
 
 import edu.pucmm.eict.common.ApplicationProperties;
 import edu.pucmm.eict.common.Controller;
+import edu.pucmm.eict.common.MyValidator;
 import edu.pucmm.eict.common.Page;
 import edu.pucmm.eict.reports.AdminReport;
 import edu.pucmm.eict.reports.ReportService;
 import edu.pucmm.eict.urls.dao.ShortURLDao;
+import edu.pucmm.eict.urls.models.ShortForm;
 import edu.pucmm.eict.urls.models.ShortURL;
 import edu.pucmm.eict.urls.services.ShortURLService;
 import edu.pucmm.eict.users.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class UserZoneController extends Controller {
 
-    private static final Logger log = LoggerFactory.getLogger(UserZoneController.class);
     private final ReportService reportService;
     private final UserDao userDao;
+    private final MyValidator validator;
     private final UserService userService;
     private final ShortURLDao shortURLDao;
     private final ShortURLService shortURLService;
@@ -36,6 +37,7 @@ public class UserZoneController extends Controller {
         this.userService = UserService.getInstance();
         this.shortURLDao = ShortURLDao.getInstance();
         this.shortURLService = ShortURLService.getInstance();
+        this.validator = MyValidator.getInstance();
     }
 
     private void UserZoneView(Context ctx) {
@@ -124,12 +126,60 @@ public class UserZoneController extends Controller {
 
     private void adminShowMyUrls(Context ctx) {
         var data = logicShowMyUrls(ctx);
-        ctx.status(200).render("templates/dashboard/admin/urls.vm", data);
+        HashMap<String, List<String>> errorCreatingUrl = ctx.sessionAttribute("error_creating_url");
+        data.put("errorsUrl", errorCreatingUrl);
+        int code = 200;
+        if(errorCreatingUrl != null) {
+            code = 400;
+        }
+        ctx.status(code).render("templates/dashboard/admin/my-urls.vm", data);
+        ctx.req.getSession().removeAttribute("error_creating_url");
     }
 
     private void userShowMyUrls(Context ctx) {
         var data = logicShowMyUrls(ctx);
-        ctx.status(200).render("templates/dashboard/user/dashboard.vm", data);
+        HashMap<String, List<String>> errorCreatingUrl = ctx.sessionAttribute("error_creating_url");
+        data.put("errorsUrl", errorCreatingUrl);
+        int code = 200;
+        if(errorCreatingUrl != null) {
+            code = 400;
+        }
+        ctx.status(code).render("templates/dashboard/user/dashboard.vm", data);
+        ctx.req.getSession().removeAttribute("error_creating_url");
+    }
+
+    private void showAccountDetails(Context ctx) {
+        User user = ctx.sessionAttribute("user");
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", user);
+        ctx.render("templates/account.vm", data);
+    }
+
+    private void refreshAfterShort(Context ctx) {
+        User user = ctx.sessionAttribute("user");
+        if(user.isAdmin()) {
+            ctx.redirect("/app/admin-panel/shortened-urls");
+        } else {
+            ctx.redirect("/app/shortened-urls");
+        }
+    }
+
+    private void appShortUrl(Context ctx) {
+        String url = ctx.formParam("url");
+        User user = ctx.sessionAttribute("user");
+        if(user == null) {
+            ctx.redirect("/");
+            return;
+        }
+        ShortForm form = new ShortForm(url, null);
+        Map<String, List<String>> errors = validator.validate(form);
+        if(!errors.isEmpty()) {
+            ctx.sessionAttribute("error_creating_url", errors);
+            refreshAfterShort(ctx);
+            return;
+        }
+        ShortURL shortURL = shortURLService.cut(form.getUrl(), null, user);
+        refreshAfterShort(ctx);
     }
 
     @Override
@@ -142,7 +192,9 @@ public class UserZoneController extends Controller {
         app.get("/app/admin-panel/users/:id/delete", this::deleteUser, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/urls/:code/delete", this::deleteURL, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/shortened-urls", this::adminShowMyUrls, Set.of(Role.ADMIN));
-        app.get("/app/shortened-urls", this::userShowMyUrls);
+        app.get("/app/shortened-urls", this::userShowMyUrls, Set.of(Role.APP_USER));
+        app.get("/app/account", this::showAccountDetails, Set.of(Role.ADMIN, Role.APP_USER));
+        app.post("/app/short", this::appShortUrl, Set.of(Role.ADMIN, Role.APP_USER));
         app.exception(UserDeleteException.class, this::handleUserDeleteException);
         app.exception(UserGrantPrivilegeException.class, this::handlePrivilegeException);
     }

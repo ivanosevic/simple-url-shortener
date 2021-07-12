@@ -3,6 +3,7 @@
 
 #parse("templates/dashboard/admin/navbar.vm")
 #parse("templates/dashboard/admin/sidebar.vm")
+#parse("templates/short-modal.vm")
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +68,7 @@
     </div>
   </div>
 </div>
-
+#shortModal()
 <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
 <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>

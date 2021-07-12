@@ -42,13 +42,40 @@
     #navbar()
     <!-- Page content-->
     <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
-      <h1 class="fs-2 display-6">Shortened Links</h1>
+      <h1 class="fs-2 display-6">My Shortened Links</h1>
     </header>
     <div class="container-fluid">
       <main id="urls" class="container mt-4">
         #if($deleted_url_successfully)
           <div class="alert alert-success">The URL was deleted sucessfully.</div>
         #end
+        <div class="row container-fluid mb-3">
+          <div class="col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">Short URL</div>
+              <div class="card-body">
+                #set($errorsUrl = $formErrors.get('url'))
+                <section class="row mb-3">
+                  <div class="col">
+                    <form method="post" action="/app/short" accept-charset="UTF-8">
+                      <div class="input-group  #if($errorsUrl) has-validation #end">
+                        <input id="url" name="url" type="text"
+                               class="form-control form-control-lg #if($errorsUrl) is-invalid #end"
+                               placeholder="Enter your long link here." required/>
+                        <button class="input-group-text" type="submit">Shorten</button>
+                        #if($errorsUrl)
+                          #foreach($error in $errorsUrl)
+                            <div class="invalid-feedback">$error</div>
+                          #end
+                        #end
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row container-fluid">
           <div class="col-md-12 col-lg-12">
             #if($urlPage.empty)
@@ -116,7 +143,7 @@
     </div>
   </div>
 </div>
-#shortModal()
+  #shortModal()
 <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
 <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
