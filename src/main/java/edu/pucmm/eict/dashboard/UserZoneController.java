@@ -110,6 +110,17 @@ public class UserZoneController extends Controller {
         ctx.redirect("/app/admin-panel/users");
     }
 
+    private void showMyUrls(Context ctx) {
+        User user = ctx.sessionAttribute("user");
+        Integer page = ctx.queryParam("page", Integer.class, "1").get();
+        Page<ShortURL> shortenURLs = shortURLDao.findPagedById(user.getId(), page, DEFAULT_URL_PAGE_SIZE);
+        var data = new HashMap<String, Object>();
+        data.put("user", user);
+        data.put("urlPage", shortenURLs);
+        data.put("baseUrl", ApplicationProperties.getInstance().getDomain());
+        ctx.status(200).render("templates/dashboard/admin/urls.vm", data);
+    }
+
     @Override
     public void applyRoutes() {
         app.get("/app/dashboard", this::UserZoneView, Set.of(Role.APP_USER));
@@ -119,7 +130,8 @@ public class UserZoneController extends Controller {
         app.get("/app/admin-panel/users/:id/grant-privileges", this::grantOrRemovePrivileges, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/users/:id/remove-privileges", this::grantOrRemovePrivileges, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/users/:id/delete", this::deleteUser, Set.of(Role.ADMIN));
-        app.get("/app/admin-panel/urls/:code/delete", this::deleteURL);
+        app.get("/app/admin-panel/urls/:code/delete", this::deleteURL, Set.of(Role.ADMIN));
+        app.get("/app/my-urls", this::showMyUrls, Set.of(Role.ADMIN, Role.APP_USER));
         app.exception(UserDeleteException.class, this::handleUserDeleteException);
         app.exception(UserGrantPrivilegeException.class, this::handlePrivilegeException);
     }

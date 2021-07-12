@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Admin Panel</title>
+  <title>My Dashboard | Simple URL Shortener</title>
 
   ## Bootstrap + + favicon + FA
   <link rel="stylesheet" type="text/css" href="/css/dashboard.css">

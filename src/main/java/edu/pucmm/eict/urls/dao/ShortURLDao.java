@@ -35,6 +35,28 @@ public class ShortURLDao extends Dao<ShortURL, Long> {
         }
     }
 
+    public Page<ShortURL> findPagedById(Long userId, Integer page, Integer size) {
+        EntityManager em = this.getEntityManager();
+        try {
+            TypedQuery<Long> countQuery = em.createQuery("SELECT COUNT(s) FROM ShortURL s JOIN s.user AS user WHERE s.active = :active and user.id = :userId", Long.class)
+                    .setParameter("active", true)
+                    .setParameter("userId", userId);
+
+            TypedQuery<Long> ids = em.createQuery("SELECT s.id FROM ShortURL s LEFT JOIN s.user AS user WHERE s.active = :active AND user.id = :userId GROUP BY s.id ORDER BY MAX(s.createdAt) DESC", Long.class)
+                    .setParameter("active", true)
+                    .setParameter("userId", userId);
+
+            TypedQuery<ShortURL> query = em.createQuery("SELECT DISTINCT s FROM ShortURL s LEFT JOIN FETCH s.user AS user WHERE s.id IN (:ids) GROUP BY s.id ORDER BY MAX(s.createdAt) DESC", ShortURL.class)
+                    .setHint(
+                            QueryHints.HINT_PASS_DISTINCT_THROUGH,
+                            false
+                    );
+            return super.findPagedFilter(page, size, countQuery, ids, query);
+        } finally {
+            em.close();
+        }
+    }
+
     public static ShortURLDao getInstance() {
         if (instance == null) {
             instance = new ShortURLDao();
