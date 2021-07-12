@@ -27,10 +27,10 @@ public class ReportDao {
     public List<StringGroupByNum> URLsGroupByCountry(Long shortUrlId) {
         EntityManager em = emf.createEntityManager();
         try {
-            List<Tuple> result = em.createQuery("SELECT r.country, COUNT(*) FROM Referrer r " +
+            List<Tuple> result = em.createQuery("SELECT r.countryIso2, COUNT(*) FROM Referrer r " +
                     "JOIN r.shortURL as shortURL " +
                     "WHERE shortURL.id = :shortUrlId and shortURL.active = :active " +
-                    "GROUP BY r.country", Tuple.class)
+                    "GROUP BY r.countryIso2", Tuple.class)
                     .setParameter("shortUrlId", shortUrlId)
                     .setParameter("active", true)
                     .getResultList();
