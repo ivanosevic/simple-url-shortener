@@ -35,7 +35,6 @@ public class Main {
         int javalinPort = appProperties.getPort();
         Javalin app = Javalin.create(config -> {
             config.addStaticFiles("/public");
-            config.enableCorsForAllOrigins();
         }).start(javalinPort);
 
         JavalinRenderer.register(JavalinVelocity.INSTANCE);

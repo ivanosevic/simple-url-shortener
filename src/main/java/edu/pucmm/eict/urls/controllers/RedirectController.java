@@ -16,14 +16,8 @@ public class RedirectController extends Controller {
 
     private String getIpAddress(Context ctx) {
         String ip = ctx.header("x-forwarded-for");
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = ctx.header("Proxy-Client-IP");
-        }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = ctx.header("WL-Proxy-Client-IP");
-        }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = ctx.req.getRemoteAddr();
+        if(ip == null) {
+            ip = ctx.ip();
         }
         return ip;
     }
