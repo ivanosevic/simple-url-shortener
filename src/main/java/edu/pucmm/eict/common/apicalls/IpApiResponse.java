@@ -6,7 +6,7 @@ public class IpApiResponse {
     private String status;
     private String country;
     private String countryCode;
-    private Integer region;
+    private String region;
     private String regionName;
     private String city;
     private String zip;
@@ -52,11 +52,11 @@ public class IpApiResponse {
         this.countryCode = countryCode;
     }
 
-    public Integer getRegion() {
+    public String getRegion() {
         return region;
     }
 
-    public void setRegion(Integer region) {
+    public void setRegion(String region) {
         this.region = region;
     }
 
