@@ -36,12 +36,11 @@
   <div id="page-content-wrapper" class="bg-light">
     <!-- Top navigation-->
     #navbar()
+    <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
+      <h1 class="fs-2 display-6">Dashboard</h1>
+    </header>
     <!-- Page content-->
     <div class="container-fluid">
-      <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
-        <h1 class="fs-2 display-6">Dashboard</h1>
-      </header>
-
       <main id="report" class="container mt-4">
         <div class="row p-2">
           <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">

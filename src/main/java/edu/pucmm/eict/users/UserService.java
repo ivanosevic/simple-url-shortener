@@ -70,24 +70,38 @@ public class UserService {
             throw new UserAlreadyExistsException("User with email: " + form.getEmail() + " already exists");
         }
 
-        Set<Role> roles = new HashSet<>();
-        form.getRoles().forEach(s -> {
-            var role = roleDao.findByName(s).orElseThrow(() -> new EntityNotFoundException("Role: " +  s + " couldn't be found."));
-            roles.add(role);
-        });
-
         user.setUsername(form.getUsername());
         user.setEmail(form.getEmail());
         user.setName(form.getName());
         user.setPassword(form.getLastname());
-        user.setRoles(roles);
         return userDao.update(user);
     }
 
     @Transactional
-    public User delete(String username) {
-        User user = userDao.findByUsername(username)
-                .orElseThrow(() -> new EntityNotFoundException("Username: " + username + " couldn't be found."));
+    public User grantOrRemovePrivileges(Long id) {
+        User user = userDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Username: " + id + " couldn't be found."));
+        User admin = userDao.findByUsername("Admin").orElseThrow(EntityNotFoundException::new);
+        if(user.equals(admin)) {
+            throw new UserGrantPrivilegeException("This user's privileges can't be removed.");
+        }
+        if(user.isAdmin()) {
+            user.getRoles().remove(Role.ADMIN);
+            user.getRoles().add(Role.APP_USER);
+        } else {
+            user.getRoles().remove(Role.APP_USER);
+            user.getRoles().add(Role.ADMIN);
+        }
+        return userDao.update(user);
+    }
+
+    @Transactional
+    public User delete(Long id) {
+        User user = userDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User id: " + id + " couldn't be found."));
+        User admin = userDao.findByUsername("Admin").orElseThrow(EntityNotFoundException::new);
+        if(user.equals(admin)) {
+            throw new UserDeleteException("This user can't be deleted from the system.");
+        }
         Long deletedAt = System.currentTimeMillis();
         user.setDeletedAt(deletedAt);
         return userDao.update(user);

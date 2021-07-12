@@ -72,6 +72,10 @@ public class User implements Serializable {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public boolean isAdmin() {
+        return roles.contains(Role.ADMIN);
+    }
+
     public Long getId() {
         return id;
     }

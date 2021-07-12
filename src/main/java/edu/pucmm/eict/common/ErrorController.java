@@ -21,6 +21,10 @@ public class ErrorController extends Controller {
             ctx.status(500);
         });
 
+        app.exception(PaginationErrorException.class, ((exception, ctx) -> {
+            ctx.status(404);
+        }));
+
         app.error(404, ctx -> {
             ctx.render("templates/404.vm");
         });

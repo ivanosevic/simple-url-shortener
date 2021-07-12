@@ -132,8 +132,6 @@ public class UserTests {
 
         List<UserForm> formList = List.of(f1, f2, f3, f4);
         var usersCreated = formList.stream().map(userService::create).collect(Collectors.toList());
-        userService.delete("User4");
-        userService.delete("User3");
 
         var users = userService.findAll();
         users.forEach(user -> {
