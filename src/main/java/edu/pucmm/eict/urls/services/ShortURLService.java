@@ -50,6 +50,13 @@ public class ShortURLService {
     }
 
     @Transactional
+    public ShortURL delete(String code) {
+        ShortURL shortURL = findByCode(code).orElseThrow(EntityNotFoundException::new);
+        shortURL.setActive(false);
+        return shortURLDao.update(shortURL);
+    }
+
+    @Transactional
     public ShortURL cut(String url, String name, User user) {
         ShortURL shortURL = new ShortURL();
 
