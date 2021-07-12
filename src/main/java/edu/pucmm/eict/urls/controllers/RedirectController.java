@@ -14,9 +14,23 @@ public class RedirectController extends Controller {
         referrerService = ReferrerService.getInstance();
     }
 
+    private String getIpAddress(Context ctx) {
+        String ip = ctx.header("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = ctx.header("Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = ctx.header("WL-Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = ctx.req.getRemoteAddr();
+        }
+        return ip;
+    }
+
     private void performRedirect(Context ctx) {
         String code = ctx.pathParam("code", String.class).get();
-        var shortURL = referrerService.newReferrer(code, ctx.req.getRemoteAddr(), ctx.userAgent());
+        var shortURL = referrerService.newReferrer(code, getIpAddress(ctx), ctx.userAgent());
         ctx.redirect(shortURL.getToURL());
     }
 

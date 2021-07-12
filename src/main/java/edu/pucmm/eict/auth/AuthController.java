@@ -35,10 +35,10 @@ public class AuthController extends Controller {
     }
 
     private void redirectToDashboard(User user, Context ctx) {
-        if(user.getRoles().contains(Role.ADMIN)) {
+        if (user.getRoles().contains(Role.ADMIN)) {
             ctx.redirect("/app/admin-panel");
-        }  else {
-            ctx.redirect("/app/dashboard");
+        } else {
+            ctx.redirect("/app/shortened-urls");
         }
     }
 
@@ -48,7 +48,7 @@ public class AuthController extends Controller {
         String rememberMe = ctx.formParam("remember-me");
         User user = authService.login(username, password);
 
-        if(rememberMe != null) {
+        if (rememberMe != null) {
             String secret = authService.assignSecret(user);
             int duration = 60 * 60 * 24 * 7;
             ctx.cookie("remember-me", secret, duration);
@@ -76,7 +76,7 @@ public class AuthController extends Controller {
         // Data to be sent to model...
         var data = new HashMap<String, Object>();
 
-        if(!errors.isEmpty()) {
+        if (!errors.isEmpty()) {
             data.put("formErrors", errors);
             ctx.status(400).render("templates/signup.vm", data);
             return;

@@ -37,6 +37,10 @@ public class SessionURLService {
         return sessionURL;
     }
 
+    public void clean(Context ctx) {
+        ctx.req.getSession().removeAttribute("urls");
+    }
+
     public List<SessionURL> findSessionURLs(Context ctx) {
         List<SessionURL> urls = ctx.sessionAttribute("urls");
         if(urls != null) {

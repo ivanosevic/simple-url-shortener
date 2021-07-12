@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class UserZoneController extends Controller {
@@ -26,7 +27,7 @@ public class UserZoneController extends Controller {
     private final ShortURLDao shortURLDao;
     private final ShortURLService shortURLService;
     private final Integer DEFAULT_USER_PAGE_SIZE = 5;
-    private final Integer DEFAULT_URL_PAGE_SIZE = 15;
+    private final Integer DEFAULT_URL_PAGE_SIZE = 5;
 
     public UserZoneController(Javalin app) {
         super(app);
@@ -110,20 +111,29 @@ public class UserZoneController extends Controller {
         ctx.redirect("/app/admin-panel/users");
     }
 
-    private void showMyUrls(Context ctx) {
+    private Map<String, Object> logicShowMyUrls(Context ctx) {
         User user = ctx.sessionAttribute("user");
         Integer page = ctx.queryParam("page", Integer.class, "1").get();
         Page<ShortURL> shortenURLs = shortURLDao.findPagedById(user.getId(), page, DEFAULT_URL_PAGE_SIZE);
-        var data = new HashMap<String, Object>();
+        Map<String, Object> data = new HashMap<>();
         data.put("user", user);
         data.put("urlPage", shortenURLs);
         data.put("baseUrl", ApplicationProperties.getInstance().getDomain());
+        return data;
+    }
+
+    private void adminShowMyUrls(Context ctx) {
+        var data = logicShowMyUrls(ctx);
         ctx.status(200).render("templates/dashboard/admin/urls.vm", data);
+    }
+
+    private void userShowMyUrls(Context ctx) {
+        var data = logicShowMyUrls(ctx);
+        ctx.status(200).render("templates/dashboard/user/dashboard.vm", data);
     }
 
     @Override
     public void applyRoutes() {
-        app.get("/app/dashboard", this::UserZoneView, Set.of(Role.APP_USER));
         app.get("/app/admin-panel", this::AdminPanelView, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/users", this::allUsersView, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/urls", this::AllLinksView, Set.of(Role.ADMIN));
@@ -131,7 +141,8 @@ public class UserZoneController extends Controller {
         app.get("/app/admin-panel/users/:id/remove-privileges", this::grantOrRemovePrivileges, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/users/:id/delete", this::deleteUser, Set.of(Role.ADMIN));
         app.get("/app/admin-panel/urls/:code/delete", this::deleteURL, Set.of(Role.ADMIN));
-        app.get("/app/my-urls", this::showMyUrls, Set.of(Role.ADMIN, Role.APP_USER));
+        app.get("/app/admin-panel/shortened-urls", this::adminShowMyUrls, Set.of(Role.ADMIN));
+        app.get("/app/shortened-urls", this::userShowMyUrls);
         app.exception(UserDeleteException.class, this::handleUserDeleteException);
         app.exception(UserGrantPrivilegeException.class, this::handlePrivilegeException);
     }

@@ -2,7 +2,7 @@ package edu.pucmm.eict.urls.controllers;
 
 import edu.pucmm.eict.common.Controller;
 import edu.pucmm.eict.common.MyValidator;
-import edu.pucmm.eict.reports.ReportService;
+import edu.pucmm.eict.urls.dao.ShortURLDao;
 import edu.pucmm.eict.urls.models.SessionURL;
 import edu.pucmm.eict.urls.models.ShortForm;
 import edu.pucmm.eict.urls.models.ShortURL;
@@ -19,6 +19,7 @@ import java.util.Map;
 public class ShortURLController extends Controller {
 
     private final MyValidator validator;
+    private final ShortURLDao shortURLDao;
     private final ShortURLService shortURLService;
     private final SessionURLService sessionURLService;
 
@@ -26,6 +27,7 @@ public class ShortURLController extends Controller {
         super(app);
         this.validator = MyValidator.getInstance();
         this.shortURLService = ShortURLService.getInstance();
+        this.shortURLDao = ShortURLDao.getInstance();
         this.sessionURLService = SessionURLService.getInstance();
     }
 
@@ -69,10 +71,27 @@ public class ShortURLController extends Controller {
         ctx.json(image);
     }
 
+    private void giveGeneratedURLs(Context ctx) {
+        User user = ctx.sessionAttribute("user");
+        List<SessionURL> sessionURLs = sessionURLService.findSessionURLs(ctx);
+        if(sessionURLs != null) {
+            for(var url : sessionURLs) {
+                var myURL = shortURLService.findByCode(url.getCode());
+                if(myURL.isPresent()) {
+                    ShortURL shortURL = myURL.get();
+                    shortURL.setUser(user);
+                    shortURLDao.update(shortURL);
+                }
+            }
+            sessionURLService.clean(ctx);
+        }
+    }
+
     @Override
     public void applyRoutes() {
         app.get("/", this::shortenUrlView);
         app.post("/short", this::shortUrl);
         app.get("/qr/:code", this::generateQr);
+        app.after("/auth/login", this::giveGeneratedURLs);
     }
 }

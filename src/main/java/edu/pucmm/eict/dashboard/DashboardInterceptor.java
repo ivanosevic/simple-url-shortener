@@ -20,7 +20,7 @@ public class DashboardInterceptor extends Controller {
             if(user.getRoles().contains(Role.ADMIN)) {
                 ctx.redirect("/app/admin-panel");
             } else {
-                ctx.redirect("/app/dashboard");
+                ctx.redirect("/app/shortened-urls");
             }
         }
     }
