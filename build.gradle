@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 mainClassName = 'edu.pucmm.eict.Main'
@@ -52,4 +53,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+shadowJar{
+    baseName = 'app'
+    classifier = ''
+    archiveVersion = ''
+}
+
+task stage {
+    dependsOn shadowJar
 }

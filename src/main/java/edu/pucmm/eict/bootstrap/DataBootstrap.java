@@ -49,17 +49,10 @@ public class DataBootstrap {
 
     private void insertUsers() {
         log.info("Inserting default users.");
-        UserForm userForm = new UserForm("Admin", "123",
+        UserForm userForm = new UserForm("Admin", "J2LgNFg2Zv8AkEYf",
                 "20170874@ce.pucmm.edu.do", "Ivanosevic", "Garcia", Set.of("ADMIN"));
         if(userService.findByUsername(userForm.getUsername()).isEmpty()) {
             userService.create(userForm);
-            log.info("User: {} created.", userForm);
-        }
-
-        UserForm user = new UserForm("ivanogc99", "123",
-                "garciaivanosevic@gmail.com", "Ivanosevic", "Garcia", Set.of("APP_USER"));
-        if(userService.findByUsername(user.getUsername()).isEmpty()) {
-            userService.create(user);
             log.info("User: {} created.", userForm);
         }
     }
