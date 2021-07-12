@@ -55,10 +55,15 @@ test {
     useJUnitPlatform()
 }
 
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
 shadowJar{
     baseName = 'app'
     classifier = ''
     archiveVersion = ''
+    transform(ServiceFileTransformer) {
+        path = 'META-INF/services'
+        include 'org.eclipse.jetty.http.HttpFieldPreEncoder'
+    }
 }
 
 task stage {
