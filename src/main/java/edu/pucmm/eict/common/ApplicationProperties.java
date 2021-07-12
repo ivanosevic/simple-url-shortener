@@ -118,7 +118,7 @@ public class ApplicationProperties {
     }
 
     public String getRedirectDomain(String code) {
-        return this.domain + "/r/" + code;
+        return "http://" + this.domain + "/r/" + code;
     }
 
     public String getMapsApiKey() {
