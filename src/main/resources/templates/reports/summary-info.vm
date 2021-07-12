@@ -1,0 +1,10 @@
+#macro(summaryInfo $title $value)
+<div class="row">
+  <div class="col">
+    <p class="fs-5 display-4"><strong>$title</strong></p>
+  </div>
+  <div class="col">
+    <p class="fs-5 display-4">$value</p>
+  </div>
+</div>
+#end

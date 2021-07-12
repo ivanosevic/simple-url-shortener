@@ -1,0 +1,151 @@
+#* @vtlvariable name="deleted_url_successfully" type="java.lang.String" *#
+#* @vtlvariable name="baseUrl" type="java.lang.String" *#
+#* @vtlvariable name="urlPage" type="edu.pucmm.eict.common.Page" *#
+#* @vtlvariable name="url" type="edu.pucmm.eict.urls.models.ShortURL" *#
+#* @velocityproperties path="../../../application.properties" runtime_root="../../../../resources" *#
+
+#parse("templates/dashboard/user/navbar.vm")
+#parse("templates/short-modal.vm")
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>My URLs | Simple URL Shortener</title>
+
+  ## Bootstrap + + favicon + FA
+  <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
+
+  ## Sweet Alert 2 JS
+  <link rel="stylesheet" type="text/css" href="/vendor/sweetalert2/sweetalert2.min.css">
+
+  ##  Alertify JS
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/bootstrap.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="d-flex h-100" id="wrapper">
+  <!-- Page content wrapper-->
+  <div id="page-content-wrapper" class="bg-light">
+    <!-- Top navigation-->
+    #navbar()
+    <!-- Page content-->
+    <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
+      <h1 class="fs-2 display-6">My Shortened Links</h1>
+    </header>
+    <div class="container-fluid">
+      <main id="urls" class="container mt-4">
+        <div class="row container-fluid mb-3">
+          <div class="col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">Short URL</div>
+              <div class="card-body">
+                #set($errorsUrl = $formErrors.get('url'))
+                <section class="row mb-3">
+                  <div class="col">
+                    <form method="post" action="/app/short" accept-charset="UTF-8">
+                      <div class="input-group  #if($errorsUrl) has-validation #end">
+                        <input id="url" name="url" type="text" class="form-control form-control-lg #if($errorsUrl) is-invalid #end"
+                               placeholder="Enter your long link here." required/>
+                        <button class="input-group-text" type="submit">Shorten</button>
+                        #if($errorsUrl)
+                          #foreach($error in $errorsUrl)
+                            <div class="invalid-feedback">$error</div>
+                          #end
+                        #end
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row container-fluid">
+          <div class="col-md-12 col-lg-12">
+            #if($urlPage.empty)
+              <div class="alert alert-warning text-center">
+                <p>You haven't shortened any URLs.</p>
+              </div>
+            #else
+              #foreach($url in $urlPage.results)
+                #set($redirectUrl = "http://" + $baseUrl + "/r/" + $url.code)
+                <div class="card p-1 mb-3">
+                  <div class="card-body">
+                    <div class="row container-fluid">
+                      <div class="col-12">
+                        <ul class="list-group list-group-flush text-sm-center text-md-start text-lg-start">
+                          <li class="list-group-item">Link: <a href="$redirectUrl" target="_blank">$redirectUrl</a></li>
+                          <li class="list-group-item">Name: $url.name</li>
+                          #if($url.toURL.length() > 60)
+                            <li class="list-group-item">Redirects to: $url.toURL.substring(0, 50) ...</li>
+                          #else
+                            <li class="list-group-item">Redirects to: $url.toURL</li>
+                          #end
+                          <li class="list-group-item mb-3">Created At: $url.createdAt</li>
+                          <li class="list-group-item d-grid gap-2 d-sm-block d-md-block d-lg-block">
+                            <a href="/qr/$url.Code" class="qr-code btn btn-outline-dark fa fa-qrcode fs-6"
+                               data-code-id="$url.code"></a>
+                            <a href="/statistics/$url.Code" class="btn btn-outline-info fa fa-chart-pie fs-6"
+                               target="_blank"></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              #end
+              <div class="card">
+                <div class="card-body">
+                  #set($before = $urlPage.currentPage - 1)
+                  #set($next = $urlPage.currentPage + 1)
+                  <nav aria-label="pagination-controls">
+                    <ul class="pagination justify-content-end">
+                      <li class="page-item #if($urlPage.first) disabled #end">
+                        <a class="page-link" #if($urlPage.first) tabindex="-1" #end
+                           href="/app/shortened-urls?page=$before" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      <li class="page-item #if($urlPage.last) disabled #end">
+                        <a class="page-link" #if($urlPage.last) tabindex="-1" #end
+                           href="/app/shortened-urls?page=$next" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            #end
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/vendor/sweetalert2/sweetalert2.min.js"></script>
+<script type="text/javascript" src="/vendor/alertifyjs/alertify.min.js"></script>
+<script type="text/javascript" src="/js/urls.js"></script>
+</body>
+</html>

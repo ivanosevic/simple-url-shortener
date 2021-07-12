@@ -1,0 +1,71 @@
+#* @vtlvariable name="clicksLastDay" type="java.lang.Long" *#
+#* @vtlvariable name="topCountryClicks" type="java.lang.String" *#
+#* @vtlvariable name="amountUniqueClicks" type="java.lang.Long" *#
+#* @vtlvariable name="amountClicks" type="java.lang.Long" *#
+#* @velocityproperties path="../../application.properties" runtime_root="../../../resources" *#
+#parse("templates/reports/summary-info.vm")
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Temporary Statistics For ${url.NewUrl}</title>
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/fa/css/all.min.css">
+  <link rel="shortcut icon" type="image/jpg" href="/img/favicon.png"/>
+</head>
+
+<body>
+
+<div class="container mt-3 mb-5 text-center">
+  <h1 class="fs-3 display-3">Report Statistic for <strong>${url.NewUrl}</strong></h1>
+</div>
+
+  ## Summary header of the report.
+  ## Contains info such as:
+  ## - Amount of clicks
+  ## - Amount of unique clicks
+  ## - Amount of clicks during last 24 hours
+  ## - Country with highest clicks
+<div class="container mb-5 text-center">
+
+  ## Summary Title
+  <div class="row">
+    <div class="col">
+      <p class="fs-4 display-3"><strong>Summary</strong></p>
+    </div>
+  </div>
+
+  #summaryInfo('Clicks', $amountClicks)
+  #summaryInfo('Unique Clicks', $amountUniqueClicks)
+  #summaryInfo('Clicks during last 24 hours', $clicksLastDay)
+  #summaryInfo('Top country by clicks', $topCountryClicks)
+</div>
+
+  ## Google Chart Graph:
+  ## Amount of clicks by Country
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center mb-2">
+      <h3 class="fs-4 display-3"><strong>Amount of clicks by country</strong></h3>
+    </div>
+    <div id="shorten-links-by-country" class="col-12" style="width: 100%; height: 400px;"></div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/popperjs/popper.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  ## Google charts
+<script type="text/javascript" src="/vendor/googlecharts/loader.js"></script>
+<script type="text/javascript">
+  const MapsApiKey = '${MyMapsApiKey}';
+  const URLGroupByCountryData = ${urlGroupByCountries};
+</script>
+<script type="text/javascript" src="/js/statistics.js"></script>
+</body>
+</html>
