@@ -46,8 +46,9 @@ public class ReferrerService {
         String platform = userAgent.getValue("DeviceClass");
         String browser = userAgent.getValue("AgentName");
         String os = userAgent.getValue("OperatingSystemName");
+        String iso2 = geoStats.getCountryCode();
         Referrer referrer = new Referrer(ip, browser, platform, os, geoStats.getCountry());
-
+        referrer.setCountryIso2(iso2);
         referrer.setShortURL(shortURL);
         referrerDao.create(referrer);
 

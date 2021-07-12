@@ -29,6 +29,9 @@ public class Referrer implements Serializable {
     private String country;
 
     @Column(nullable = false)
+    private String countryIso2;
+
+    @Column(nullable = false)
     private String operatingSystem;
 
     @Column(nullable = false)
@@ -112,6 +115,14 @@ public class Referrer implements Serializable {
 
     public void setClickedAt(LocalDateTime clickedAt) {
         this.clickedAt = clickedAt;
+    }
+
+    public String getCountryIso2() {
+        return countryIso2;
+    }
+
+    public void setCountryIso2(String countryIso2) {
+        this.countryIso2 = countryIso2;
     }
 
     @Override

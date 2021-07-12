@@ -86,7 +86,7 @@ function arrayColors(n) {
 }
 
 function getCountryGeoLocations() {
-    return axios.get('/json/geocountries.json')
+    return axios.get('/json/countries-hires.json')
         .then(res => {
             return res.data;
         })
@@ -99,10 +99,9 @@ function getCountryGeoLocations() {
 function rebuildGeoLocationData(myData, geoCountryData) {
     let features = geoCountryData.features;
     let myFeatures = [];
-    console.log(features);
     for (let i = 0; i < features.length; i++) {
         for (let j = 0; j < myData.length; j++) {
-            if (features[i].properties.name === myData[j].first) {
+            if (features[i].properties.ISO_A2 === myData[j].first) {
                 features[i].properties["density"] = myData[j].second;
                 myFeatures.push(features[i]);
             }
