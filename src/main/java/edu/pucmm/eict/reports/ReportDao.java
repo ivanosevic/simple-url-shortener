@@ -150,11 +150,10 @@ public class ReportDao {
             LocalDateTime startDate = endDate.minusDays(1);
             String query = "SELECT COUNT(*) FROM Referrer r " +
                     "JOIN r.shortURL as shortURL " +
-                    "WHERE shortURL.active = :active AND shortURL.id = :shortUrlId AND " +
+                    "WHERE shortURL.id = :shortUrlId AND " +
                     "shortURL.createdAt BETWEEN :startDate AND :endDate";
             return em.createQuery(query, Long.class)
                     .setParameter("shortUrlId", shortUrlId)
-                    .setParameter("active", true)
                     .setParameter("startDate", startDate)
                     .setParameter("endDate", endDate)
                     .getResultList()
@@ -184,9 +183,8 @@ public class ReportDao {
         try {
             LocalDateTime endDate = LocalDateTime.now();
             LocalDateTime startDate = endDate.minusDays(1);
-            String query = "SELECT COUNT(*) FROM ShortURL s WHERE s.active = :active";
+            String query = "SELECT COUNT(*) FROM ShortURL s ";
             return em.createQuery(query, Long.class)
-                    .setParameter("active", true)
                     .getResultList()
                     .stream().findFirst().get();
         } finally {
@@ -212,9 +210,8 @@ public class ReportDao {
             LocalDateTime endDate = LocalDateTime.now();
             LocalDateTime startDate = endDate.minusDays(1);
             String query = "SELECT COUNT(*) FROM ShortURL s " +
-                    "WHERE s.active = :active AND s.createdAt BETWEEN :startDate AND :endDate";
+                    "WHERE s.createdAt BETWEEN :startDate AND :endDate";
             return em.createQuery(query, Long.class)
-                    .setParameter("active", true)
                     .setParameter("startDate", startDate)
                     .setParameter("endDate", endDate)
                     .getResultList()
