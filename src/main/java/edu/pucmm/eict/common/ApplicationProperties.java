@@ -14,6 +14,9 @@ public class ApplicationProperties {
     private final String domain;
     private final boolean embedded;
     private final int h2Port;
+    private final int restapiPort;
+    private final String restapiSecret;
+    private final int restapiExpirationMs;
     private final String dbUsername;
     private final String dbPassword;
     private final String dbUrl;
@@ -39,6 +42,9 @@ public class ApplicationProperties {
         generateDdl = properties.getProperty("app.db.generate-ddl");
         encryptPass = properties.getProperty("app.encrypt.pass");
         mapsApiKey = properties.getProperty("app.google.maps-api-key");
+        restapiPort = Integer.parseInt(properties.getProperty("app.restapi.port"));
+        restapiExpirationMs = Integer.parseInt(properties.getProperty("app.restapi.expirationMs"));
+        restapiSecret = properties.getProperty("app.restapi.secret");
     }
 
     public static ApplicationProperties getInstance() {
@@ -123,5 +129,17 @@ public class ApplicationProperties {
 
     public String getMapsApiKey() {
         return mapsApiKey;
+    }
+
+    public int getRestapiPort() {
+        return restapiPort;
+    }
+
+    public String getRestapiSecret() {
+        return restapiSecret;
+    }
+
+    public int getRestapiExpirationMs() {
+        return restapiExpirationMs;
     }
 }
