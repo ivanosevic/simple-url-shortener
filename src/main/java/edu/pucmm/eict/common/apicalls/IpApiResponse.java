@@ -16,6 +16,7 @@ public class IpApiResponse {
     private String isp;
     private String org;
     private String as;
+    private String message;
 
     public IpApiResponse(){
     }
@@ -130,5 +131,13 @@ public class IpApiResponse {
 
     public void setAs(String as) {
         this.as = as;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

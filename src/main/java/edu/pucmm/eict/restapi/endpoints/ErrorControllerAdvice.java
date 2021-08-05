@@ -4,10 +4,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import edu.pucmm.eict.restapi.apiresponses.ApiError;
-import edu.pucmm.eict.restapi.endpoints.BaseEndPoint;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.eclipse.jetty.http.HttpStatus;
+
+import javax.persistence.EntityNotFoundException;
 
 public class ErrorControllerAdvice extends BaseEndPoint {
     public ErrorControllerAdvice(Javalin app) {
@@ -29,10 +30,22 @@ public class ErrorControllerAdvice extends BaseEndPoint {
         ctx.status(HttpStatus.BAD_REQUEST_400).json(apiError);
     }
 
+    private void handleEntityNotFoundException(EntityNotFoundException ex, Context ctx) {
+        ApiError apiError = new ApiError("Not found", ex.getMessage());
+        ctx.status(HttpStatus.NOT_FOUND_404).json(apiError);
+    }
+
+    private void handleInternalServerError(Context ctx) {
+        ApiError apiError = new ApiError("Internal Server Error", "Please contact with the side administrator");
+        ctx.status(HttpStatus.INTERNAL_SERVER_ERROR_500).json(apiError);
+    }
+
     @Override
     public void applyRoutes() {
         app.exception(MismatchedInputException.class, this::handleJsonBadFormat);
         app.exception(InvalidFormatException.class, this::handleInvalidFormatException);
         app.exception(JsonMappingException.class, this::handleJsonMappingException);
+        app.exception(EntityNotFoundException.class, this::handleEntityNotFoundException);
+        app.error(HttpStatus.INTERNAL_SERVER_ERROR_500, this::handleInternalServerError);
     }
 }

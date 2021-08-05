@@ -86,7 +86,7 @@ public class UrlEndpoint extends BaseEndPoint{
         // We need to get the user from context...
         String token = jwtUtils.parseJwt(ctx);
         String username = jwtUtils.getUsernameFromToken(token);
-        User user = userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with " + username + " couldn't be found."));
+        User user = userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with username " + username + " couldn't be found."));
         ShortURL shortURL = shortURLService.cut(shortUrlForm.getUrl(), shortUrlForm.getName(), user);
 
         // Parse DTO...
@@ -97,7 +97,7 @@ public class UrlEndpoint extends BaseEndPoint{
     private void listUrlsByUser(Context ctx) {
         String username = ctx.pathParam("user", String.class).get();
         Integer page = ctx.queryParam("page", Integer.class, "1").get();
-        User user = userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with " + username + " couldn't be found."));
+        User user = userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with username " + username + " couldn't be found."));
         Page<ShortURL> shortURLPage = shortURLDao.findPagedById(user.getId(), page, DEFAULT_USER_PAGE_SIZE);
         Page<UrlDto> urlDtoPage = transformToPageDto(shortURLPage);
         ctx.status(HttpStatus.OK_200).json(urlDtoPage);
@@ -107,7 +107,7 @@ public class UrlEndpoint extends BaseEndPoint{
         String token = jwtUtils.parseJwt(ctx);
         String username = jwtUtils.getUsernameFromToken(token);
         Integer page = ctx.queryParam("page", Integer.class, "1").get();
-        User user = userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with " + username + " couldn't be found."));
+        User user = userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User with username " + username + " couldn't be found."));
         Page<ShortURL> shortURLPage = shortURLDao.findPagedById(user.getId(), page, DEFAULT_USER_PAGE_SIZE);
         Page<UrlDto> urlDtoPage = transformToPageDto(shortURLPage);
         ctx.status(HttpStatus.OK_200).json(urlDtoPage);
