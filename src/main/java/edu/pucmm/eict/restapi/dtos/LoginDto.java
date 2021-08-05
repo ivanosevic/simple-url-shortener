@@ -2,7 +2,7 @@ package edu.pucmm.eict.restapi.dtos;
 
 import java.util.List;
 
-public class LoginResponse {
+public class LoginDto {
     private String token;
     private String name;
     private String lastname;
@@ -10,7 +10,7 @@ public class LoginResponse {
     private String email;
     private List<String> roles;
 
-    public LoginResponse(String name, String lastname, String username, String email, List<String> roles) {
+    public LoginDto(String name, String lastname, String username, String email, List<String> roles) {
         this.name = name;
         this.lastname = lastname;
         this.username = username;
@@ -18,7 +18,7 @@ public class LoginResponse {
         this.roles = roles;
     }
 
-    public LoginResponse(String token, String name, String lastname, String username, String email, List<String> roles) {
+    public LoginDto(String token, String name, String lastname, String username, String email, List<String> roles) {
         this.token = token;
         this.name = name;
         this.lastname = lastname;

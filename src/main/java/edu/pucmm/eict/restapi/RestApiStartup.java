@@ -4,6 +4,7 @@ import edu.pucmm.eict.common.ApplicationProperties;
 import edu.pucmm.eict.restapi.endpoints.ErrorControllerAdvice;
 import edu.pucmm.eict.restapi.endpoints.LoginEndpoint;
 import edu.pucmm.eict.restapi.endpoints.TestEndpoint;
+import edu.pucmm.eict.restapi.endpoints.UrlEndpoint;
 import edu.pucmm.eict.restapi.security.ApiSecurity;
 import io.javalin.Javalin;
 
@@ -23,5 +24,6 @@ public class RestApiStartup {
         new ErrorControllerAdvice(restApiApp).applyRoutes();
         new TestEndpoint(restApiApp).applyRoutes();
         new LoginEndpoint(restApiApp).applyRoutes();
+        new UrlEndpoint(restApiApp).applyRoutes();
     }
 }

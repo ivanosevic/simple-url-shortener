@@ -4,6 +4,7 @@ import edu.pucmm.eict.urls.dao.ShortURLDao;
 import io.javalin.plugin.json.JavalinJson;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 public class ReportService {
 
@@ -34,6 +35,19 @@ public class ReportService {
         String clicksByCountry = JavalinJson.toJson(reportDao.URLsGroupByCountry(shortURLId));
         String clicksByOS = JavalinJson.toJson(reportDao.URLGroupByOS(shortURLId));
         return new BasicURLReport(clicks, uniqueClicks, clicksDuringDay, topCountryByClicks, clicksByBrowser, clicksByPlatform, clicksByCountry, clicksByOS);
+    }
+
+    public UrlReport getUrlReport(Long shortURLId) {
+        shortURLDao.findById(shortURLId).orElseThrow(EntityNotFoundException::new);
+        long clicks = reportDao.amountClicks(shortURLId);
+        long uniqueClicks = reportDao.amountUniqueClicks(shortURLId);
+        long clicksDuringDay = reportDao.amountClicksDuringLastDay(shortURLId);
+        String topCountryByClicks = reportDao.topCountryByClicks(shortURLId);
+        List<StringGroupByNum> clicksByBrowser = reportDao.URLGroupByBrowser(shortURLId);
+        List<StringGroupByNum> clicksByPlatform = reportDao.URLGroupByPlatform(shortURLId);
+        List<StringGroupByNum> clicksByCountry = reportDao.URLsGroupByCountry(shortURLId);
+        List<StringGroupByNum> clicksByOS = reportDao.URLGroupByOS(shortURLId);
+        return new UrlReport(clicks, uniqueClicks, clicksDuringDay, topCountryByClicks, clicksByBrowser, clicksByPlatform, clicksByCountry, clicksByOS);
     }
 
     public AdminReport adminReport() {

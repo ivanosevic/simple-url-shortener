@@ -2,7 +2,7 @@
 <configuration>
     <property name="USER_HOME" value="logs"/>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.FileAppender">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <file>${USER_HOME}/app_logs.txt</file>
         <append>true</append>
         <encoder>
@@ -20,6 +20,5 @@
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="APP_LOGS"/>
     </root>
 </configuration>

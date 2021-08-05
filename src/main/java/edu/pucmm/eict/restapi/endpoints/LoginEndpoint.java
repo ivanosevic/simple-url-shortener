@@ -5,7 +5,7 @@ import edu.pucmm.eict.auth.BadCredentialsException;
 import edu.pucmm.eict.restapi.apiresponses.ApiError;
 import edu.pucmm.eict.restapi.apiresponses.SubError;
 import edu.pucmm.eict.restapi.common.*;
-import edu.pucmm.eict.restapi.dtos.LoginResponse;
+import edu.pucmm.eict.restapi.dtos.LoginDto;
 import edu.pucmm.eict.restapi.mappers.DtoMapper;
 import edu.pucmm.eict.restapi.security.JwtUtils;
 import edu.pucmm.eict.restapi.security.LoginForm;
@@ -43,9 +43,9 @@ public class LoginEndpoint extends BaseEndPoint {
         User user =  authService.login(loginForm.getUsername(), loginForm.getPassword());
         // Prepare the response
         String token = "Bearer " + jwtUtils.generateToken(user.getUsername());
-        LoginResponse loginResponse = modelMapper.map(user, LoginResponse.class);
-        loginResponse.setToken(token);
-        ctx.status(HttpStatus.OK_200).json(loginResponse);
+        LoginDto loginDto = modelMapper.map(user, LoginDto.class);
+        loginDto.setToken(token);
+        ctx.status(HttpStatus.OK_200).json(loginDto);
     }
 
     private void handleBadCredentials(Exception ex, Context ctx) {
