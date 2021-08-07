@@ -18,6 +18,12 @@
   <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/default.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/bootstrap.min.css">
+
+
+  <!-- preact + styled-components + microlink -->
+  <script src="https://cdn.jsdelivr.net/combine/npm/preact@10/dist/preact.umd.min.js,npm/preact@10/hooks/dist/hooks.umd.min.js,npm/preact@10/compat/dist/compat.umd.min.js,gh/smoljs/react/react.js,npm/react-is@16/umd/react-is.production.min.js,npm/styled-components@5/dist/styled-components.min.js,npm/@microlink/mql@latest/dist/mql.min.js,npm/@microlink/vanilla@5/dist/microlink.min.js"></script>
+
+
 </head>
 <body>
 
@@ -79,13 +85,9 @@
       <div class="row justify-content-center align-items-center">
         <div class="col-12 #if($velocityCount % 2 != 0) bg-light #else bg-white #end rounded-3 p-3">
           <div class="row container-fluid mx-auto">
-            <!-- Name URL -->
-            <div class="col-12 col-md-4 col-lg-4 original-url text-center mb-2">
-              <p>$url.Name</p>
-            </div>
             <!-- Redirect URL -->
-            <div class="col-12 col-md-5 col-lg-5 shorten-url text-center mb-3">
-              <a href="$url.NewUrl" target="_blank">$url.NewUrl</a>
+            <div class="col-12 col-md-9 col-lg-9 shorten-url text-center mb-3">
+              <a href="$url.toUrl" target="_blank" class="link-preview" data-short-url="$url.NewUrl" data-set-data='{"title": "$url.NewUrl"}'>$url.NewUrl</a>
             </div>
             <!-- QR Code -->
             <div class="col-12 col-md-1 col-lg-1 url-actions d-grip gap-2 mb-2">
