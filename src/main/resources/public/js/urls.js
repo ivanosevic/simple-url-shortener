@@ -49,5 +49,19 @@ $(document).ready(function () {
         })
     });
 
+    //Microlink needs original urls in order to work. So in this case, after loading the link previews with the original URLs
+    //we change back the urls of the links to the shorten ones.
+    $(document).on('click','.link-preview',function(e){
+        let short_url = $(this).attr('data-short-url');
+        $(this).attr("href",short_url)
+    });
 
 });
+
+//Microlink implementation
+document.addEventListener('DOMContentLoaded', function (event) {
+    // Replace all `link-preview` tags for microlink cards
+    microlink('.link-preview', {
+        media: ['image','logo']
+    })
+})

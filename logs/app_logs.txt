@@ -4526,3 +4526,484 @@
 10:26:09.345 [qtp2015110295-56] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='www.gmail.com', code='n', toUrl='http://www.gmail.com'} 
 10:26:56.512 [qtp2015110295-57] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=2, name='www.youtube.com', code='o', toUrl='https://www.youtube.com/'} 
 10:27:26.336 [qtp2015110295-57] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=3, name='wikipedia.com', code='p', toUrl='http://wikipedia.com'} 
+10:39:39.037 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+10:39:39.889 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+10:39:40.716 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+10:39:40.920 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+10:39:41.605 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+10:39:44.354 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+10:39:44.356 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+10:39:44.385 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+10:39:44.632 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+10:39:44.706 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+10:39:46.414 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+10:39:47.993 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+10:39:48.114 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+10:39:48.623 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+10:39:48.642 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+10:39:48.642 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+10:39:48.677 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+10:39:50.539 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+10:39:50.578 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+10:39:50.666 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @13672ms to org.eclipse.jetty.util.log.Slf4jLog 
+10:39:50.873 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+10:39:50.924 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+10:39:50.926 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+10:39:51.358 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+10:39:51.359 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 435ms \o/ 
+10:39:54.816 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 3189 msec using expression: classpath*:UserAgents/**/*.yaml 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+10:39:54.817 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+10:39:54.852 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+10:41:18.641 [qtp192264336-49] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+10:41:18.788 [qtp192264336-49] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+10:41:29.696 [qtp192264336-57] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='wikipedia.com', code='n', toUrl='http://wikipedia.com'} 
+10:43:49.296 [qtp192264336-56] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=2, name='www.youtube.com', code='o', toUrl='https://www.youtube.com/'} 
+10:45:38.600 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+10:45:38.995 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+10:45:39.190 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+10:45:39.313 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+10:45:39.677 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+10:45:41.192 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+10:45:41.194 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+10:45:41.213 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+10:45:41.333 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+10:45:41.361 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+10:45:41.996 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+10:45:43.165 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+10:45:43.230 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+10:45:43.527 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+10:45:43.541 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+10:45:43.541 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+10:45:43.561 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+10:45:44.928 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+10:45:44.964 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+10:45:45.034 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7483ms to org.eclipse.jetty.util.log.Slf4jLog 
+10:45:45.169 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+10:45:45.217 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+10:45:45.219 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+10:45:45.596 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+10:45:45.597 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 380ms \o/ 
+10:45:47.658 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1854 msec using expression: classpath*:UserAgents/**/*.yaml 
+10:45:47.659 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+10:45:47.659 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+10:45:47.659 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+10:45:47.659 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+10:45:47.659 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+10:45:47.659 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+10:45:47.660 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+10:45:47.660 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+10:45:47.684 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+10:46:17.768 [qtp908139452-49] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+10:46:17.861 [qtp908139452-49] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+10:46:29.602 [qtp908139452-59] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='www.gmail.com', code='n', toUrl='http://www.gmail.com'} 
+10:48:22.017 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+10:48:22.651 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+10:48:23.044 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+10:48:23.144 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+10:48:23.502 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+10:48:24.953 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+10:48:24.954 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+10:48:24.979 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+10:48:25.096 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+10:48:25.123 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+10:48:25.764 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+10:48:26.958 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+10:48:27.016 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+10:48:27.315 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+10:48:27.332 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+10:48:27.332 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+10:48:27.351 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+10:48:28.739 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+10:48:28.770 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+10:48:28.836 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7915ms to org.eclipse.jetty.util.log.Slf4jLog 
+10:48:28.979 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+10:48:29.022 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+10:48:29.024 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+10:48:29.361 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+10:48:29.361 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 339ms \o/ 
+10:48:31.653 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 2051 msec using expression: classpath*:UserAgents/**/*.yaml 
+10:48:31.653 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+10:48:31.653 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+10:48:31.653 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+10:48:31.653 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+10:48:31.654 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+10:48:31.654 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+10:48:31.654 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+10:48:31.654 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+10:48:31.674 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+10:48:42.960 [qtp908139452-55] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+10:48:43.045 [qtp908139452-55] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+10:48:50.839 [qtp908139452-56] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='wikipedia.com', code='n', toUrl='http://wikipedia.com'} 
+11:01:24.359 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+11:01:24.807 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+11:01:25.129 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+11:01:25.218 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+11:01:25.645 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+11:01:27.175 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+11:01:27.176 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+11:01:27.191 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+11:01:27.322 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+11:01:27.348 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+11:01:27.971 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+11:01:29.050 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+11:01:29.116 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+11:01:29.404 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+11:01:29.416 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+11:01:29.416 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+11:01:29.431 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:01:30.892 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:01:30.935 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+11:01:31.001 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7712ms to org.eclipse.jetty.util.log.Slf4jLog 
+11:01:31.139 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+11:01:31.174 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+11:01:31.176 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+11:01:31.471 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+11:01:31.471 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 297ms \o/ 
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1962 msec using expression: classpath*:UserAgents/**/*.yaml 
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+11:01:33.739 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+11:01:33.740 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+11:01:33.740 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:01:33.755 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+11:01:39.090 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:01:39.182 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:01:49.562 [qtp908139452-57] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='wikipedia.com', code='n', toUrl='http://wikipedia.com'} 
+11:01:56.153 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=2, name='www.youtube.com', code='o', toUrl='https://www.youtube.com/'} 
+11:04:36.434 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+11:04:36.830 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+11:04:37.041 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+11:04:37.116 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+11:04:37.447 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+11:04:38.908 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+11:04:38.909 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+11:04:38.927 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+11:04:39.039 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+11:04:39.065 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+11:04:39.817 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+11:04:40.924 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+11:04:40.990 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+11:04:41.287 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+11:04:41.301 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+11:04:41.301 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+11:04:41.317 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:04:42.709 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:04:42.742 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+11:04:42.802 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7408ms to org.eclipse.jetty.util.log.Slf4jLog 
+11:04:42.920 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+11:04:42.959 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+11:04:42.961 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+11:04:43.196 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+11:04:43.196 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 236ms \o/ 
+11:04:45.300 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1828 msec using expression: classpath*:UserAgents/**/*.yaml 
+11:04:45.300 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:04:45.300 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+11:04:45.300 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+11:04:45.300 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+11:04:45.301 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+11:04:45.301 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+11:04:45.301 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+11:04:45.301 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:04:45.316 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+11:05:36.695 [qtp908139452-43] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:05:36.801 [qtp908139452-43] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:06:48.082 [qtp908139452-50] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='www.youtube.com', code='n', toUrl='https://www.youtube.com/watch?v=R6NWCxaiCZ4'} 
+11:09:27.854 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+11:09:28.287 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+11:09:28.510 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+11:09:28.589 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+11:09:28.901 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+11:09:30.387 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+11:09:30.389 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+11:09:30.417 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+11:09:30.539 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+11:09:30.568 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+11:09:31.175 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+11:09:32.314 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+11:09:32.381 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+11:09:32.738 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+11:09:32.754 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+11:09:32.754 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+11:09:32.774 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:09:34.268 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:09:34.299 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+11:09:34.369 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7552ms to org.eclipse.jetty.util.log.Slf4jLog 
+11:09:34.494 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+11:09:34.526 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+11:09:34.530 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+11:09:34.786 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+11:09:34.786 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 260ms \o/ 
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 2141 msec using expression: classpath*:UserAgents/**/*.yaml 
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+11:09:37.136 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+11:09:37.137 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+11:09:37.137 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:09:37.157 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+11:09:52.700 [qtp908139452-46] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:09:52.784 [qtp908139452-46] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:10:03.348 [qtp908139452-49] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='wikipedia.com', code='n', toUrl='http://wikipedia.com'} 
+11:10:43.889 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+11:10:44.254 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+11:10:44.471 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+11:10:44.549 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+11:10:44.843 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+11:10:46.389 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+11:10:46.390 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+11:10:46.406 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+11:10:46.536 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+11:10:46.562 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+11:10:47.209 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+11:10:48.340 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+11:10:48.414 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+11:10:48.708 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+11:10:48.722 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+11:10:48.722 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+11:10:48.738 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:10:50.187 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:10:50.219 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+11:10:50.279 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7359ms to org.eclipse.jetty.util.log.Slf4jLog 
+11:10:50.416 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+11:10:50.455 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+11:10:50.456 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+11:10:50.720 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+11:10:50.720 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 265ms \o/ 
+11:10:52.747 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1754 msec using expression: classpath*:UserAgents/**/*.yaml 
+11:10:52.747 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:10:52.748 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+11:10:52.748 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+11:10:52.748 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+11:10:52.748 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+11:10:52.748 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+11:10:52.750 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+11:10:52.750 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:10:52.767 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+11:11:00.931 [qtp908139452-43] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:11:01.034 [qtp908139452-43] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+11:11:08.885 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='wikipedia.com', code='n', toUrl='http://wikipedia.com'} 
+11:11:15.146 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=2, name='www.youtube.com', code='o', toUrl='https://www.youtube.com/watch?v=gWqBbqXXrbA'} 
+11:11:58.059 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+11:11:58.469 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+11:11:58.725 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+11:11:58.796 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+11:11:59.088 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+11:12:00.558 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+11:12:00.560 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+11:12:00.575 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+11:12:00.693 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+11:12:00.720 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+11:12:01.271 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+11:12:02.385 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+11:12:02.451 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+11:12:02.815 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+11:12:02.834 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+11:12:02.835 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+11:12:02.856 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:12:04.496 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+11:12:04.542 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+11:12:04.616 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @8055ms to org.eclipse.jetty.util.log.Slf4jLog 
+11:12:04.761 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+11:12:04.799 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+11:12:04.803 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+11:12:05.090 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+11:12:05.090 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 291ms \o/ 
+11:12:07.236 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1940 msec using expression: classpath*:UserAgents/**/*.yaml 
+11:12:07.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:12:07.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+11:12:07.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+11:12:07.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+11:12:07.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+11:12:07.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+11:12:07.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+11:12:07.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+11:12:07.259 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+12:20:08.249 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+12:20:08.702 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+12:20:08.933 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+12:20:09.051 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+12:20:09.384 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+12:20:10.850 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+12:20:10.851 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+12:20:10.863 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+12:20:10.976 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+12:20:10.998 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+12:20:11.625 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+12:20:12.841 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+12:20:12.898 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+12:20:13.216 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+12:20:13.232 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+12:20:13.232 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+12:20:13.248 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+12:20:14.725 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+12:20:14.759 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+12:20:14.816 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7989ms to org.eclipse.jetty.util.log.Slf4jLog 
+12:20:14.937 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+12:20:14.976 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+12:20:14.978 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+12:20:15.269 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+12:20:15.270 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 294ms \o/ 
+12:20:17.237 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1724 msec using expression: classpath*:UserAgents/**/*.yaml 
+12:20:17.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+12:20:17.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+12:20:17.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+12:20:17.237 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+12:20:17.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+12:20:17.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+12:20:17.238 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+12:20:17.239 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+12:20:17.253 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+12:27:34.063 [qtp908139452-57] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='wikipedia.com', code='n', toUrl='http://wikipedia.com'} 
+12:31:18.706 [main] [34mINFO [0;39m [36me.p.e.c.ApplicationProperties[0;39m - Successfully read application.properties 
+12:31:19.083 [main] [34mINFO [0;39m [36me.p.e.b.DatabaseBootstrap[0;39m - Current H2 Server Status: TCP server running at tcp://26.63.188.135:9092 (others can connect) 
+12:31:19.309 [main] [34mINFO [0;39m [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: main-unit] 
+12:31:19.381 [main] [34mINFO [0;39m [36mo.h.Version[0;39m - HHH000412: Hibernate ORM core version 5.4.32.Final 
+12:31:19.693 [main] [34mINFO [0;39m [36mo.h.a.c.Version[0;39m - HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+12:31:21.126 [main] [34mINFO [0;39m [36mo.h.e.j.c.i.ConnectionProviderInitiator[0;39m - HHH000130: Instantiating explicit connection provider: com.zaxxer.hikari.hibernate.HikariConnectionProvider 
+12:31:21.128 [main] [31mWARN [0;39m [36mc.z.h.h.HikariConnectionProvider[0;39m - com.zaxxer.hikari.hibernate.HikariConnectionProvider has been deprecated for versions of Hibernate 4.3.6 and newer.  Please switch to org.hibernate.hikaricp.internal.HikariCPConnectionProvider. 
+12:31:21.143 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Starting... 
+12:31:21.253 [main] [34mINFO [0;39m [36mc.z.h.HikariDataSource[0;39m - HikariPool-1 - Start completed. 
+12:31:21.281 [main] [34mINFO [0;39m [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect 
+12:31:21.923 [main] [34mINFO [0;39m [36mo.h.v.i.u.Version[0;39m - HV000001: Hibernate Validator 6.1.7.Final 
+12:31:23.089 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.WeblogicJtaPlatform] 
+12:31:23.176 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting application roles. 
+12:31:23.462 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=2, name='APP_USER'} created. 
+12:31:23.478 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Role: Role{id=1, name='ADMIN'} created. 
+12:31:23.478 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - Inserting default users. 
+12:31:23.495 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+12:31:24.932 [main] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} 
+12:31:24.963 [main] [34mINFO [0;39m [36me.p.e.b.DataBootstrap[0;39m - User: UserForm{username='Admin', password='J2LgNFg2Zv8AkEYf', email='20170874@ce.pucmm.edu.do', name='Ivanosevic', lastname='Garcia', roles=[ADMIN]} created. 
+12:31:25.027 [main] [34mINFO [0;39m [36mo.e.j.util.log[0;39m - Logging initialized @7545ms to org.eclipse.jetty.util.log.Slf4jLog 
+12:31:25.145 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Static file handler added:
+    {urlPathPrefix: "/", path: "/public", location: Location.CLASSPATH}
+    Resolved path: 'file:///E:/Archivos/Github/simple-url-shortener/build/resources/main/public/' 
+12:31:25.180 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+ 
+12:31:25.182 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Starting Javalin ... 
+12:31:25.475 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Listening on http://localhost:8080/ 
+12:31:25.475 [main] [34mINFO [0;39m [36mi.j.Javalin[0;39m - Javalin started in 294ms \o/ 
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - - Loaded 69 files in 1834 msec using expression: classpath*:UserAgents/**/*.yaml 
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - /-----------------------------------------------------------\ 
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Yauaa 5.23 (v5.23 @ 2021-03-05T11:05:38Z)                 | 
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - +-----------------------------------------------------------+ 
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | For more information: https://yauaa.basjes.nl             | 
+12:31:27.533 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - | Copyright (C) 2013-2021 Niels Basjes - License Apache 2.0 | 
+12:31:27.534 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m - \-----------------------------------------------------------/ 
+12:31:27.534 [main] [34mINFO [0;39m [36mn.b.p.u.u.YauaaVersion[0;39m -  
+12:31:27.578 [main] [34mINFO [0;39m [36mn.b.p.u.AbstractUserAgentAnalyzerDirect[0;39m - Building all matchers for all possible fields. 
+12:31:56.463 [qtp908139452-54] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=1, name='www.youtube.com', code='n', toUrl='https://www.youtube.com/watch?v=UKNQJlwN1VA'} 
+12:32:14.045 [qtp908139452-55] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=2, name='wikipedia.com', code='o', toUrl='http://wikipedia.com'} 
+12:32:35.882 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - Creating a new user with form: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+12:32:35.964 [qtp908139452-44] [34mINFO [0;39m [36me.p.e.u.UserService[0;39m - User created successfully: UserForm{username='jean18699', password='abc123', email='jean18699@gmail.com', name='Jean', lastname='George', roles=[APP_USER]} 
+12:32:50.695 [qtp908139452-50] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=3, name='web.whatsapp.com', code='p', toUrl='https://web.whatsapp.com/'} 
+12:33:07.381 [qtp908139452-55] [34mINFO [0;39m [36me.p.e.u.s.ShortURLService[0;39m - Shorted URL Successfully: ShortURL{id=4, name='web.telegram.org', code='q', toUrl='https://web.telegram.org/k/'} 
