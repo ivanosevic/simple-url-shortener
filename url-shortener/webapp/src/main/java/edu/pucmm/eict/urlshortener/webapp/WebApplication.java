@@ -10,9 +10,7 @@ import edu.pucmm.eict.urlshortener.users.UserDao;
 import edu.pucmm.eict.urlshortener.users.UserService;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.EmbeddedDb;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.H2Database;
-import edu.pucmm.eict.urlshortener.webapp.controllers.AdviceController;
-import edu.pucmm.eict.urlshortener.webapp.controllers.ShortUrlController;
-import edu.pucmm.eict.urlshortener.webapp.controllers.UrlStatisticsController;
+import edu.pucmm.eict.urlshortener.webapp.controllers.*;
 import edu.pucmm.eict.urlshortener.webapp.security.SecurityConfig;
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
@@ -86,6 +84,8 @@ public class WebApplication {
 
         // Controllers...
         new AdviceController(app).applyRoutes();
+        new AuthController(app, authService, sessionFlash).applyRoutes();
+        new UserZoneController(app).applyRoutes();
         new ShortUrlController(app, shortUrlService, sessionUrlService, sessionFlash).applyRoutes();
         new UrlStatisticsController(app, sessionUrlService, urlStatisticsService, shortUrlDao).applyRoutes();
         // Start web server application

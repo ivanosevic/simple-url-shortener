@@ -5,7 +5,7 @@ import io.javalin.Javalin;
 public abstract class BaseController {
     protected final Javalin app;
 
-    protected BaseController(Javalin app) {
+    public BaseController(Javalin app) {
         this.app = app;
     }
 
