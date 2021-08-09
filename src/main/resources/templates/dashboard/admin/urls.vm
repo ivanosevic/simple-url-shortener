@@ -29,6 +29,11 @@
   <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/default.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/alertifyjs/css/themes/bootstrap.min.css">
+
+  <!-- preact + styled-components + microlink -->
+  <script src="https://cdn.jsdelivr.net/combine/npm/preact@10/dist/preact.umd.min.js,npm/preact@10/hooks/dist/hooks.umd.min.js,npm/preact@10/compat/dist/compat.umd.min.js,gh/smoljs/react/react.js,npm/react-is@16/umd/react-is.production.min.js,npm/styled-components@5/dist/styled-components.min.js,npm/@microlink/mql@latest/dist/mql.min.js,npm/@microlink/vanilla@5/dist/microlink.min.js"></script>
+
+
 </head>
 <body>
 
@@ -62,8 +67,10 @@
                     <div class="row container-fluid">
                       <div class="col-12">
                         <ul class="list-group list-group-flush text-sm-center text-md-start text-lg-start">
-                          <li class="list-group-item">Link: <a href="$redirectUrl" target="_blank">$redirectUrl</a></li>
-                          <li class="list-group-item">Name: $url.name</li>
+                          <li class="list-group-item">
+                            <a href="$url.toURL" target="_blank" class="link-preview" data-short-url="$redirectUrl" data-set-data='{"title": "$redirectUrl"}'>$redirectUrl</a>
+                          </li>
+
                           #if($url.toURL.length() > 60)
                             <li class="list-group-item">Redirects to: $url.toURL.substring(0, 50) ...</li>
                           #else
