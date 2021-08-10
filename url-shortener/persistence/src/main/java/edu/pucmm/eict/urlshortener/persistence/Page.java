@@ -14,6 +14,11 @@ public class Page<T> {
         this.isEmpty = isEmpty;
     }
 
+    public Page(boolean isEmpty, List<T> results) {
+        this.isEmpty = isEmpty;
+        this.results = results;
+    }
+
     public Page(int totalPages, int currentPage, boolean isFirst, boolean isLast, List<T> results) {
         this.totalPages = totalPages;
         this.currentPage = currentPage;

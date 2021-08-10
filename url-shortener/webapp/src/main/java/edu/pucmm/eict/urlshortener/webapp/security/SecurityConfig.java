@@ -40,7 +40,7 @@ public class SecurityConfig implements AccessManager {
         user = ctx.sessionAttribute("user");
 
         if(user == null) {
-            ctx.redirect("/app/login");
+            ctx.redirect("/login");
             return;
         }
 

@@ -1,19 +1,19 @@
 package edu.pucmm.eict.urlshortener.users;
 
 import edu.pucmm.eict.urlshortener.persistence.Page;
-import org.jasypt.util.password.PasswordEncryptor;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 public class UserService {
     private final UserDao userDao;
-    private final PasswordEncryptor passwordEncryptor;
+    private final MyEncryptor myEncryptor;
 
-    public UserService(UserDao userDao, PasswordEncryptor passwordEncryptor) {
+    public UserService(UserDao userDao, MyEncryptor myEncryptor) {
         this.userDao = userDao;
-        this.passwordEncryptor = passwordEncryptor;
+        this.myEncryptor = myEncryptor;
     }
 
     public List<User> findAll() {
@@ -26,12 +26,12 @@ public class UserService {
 
     private void hashUserPassword(User user) {
         String password = user.getPassword();
-        String hashedPassword = passwordEncryptor.encryptPassword(password);
+        String hashedPassword = myEncryptor.hash(password);
         user.setPassword(hashedPassword);
     }
 
     private void addRolesToUser(User user, List<Role> roles) {
-        user.getRoles().addAll(roles);
+        user.setRoles(new HashSet<>(roles));
     }
 
     public boolean userExists(User user) {
@@ -57,6 +57,16 @@ public class UserService {
         }
         hashUserPassword(user);
         addRolesToUser(user, List.of(RoleList.APP_USER));
+        return userDao.create(user);
+    }
+
+    @Transactional
+    public User createAsAdmin(User user) {
+        if(userExists(user)) {
+            throw new UserAlreadyExistsException("User with username = " + user.getUsername() + " or email = " + user.getEmail());
+        }
+        hashUserPassword(user);
+        addRolesToUser(user, List.of(RoleList.ADMIN));
         return userDao.create(user);
     }
 

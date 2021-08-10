@@ -1,4 +1,4 @@
-module url.shortener.webapp {
+open module url.shortener.webapp {
     requires url.shortener.persistence;
     requires url.shortener.users;
     requires url.shortener.urls;
@@ -11,8 +11,9 @@ module url.shortener.webapp {
     requires io.javalin;
     requires org.slf4j;
     requires org.slf4j.simple;
+
     requires jasypt;
-    requires com.fasterxml.classmate;
+
     requires java.xml.bind;
     requires annotations;
     requires com.google.zxing;
@@ -29,4 +30,6 @@ module url.shortener.webapp {
     requires org.eclipse.jetty.http;
     requires javax.servlet.api;
     requires kotlin.stdlib;
+    requires java.security.jgss;
+    requires java.security.sasl;
 }

@@ -5,9 +5,9 @@ import edu.pucmm.eict.urlshortener.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-public class UserZoneController extends BaseController {
+public class RedirectAppFilter extends BaseController {
 
-    public UserZoneController(Javalin app) {
+    public RedirectAppFilter(Javalin app) {
         super(app);
     }
 
@@ -17,7 +17,7 @@ public class UserZoneController extends BaseController {
             if(user.getRoles().contains(RoleList.ADMIN)) {
                 ctx.redirect("/admin-panel");
             } else {
-                ctx.redirect("/app");
+                ctx.redirect("/user-zone");
             }
         }
     }

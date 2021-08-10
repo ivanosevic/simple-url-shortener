@@ -37,7 +37,7 @@ public class User implements Serializable {
     @Column(length = 320, nullable = false)
     private String email;
 
-    @Column(columnDefinition = "char(64)", nullable = false)
+    @Column(nullable = false)
     private String password;
 
     private String secret;

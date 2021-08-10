@@ -3,6 +3,7 @@ package edu.pucmm.eict.urlshortener.persistence;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,12 +86,12 @@ public class PaginationDao<T, PK extends Serializable> extends Dao<T, PK>{
 
         long amount = getPageAmount(count);
         if(hasNoResults(amount)) {
-            return new Page<>(true);
+            return new Page<>(true, new ArrayList<>());
         }
 
         long totalPages = calculateNumberOfPages(size, amount);
         if(isPageEmpty(totalPages)) {
-            return new Page<>(true);
+            return new Page<>(true, new ArrayList<>());
         }
 
         if(pageExceedsTotal(page, totalPages)) {
