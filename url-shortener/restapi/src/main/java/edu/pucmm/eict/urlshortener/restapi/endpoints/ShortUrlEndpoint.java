@@ -124,6 +124,6 @@ public class ShortUrlEndpoint extends BaseEndpoint {
         app.exception(InvalidUrlException.class, this::handleInvalidUrlException);
         app.post("/short-url", this::shortUrl, Set.of(RoleList.ADMIN, RoleList.APP_USER));
         app.get("/users/:username/urls", this::getUrlsByUser, Set.of(RoleList.ADMIN));
-        app.get("/me/urls", this::getUrlsByUser, Set.of(RoleList.ADMIN, RoleList.APP_USER));
+        app.get("/me/urls", this::getMyUrls, Set.of(RoleList.ADMIN, RoleList.APP_USER));
     }
 }

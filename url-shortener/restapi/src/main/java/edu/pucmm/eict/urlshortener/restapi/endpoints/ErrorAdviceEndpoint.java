@@ -3,6 +3,7 @@ package edu.pucmm.eict.urlshortener.restapi.endpoints;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import edu.pucmm.eict.urlshortener.persistence.PaginationErrorException;
 import edu.pucmm.eict.urlshortener.restapi.responses.ApiError;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -41,12 +42,18 @@ public class ErrorAdviceEndpoint extends BaseEndpoint {
         ctx.status(HttpStatus.INTERNAL_SERVER_ERROR_500).json(apiError);
     }
 
+    private void handlePaginationErrorException(PaginationErrorException ex, Context ctx) {
+        ApiError apiError = new ApiError("Not found", ex.getMessage());
+        ctx.status(HttpStatus.NOT_FOUND_404).json(apiError);
+    }
+
     @Override
     public void applyEndpoints() {
         app.exception(MismatchedInputException.class, this::handleJsonBadFormat);
         app.exception(InvalidFormatException.class, this::handleInvalidFormatException);
         app.exception(JsonMappingException.class, this::handleJsonMappingException);
         app.exception(EntityNotFoundException.class, this::handleEntityNotFoundException);
+        app.exception(PaginationErrorException.class, this::handlePaginationErrorException);
         app.error(HttpStatus.INTERNAL_SERVER_ERROR_500, this::handleInternalServerError);
     }
 }

@@ -4,17 +4,13 @@ import edu.pucmm.eict.urlshortener.restapi.config.JwtUtil;
 import edu.pucmm.eict.urlshortener.restapi.dtos.LoginDto;
 import edu.pucmm.eict.urlshortener.restapi.forms.LoginForm;
 import edu.pucmm.eict.urlshortener.restapi.responses.ApiError;
-import edu.pucmm.eict.urlshortener.restapi.responses.ApiMessage;
 import edu.pucmm.eict.urlshortener.users.AuthService;
 import edu.pucmm.eict.urlshortener.users.BadCredentialsException;
-import edu.pucmm.eict.urlshortener.users.RoleList;
 import edu.pucmm.eict.urlshortener.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.eclipse.jetty.http.HttpStatus;
 import org.modelmapper.ModelMapper;
-
-import java.util.Set;
 
 public class LoginEndpoint extends BaseEndpoint{
 
@@ -27,11 +23,6 @@ public class LoginEndpoint extends BaseEndpoint{
         this.authService = authService;
         this.jwtUtil = jwtUtil;
         this.modelMapper = modelMapper;
-    }
-
-    private void welcome(Context ctx) {
-        ApiMessage apiMessage = new ApiMessage("Welcome to Wolfisc - Simple Url Shortener API", "Hope you enjoy this cool API");
-        ctx.status(HttpStatus.OK_200).json(apiMessage);
     }
 
     private void login(Context ctx) {
@@ -51,7 +42,6 @@ public class LoginEndpoint extends BaseEndpoint{
     @Override
     public void applyEndpoints() {
         app.post("/login", this::login);
-        app.get("/welcome", this::welcome, Set.of(RoleList.APP_USER, RoleList.ADMIN));
         app.exception(BadCredentialsException.class, this::handleBadCredentials);
     }
 }
