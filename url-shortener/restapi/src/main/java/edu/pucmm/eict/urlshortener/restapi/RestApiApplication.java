@@ -113,7 +113,7 @@ public class RestApiApplication {
          * */
         new ErrorAdviceEndpoint(app).applyEndpoints();
         new LoginEndpoint(app, authService, jwtUtil, modelMapper).applyEndpoints();
-        new ShortUrlEndpoint(app, userDao, shortUrlService, urlStatisticsService, modelMapper).applyEndpoints();
+        new ShortUrlEndpoint(app, userDao, shortUrlService, urlStatisticsService, modelMapper, jwtUtil).applyEndpoints();
 
         // Start web server application
         app.start(APP_PORT);
