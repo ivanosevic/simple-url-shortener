@@ -5,6 +5,6 @@ open module url.shortener.users {
     requires java.transaction;
     requires io.javalin;
     requires url.shortener.persistence;
-
+    requires jasypt;
     exports edu.pucmm.eict.urlshortener.users;
 }

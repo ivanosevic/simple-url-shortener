@@ -12,8 +12,6 @@ open module url.shortener.webapp {
     requires org.slf4j;
     requires org.slf4j.simple;
 
-    requires jasypt;
-
     requires java.xml.bind;
     requires annotations;
     requires com.google.zxing;
@@ -32,4 +30,5 @@ open module url.shortener.webapp {
     requires kotlin.stdlib;
     requires java.security.jgss;
     requires java.security.sasl;
+    requires jasypt;
 }

@@ -12,7 +12,7 @@ import edu.pucmm.eict.urlshortener.webapp.bootstrap.DataBootstrapImpl;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.EmbeddedDb;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.H2Database;
 import edu.pucmm.eict.urlshortener.webapp.config.CustomThymeleafRenderer;
-import edu.pucmm.eict.urlshortener.webapp.config.JasyptEncryptor;
+import edu.pucmm.eict.urlshortener.users.JasyptEncryptor;
 import edu.pucmm.eict.urlshortener.webapp.controllers.*;
 import edu.pucmm.eict.urlshortener.webapp.converters.ShortUrlDtoConverter;
 import edu.pucmm.eict.urlshortener.webapp.config.SecurityConfig;

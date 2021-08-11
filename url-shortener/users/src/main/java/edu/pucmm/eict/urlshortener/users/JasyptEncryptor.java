@@ -1,6 +1,5 @@
-package edu.pucmm.eict.urlshortener.webapp.config;
+package edu.pucmm.eict.urlshortener.users;
 
-import edu.pucmm.eict.urlshortener.users.MyEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.jasypt.util.password.StrongPasswordEncryptor;
