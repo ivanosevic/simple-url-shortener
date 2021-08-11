@@ -7,8 +7,10 @@ import edu.pucmm.eict.urlshortener.reports.*;
 import edu.pucmm.eict.urlshortener.restapi.config.JwtUtil;
 import edu.pucmm.eict.urlshortener.restapi.config.SecurityConfig;
 import edu.pucmm.eict.urlshortener.restapi.converters.LoginDtoConverter;
+import edu.pucmm.eict.urlshortener.restapi.converters.ShortUrlDtoConverter;
 import edu.pucmm.eict.urlshortener.restapi.endpoints.ErrorAdviceEndpoint;
 import edu.pucmm.eict.urlshortener.restapi.endpoints.LoginEndpoint;
+import edu.pucmm.eict.urlshortener.restapi.endpoints.ShortUrlEndpoint;
 import edu.pucmm.eict.urlshortener.urls.*;
 import edu.pucmm.eict.urlshortener.users.*;
 import io.javalin.Javalin;
@@ -98,7 +100,9 @@ public class RestApiApplication {
 
         ModelMapper modelMapper = new ModelMapper();
         LoginDtoConverter loginDtoConverter = new LoginDtoConverter();
+        ShortUrlDtoConverter shortUrlDtoConverter = new ShortUrlDtoConverter(redirectUrlBuilder);
         modelMapper.addConverter(loginDtoConverter);
+        modelMapper.addConverter(shortUrlDtoConverter);
         JwtUtil jwtUtil = new JwtUtil(API_SECRET, API_TOKEN_EXPIRATION_MS);
         SecurityConfig securityConfig = new SecurityConfig(jwtUtil, userDao);
         app.config.accessManager(securityConfig);
@@ -109,6 +113,7 @@ public class RestApiApplication {
          * */
         new ErrorAdviceEndpoint(app).applyEndpoints();
         new LoginEndpoint(app, authService, jwtUtil, modelMapper).applyEndpoints();
+        new ShortUrlEndpoint(app, userDao, shortUrlService, urlStatisticsService, modelMapper).applyEndpoints();
 
         // Start web server application
         app.start(APP_PORT);
