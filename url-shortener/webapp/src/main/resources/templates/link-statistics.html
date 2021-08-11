@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/public/vendor/leaflet-js/leaflet.css">
   <!--/*@thymesVar id="title" type="java.lang.String"*/-->
-  <!--/*@thymesVar id="sessionUrl" type="edu.pucmm.eict.urlshortener.webapp.SessionUrl"*/-->
+  <!--/*@thymesVar id="sessionUrl" type="edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl"*/-->
   <title th:text="${ title } + ' for ' + ${ sessionUrl.shortUrl }"></title>
 </head>
 <body class="bg-light">
@@ -22,7 +22,7 @@
 <header class="shadow-sm p-3 mb-4 bg-body rounded">
   <h1 class="text-center text-md-start text-lg-start">Url Statistics</h1>
   <p class="lead text-center text-md-start text-lg-start">Url Statistics for
-    <!--/*@thymesVar id="sessionUrl" type="edu.pucmm.eict.urlshortener.webapp.SessionUrl"*/-->
+    <!--/*@thymesVar id="sessionUrl" type="edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl"*/-->
     <strong th:text="${ sessionUrl.shortUrl }"></strong></p>
 </header>
 

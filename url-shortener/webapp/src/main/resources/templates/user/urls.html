@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>My Shortened URLs | Simple URL Shortener</title>
+  <link rel="stylesheet" type="text/css" href="/public/css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/sweetalert2/sweetalert2.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/bootstrap.min.css">
+</head>
+<body>
+
+<div class="d-flex" id="wrapper">
+  <!-- Page content wrapper-->
+  <div id="page-content-wrapper" class="bg-light">
+    <!-- Top navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <!--/*@thymesVar id="user" type="edu.pucmm.eict.urlshortener.users.User"*/-->
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false" th:text="'Welcome, ' + ${ user.username }"></a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/my-account">Account Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
+      <h1 class="fs-2 display-6">My Shortened URLs</h1>
+    </header>
+    <div class="container-fluid">
+      <!-- Page content-->
+      <main id="urls" class="container-fluid mt-4">
+
+        <!--/* Handle message error here */-->
+        <!--/*@thymesVar id="errorShortingUrl" type="java.lang.String"*/-->
+        <section class="row mb-5" th:if="${ errorShortingUrl }">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p th:text="${ errorShortingUrl }" class="text-center"></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        </section>
+
+        <!--/* Handle success message here */-->
+        <!--/*@thymesVar id="successOnShortingUrl" type="java.lang.String"*/-->
+        <section class="row mb-5" th:if="${ successOnShortingUrl }">
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <p class="text-center">Url shortened successfully!</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        </section>
+
+        <section class="row mb-3">
+          <div class="col">
+            <form method="post" action="/user-zone/short-url" accept-charset="UTF-8">
+              <div class="input-group">
+                <label for="url"></label>
+                <input id="url" name="url" type="text" class="form-control"
+                       placeholder="Enter your long link here." required/>
+                <button class="input-group-text btn btn-primary" type="submit">Shorten</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!--/* Print no URLs in system if there are no results  */-->
+        <!--/*@thymesVar id="urlPage" type="edu.pucmm.eict.urlshortener.persistence.Page"*/-->
+        <section th:if="${ urlPage.isEmpty() }" class="alert alert-warning mb-4">
+          <p class="text-center">You haven't shortened any URLs. Start by clicking shorten</p>
+        </section>
+
+        <!--/* Print table, otherwise */-->
+        <section th:if="${ !urlPage.isEmpty() }">
+          <div class="card p-1 mb-3" th:each="shortenedUrl : ${ urlPage.results }">
+            <div class="card-body">
+              <div class="row container-fluid">
+                <div class="col-12">
+                  <ul class="list-group list-group-flush text-sm-center text-md-start">
+                    <li class="list-group-item" th:text="'Short URL: ' + ${ shortenedUrl.shortUrl }"></li>
+                    <li class="list-group-item" th:text="'Redirects to: ' + ${ shortenedUrl.url }"></li>
+                    <li class="list-group-item" th:text="'Name: ' + ${ shortenedUrl.name }"></li>
+                    <li class="list-group-item" th:text="'Created at: ' + ${ shortenedUrl.createdAt }"></li>
+                    <li class="list-group-item d-grid gap-2 d-sm-block d-md-block d-lg-block">
+                      <a class="qr-code btn btn-outline-dark fa fa-qrcode fs-6" th:data-code-id="${shortenedUrl.code}"
+                         th:qr-image="${ shortenedUrl.qrCode }"></a>
+                      <a th:href="'/user-zone/urls/' + ${ shortenedUrl.code } + '/statistics'"
+                         class="btn btn-outline-info fa fa-chart-pie fs-6" target="_blank"></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="card" th:if="${ !urlPage.isEmpty() }"
+             th:with="before=${ urlPage.currentPage - 1 }, next=${urlPage.currentPage + 1}">
+          <div class="card-body">
+            <nav aria-label="pagination-controls"
+                 th:with="beforeLink='/user-zone/urls?page='+${before}, nextLink='/user-zone/urls?page='+${next}">
+              <ul class="pagination justify-content-end">
+                <li class="page-item" th:classappend="${ urlPage.isFirst() } ? disabled : enabled">
+                  <a class="page-link" th:href="${beforeLink}" aria-label="Previous"
+                     th:tabindex="${ urlPage.isFirst() } ? -1 : 0">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item" th:classappend="${ urlPage.isLast() } ? disabled : enabled">
+                  <a class="page-link" th:href="${nextLink}" aria-label="Next"
+                     th:tabindex="${ urlPage.isLast() } ? -1 : 0">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/vendor/sweetalert2/sweetalert2.min.js"></script>
+<script type="text/javascript" src="/public/vendor/alertify-js/alertify.min.js"></script>
+<script type="text/javascript" src="/public/js/navbar.js"></script>
+<script type="text/javascript" src="/public/js/my-url-page.js"></script>
+</body>
+</html>

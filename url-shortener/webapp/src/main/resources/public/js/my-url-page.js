@@ -2,20 +2,9 @@
  * Until document is ready...
  */
 document.addEventListener("DOMContentLoaded", function (event) {
-  const clipboard = new ClipboardJS('.copyable');
-
-  clipboard.on('success', function () {
-    alertify.notify('Copied! :)', 'success', 5);
-  });
-
-  clipboard.on('error', function () {
-    alertify.notify('Error copying :(', 'error', 5);
-  });
-
   document.addEventListener('click', function (clickEvent) {
     qrCodeBtn(clickEvent);
   });
-
 });
 
 const qrCodeBtn = function (evt) {

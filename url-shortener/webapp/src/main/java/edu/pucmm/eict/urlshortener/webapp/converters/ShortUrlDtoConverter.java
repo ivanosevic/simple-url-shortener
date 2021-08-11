@@ -3,7 +3,7 @@ package edu.pucmm.eict.urlshortener.webapp.converters;
 import edu.pucmm.eict.urlshortener.urls.QrGenerator;
 import edu.pucmm.eict.urlshortener.urls.RedirectUrlBuilder;
 import edu.pucmm.eict.urlshortener.urls.ShortUrl;
-import edu.pucmm.eict.urlshortener.webapp.ShortUrlDto;
+import edu.pucmm.eict.urlshortener.webapp.domain.ShortUrlDto;
 import org.modelmapper.AbstractConverter;
 
 import java.time.format.DateTimeFormatter;
@@ -20,13 +20,19 @@ public class ShortUrlDtoConverter extends AbstractConverter<ShortUrl, ShortUrlDt
 
     @Override
     protected ShortUrlDto convert(ShortUrl shortUrl) {
+        String user = "Anonymous";
+        String redirectUrl = redirectUrlBuilder.redirectUrl(shortUrl.getCode());
+        if(shortUrl.getUser() != null) {
+            user = shortUrl.getUser().getUsername();
+        }
         return new ShortUrlDto(
-                        shortUrl.getName(),
-                        shortUrl.getCode(),
-                        qrGenerator.getQrCode(shortUrl.getCode()),
-                        shortUrl.getUrl(),
-                        redirectUrlBuilder.redirectUrl(shortUrl.getCode()),
-                        shortUrl.getCreatedAt().format(DateTimeFormatter.ISO_DATE_TIME)
+                shortUrl.getName(),
+                shortUrl.getCode(),
+                qrGenerator.getQrCode(redirectUrl),
+                shortUrl.getUrl(),
+                redirectUrl,
+                shortUrl.getCreatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                user
         );
     }
 }

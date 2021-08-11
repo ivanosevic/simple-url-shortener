@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urlshortener.webapp;
+package edu.pucmm.eict.urlshortener.webapp.services;
 
 import io.javalin.http.Context;
 

@@ -4,8 +4,12 @@ import edu.pucmm.eict.urlshortener.users.RoleList;
 import edu.pucmm.eict.urlshortener.users.User;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RedirectAppFilter extends BaseController {
+
+    private static final Logger log = LoggerFactory.getLogger(RedirectAppFilter.class);
 
     public RedirectAppFilter(Javalin app) {
         super(app);

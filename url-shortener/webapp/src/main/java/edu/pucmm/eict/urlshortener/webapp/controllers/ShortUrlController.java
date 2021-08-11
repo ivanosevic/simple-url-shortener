@@ -3,9 +3,10 @@ package edu.pucmm.eict.urlshortener.webapp.controllers;
 import edu.pucmm.eict.urlshortener.urls.InvalidUrlException;
 import edu.pucmm.eict.urlshortener.urls.ShortUrl;
 import edu.pucmm.eict.urlshortener.urls.ShortUrlService;
-import edu.pucmm.eict.urlshortener.webapp.SessionFlash;
-import edu.pucmm.eict.urlshortener.webapp.SessionUrl;
-import edu.pucmm.eict.urlshortener.webapp.SessionUrlService;
+import edu.pucmm.eict.urlshortener.users.User;
+import edu.pucmm.eict.urlshortener.webapp.services.SessionFlash;
+import edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl;
+import edu.pucmm.eict.urlshortener.webapp.services.SessionUrlService;
 import io.javalin.Javalin;
 import io.javalin.core.validation.Validator;
 import io.javalin.http.Context;
@@ -34,15 +35,11 @@ public class ShortUrlController extends BaseController {
     private Map<String, Object> mainViewData(Context ctx) {
         Map<String, Object> data = new HashMap<>();
         List<SessionUrl> sessionUrls = sessionUrlService.consult(ctx);
-        Map<String, List<String>> errors = sessionFlash.get("errors", ctx);
-        Boolean hasErrors = sessionFlash.get("hasErrors", ctx);
-        Boolean success = sessionFlash.get("success", ctx);
-        String errorMessage = sessionFlash.get("errorMessage", ctx);
+        Boolean successOnShortingUrl = sessionFlash.get("successOnShortingUrl", ctx);
+        String errorShortingUrl = sessionFlash.get("errorShortingUrl", ctx);
         data.put("sessionUrls", sessionUrls);
-        data.put("errorMessage", errorMessage);
-        data.put("errors", errors);
-        data.put("hasErrors", hasErrors);
-        data.put("success", success);
+        data.put("errorShortingUrl", errorShortingUrl);
+        data.put("successOnShortingUrl", successOnShortingUrl);
         return data;
     }
 
@@ -53,26 +50,25 @@ public class ShortUrlController extends BaseController {
     }
 
     private void processUrl(Context ctx) {
-        var vUrl = ctx.formParam("url", String.class)
-                .check(s-> !s.isBlank(), "Url can't be blank")
-                .check(s -> s.length() <= 2048, "Url can't be longer than 2048 characters.");
-        var errors = Validator.collectErrors(vUrl);
-        if(!errors.isEmpty()) {
-            sessionFlash.add("hasErrors", true, ctx);
-            sessionFlash.add("errors", errors, ctx);
-            ctx.redirect("/", HttpStatus.SEE_OTHER_303);
-            return;
-        }
-        String url = vUrl.getValue();
+        String url = ctx.formParam("url");
         ShortUrl shortUrl = shortUrlService.doShort(null, url);
         sessionUrlService.addToSession(ctx, shortUrl);
-        sessionFlash.add("success", true, ctx);
+        sessionFlash.add("successOnShortingUrl", true, ctx);
         ctx.redirect("/", HttpStatus.SEE_OTHER_303);
     }
 
     private void handleInvalidUrlException(Exception ex, Context ctx) {
         log.info("{}", ex.getMessage());
-        sessionFlash.add("errorMessage", "The given URL is invalid. Please, make sure that the URL is correct.", ctx);
+        sessionFlash.add("errorShortingUrl", ex.getMessage(), ctx);
+        User user = ctx.sessionAttribute("user");
+        if(user != null) {
+            if(user.isAdmin()) {
+                ctx.redirect("/admin-panel/urls", HttpStatus.SEE_OTHER_303);
+            } else {
+                ctx.redirect("/user-zone/urls", HttpStatus.SEE_OTHER_303);
+            }
+            return;
+        }
         ctx.redirect("/", HttpStatus.SEE_OTHER_303);
     }
 

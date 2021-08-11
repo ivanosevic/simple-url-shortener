@@ -17,9 +17,9 @@ public class UserDao extends PaginationDao<User, Long> {
     public Page<User> findPaged(int page, int size) {
         EntityManager em = super.getEntityManager();
         try {
-            TypedQuery<Long> count = em.createQuery("select u from User u where u.deletedAt = 0L", Long.class);
-            TypedQuery<Long> ids = em.createQuery("select u.id from User u where u.deletedAt = 0L", Long.class);
-            TypedQuery<User> query = em.createQuery("select u from User u join fetch u.roles as roles where u.id in (:ids)", User.class);
+            TypedQuery<Long> count = em.createQuery("select count(u) from User u where u.deletedAt = 0L", Long.class);
+            TypedQuery<Long> ids = em.createQuery("select u.id from User u where u.deletedAt = 0L group by u.id order by max(u.joinedAt) desc", Long.class);
+            TypedQuery<User> query = em.createQuery("select u from User u join fetch u.roles as roles where u.id in (:ids) group by u.id order by max(u.joinedAt) desc", User.class);
             return super.findPagedFilter(page, size, count, ids, query);
         } finally {
             em.close();

@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urlshortener.webapp;
+package edu.pucmm.eict.urlshortener.webapp.config;
 
 import io.javalin.http.Context;
 import io.javalin.plugin.rendering.FileRenderer;

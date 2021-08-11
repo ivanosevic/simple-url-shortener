@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urlshortener.webapp;
+package edu.pucmm.eict.urlshortener.webapp.domain;
 
 public class SessionUrl {
     private String temporaryCode;

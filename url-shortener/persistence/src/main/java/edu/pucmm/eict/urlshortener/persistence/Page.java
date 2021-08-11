@@ -25,7 +25,7 @@ public class Page<T> {
         this.isFirst = isFirst;
         this.isLast = isLast;
         this.results = results;
-        this.isEmpty = false;
+        this.isEmpty = results.isEmpty();
     }
 
     public int getTotalPages() {

@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urlshortener.webapp;
+package edu.pucmm.eict.urlshortener.webapp.domain;
 
 public class ShortUrlDto {
     private String name;
@@ -7,17 +7,19 @@ public class ShortUrlDto {
     private String url;
     private String shortUrl;
     private String createdAt;
+    private String user;
 
     public ShortUrlDto() {
     }
 
-    public ShortUrlDto(String name, String code, String qrCode, String url, String shortUrl, String createdAt) {
+    public ShortUrlDto(String name, String code, String qrCode, String url, String shortUrl, String createdAt, String user) {
         this.name = name;
         this.code = code;
         this.qrCode = qrCode;
         this.url = url;
         this.shortUrl = shortUrl;
         this.createdAt = createdAt;
+        this.user = user;
     }
 
     public String getName() {
@@ -66,5 +68,13 @@ public class ShortUrlDto {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

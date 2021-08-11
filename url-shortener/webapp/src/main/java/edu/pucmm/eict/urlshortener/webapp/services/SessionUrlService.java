@@ -1,8 +1,9 @@
-package edu.pucmm.eict.urlshortener.webapp;
+package edu.pucmm.eict.urlshortener.webapp.services;
 
 import edu.pucmm.eict.urlshortener.urls.QrGenerator;
 import edu.pucmm.eict.urlshortener.urls.RedirectUrlBuilder;
 import edu.pucmm.eict.urlshortener.urls.ShortUrl;
+import edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl;
 import io.javalin.http.Context;
 
 import java.util.*;
@@ -51,6 +52,10 @@ public class SessionUrlService {
         List<SessionUrl> dump = new ArrayList<>(sessionUrls);
         Collections.reverse(dump);
         return dump;
+    }
+
+    public void clean(Context ctx) {
+        ctx.req.getSession().removeAttribute("sessionUrls");
     }
 
     public Optional<SessionUrl> findByTemporaryCode(Context ctx, String temporaryCode) {

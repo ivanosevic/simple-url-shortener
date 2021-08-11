@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urlshortener.webapp.security;
+package edu.pucmm.eict.urlshortener.webapp.config;
 
 import edu.pucmm.eict.urlshortener.users.AuthService;
 import edu.pucmm.eict.urlshortener.users.User;
@@ -21,13 +21,6 @@ public class SecurityConfig implements AccessManager {
     @Override
     public void manage(@NotNull Handler handler, @NotNull Context ctx, @NotNull Set<Role> permittedRoles) throws Exception {
 
-        // If the route is accessible to everyone, no need
-        // to check session
-        if(permittedRoles.isEmpty()) {
-            handler.handle(ctx);
-            return;
-        }
-
         User user = ctx.sessionAttribute("user");
         String rememberMe = ctx.cookie("remember-me");
         // If there's a cookie but there's no session for the user,
@@ -38,6 +31,13 @@ public class SecurityConfig implements AccessManager {
         }
 
         user = ctx.sessionAttribute("user");
+
+        // If the route is accessible to everyone, no need
+        // to check session
+        if(permittedRoles.isEmpty()) {
+            handler.handle(ctx);
+            return;
+        }
 
         if(user == null) {
             ctx.redirect("/login");

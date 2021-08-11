@@ -179,7 +179,7 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(roles, user.roles) && Objects.equals(username, user.username) && Objects.equals(email, user.email);
+        return Objects.equals(username, user.username) && Objects.equals(email, user.email);
     }
 
     @Override

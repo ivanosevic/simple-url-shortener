@@ -1,4 +1,4 @@
-package edu.pucmm.eict.urlshortener.webapp;
+package edu.pucmm.eict.urlshortener.webapp.config;
 
 import edu.pucmm.eict.urlshortener.users.MyEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;

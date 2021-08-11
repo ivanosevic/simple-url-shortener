@@ -11,9 +11,13 @@ import edu.pucmm.eict.urlshortener.webapp.bootstrap.DataBootstrap;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.DataBootstrapImpl;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.EmbeddedDb;
 import edu.pucmm.eict.urlshortener.webapp.bootstrap.H2Database;
+import edu.pucmm.eict.urlshortener.webapp.config.CustomThymeleafRenderer;
+import edu.pucmm.eict.urlshortener.webapp.config.JasyptEncryptor;
 import edu.pucmm.eict.urlshortener.webapp.controllers.*;
 import edu.pucmm.eict.urlshortener.webapp.converters.ShortUrlDtoConverter;
-import edu.pucmm.eict.urlshortener.webapp.security.SecurityConfig;
+import edu.pucmm.eict.urlshortener.webapp.config.SecurityConfig;
+import edu.pucmm.eict.urlshortener.webapp.services.SessionFlash;
+import edu.pucmm.eict.urlshortener.webapp.services.SessionUrlService;
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
 import io.javalin.http.staticfiles.Location;
@@ -63,7 +67,6 @@ public class WebApplication {
         JasyptEncryptor jasyptEncryptor = new JasyptEncryptor(passwordEncryptor, encryptor);
         AuthService authService = new AuthService(userDao, jasyptEncryptor);
         UserService userService = new UserService(userDao, jasyptEncryptor);
-
 
         // Initializing utils from urls modules
         QrGenerator qrGenerator = new PngQrGenerator();
@@ -131,7 +134,8 @@ public class WebApplication {
         new AdviceController(app).applyRoutes();
         new RedirectAppFilter(app).applyRoutes();
         new RedirectUrlController(app, redirectService).applyRoutes();
-        new AdminZoneController(app, adminReportService, shortUrlService, modelMapper).applyRoutes();
+        new AssignUrlsToUserFilter(app, sessionUrlService, shortUrlService).applyRoutes();
+        new AdminZoneController(app, adminReportService, shortUrlService, userService, sessionFlash, modelMapper).applyRoutes();
         new AuthController(app, userService, authService, sessionFlash).applyRoutes();
         new ShortUrlController(app, shortUrlService, sessionUrlService, sessionFlash).applyRoutes();
         new UrlStatisticsController(app, sessionUrlService, urlStatisticsService, shortUrlDao).applyRoutes();

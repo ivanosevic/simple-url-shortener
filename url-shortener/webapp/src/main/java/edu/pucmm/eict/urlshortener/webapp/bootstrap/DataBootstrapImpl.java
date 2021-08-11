@@ -27,7 +27,7 @@ public class DataBootstrapImpl implements DataBootstrap {
     }
 
     private void insertUsers() {
-        User user = new User("admin", "20170874@ce.pucmm.edu.do", "admin", "Ivanosevic", "Garcia Consuegra");
+        User user = UserList.ADMIN;
         user.setRoles(Set.of(RoleList.ADMIN));
         var userDb = userService.findByUsername(user.getUsername());
         if(userDb.isEmpty()) {

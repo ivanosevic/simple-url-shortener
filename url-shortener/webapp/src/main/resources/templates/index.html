@@ -44,18 +44,20 @@
     </section>
 
     <!--/* Handle message error here */-->
-    <!--/*@thymesVar id="errorMessage" type="java.lang.String"*/-->
-    <section class="row mb-5" th:if="${ errorMessage }">
-      <div class="alert alert-danger">
-        <p th:text="${ errorMessage }" class="text-center"></p>
+    <!--/*@thymesVar id="errorShortingUrl" type="java.lang.String"*/-->
+    <section class="row mb-5" th:if="${ errorShortingUrl }">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p th:text="${ errorShortingUrl }" class="text-center"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     </section>
 
     <!--/* Handle success message here */-->
-    <!--/*@thymesVar id="success" type="java.lang.String"*/-->
-    <section class="row mb-5" th:if="${ success }">
-      <div class="alert alert-success">
+    <!--/*@thymesVar id="successOnShortingUrl" type="java.lang.Boolean"*/-->
+    <section class="row mb-5" th:if="${ successOnShortingUrl }">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
         <p class="text-center">Url shortened successfully!</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     </section>
 
@@ -83,7 +85,7 @@
 
 <!--/* Session URLs */-->
 
-<!--/*@thymesVar id="sessionUrls" type="java.util.ArrayList<edu.pucmm.eict.urlshortener.webapp.SessionUrl>"*/-->
+<!--/*@thymesVar id="sessionUrls" type="java.util.ArrayList<edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl>"*/-->
 <article class="generated-urls container" th:if="${!sessionUrls.isEmpty()}">
   <header>
     <h3 class="text-center mt-3 mb-3">Recent Links</h3>

@@ -2,6 +2,7 @@ package edu.pucmm.eict.urlshortener.users;
 
 import edu.pucmm.eict.urlshortener.persistence.Page;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserService {
         user.setPassword(hashedPassword);
     }
 
-    private void addRolesToUser(User user, List<Role> roles) {
+    private void setRolesToUser(User user, List<Role> roles) {
         user.setRoles(new HashSet<>(roles));
     }
 
@@ -56,7 +57,7 @@ public class UserService {
             throw new UserAlreadyExistsException("User with username = " + user.getUsername() + " or email = " + user.getEmail());
         }
         hashUserPassword(user);
-        addRolesToUser(user, List.of(RoleList.APP_USER));
+        setRolesToUser(user, List.of(RoleList.APP_USER));
         return userDao.create(user);
     }
 
@@ -66,12 +67,43 @@ public class UserService {
             throw new UserAlreadyExistsException("User with username = " + user.getUsername() + " or email = " + user.getEmail());
         }
         hashUserPassword(user);
-        addRolesToUser(user, List.of(RoleList.ADMIN));
+        setRolesToUser(user, List.of(RoleList.ADMIN));
         return userDao.create(user);
     }
 
     @Transactional
-    public User delete(User user) {
+    public User grantAdminPrivileges(String username) {
+        User user = userDao.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User with username " + username + " was not found"));
+        if(user.isAdmin()) {
+            throw new GrantPrivilegesException("The user " + user.getUsername() + " already has ADMIN privileges.");
+        }
+        setRolesToUser(user, List.of(RoleList.ADMIN));
+        return userDao.update(user);
+    }
+
+    @Transactional
+    public User removeAdminPrivileges(String username) {
+        User user = userDao.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User with username " + username + " was not found"));
+        if(!user.isAdmin()) {
+            throw new GrantPrivilegesException("The user " + user.getPassword() + " doesn't has admin privileges.");
+        }
+
+        if(user.equals(UserList.ADMIN)) {
+            throw new GrantPrivilegesException("You can't remove the privileges of the Admin user.");
+        }
+        setRolesToUser(user, List.of(RoleList.APP_USER));
+        return userDao.update(user);
+    }
+
+    @Transactional
+    public User delete(String username) {
+        User user = userDao.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User with username " + username + " was not found"));
+        if(user.equals(UserList.ADMIN)) {
+            throw new UserNotDeletableException("The user Admin cannot be deleted.");
+        }
         Long deletedAt = System.currentTimeMillis() / 1000L;
         user.setDeletedAt(deletedAt);
         return userDao.update(user);

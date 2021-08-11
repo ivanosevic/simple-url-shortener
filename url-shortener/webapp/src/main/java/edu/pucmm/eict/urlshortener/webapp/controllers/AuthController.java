@@ -4,7 +4,7 @@ import edu.pucmm.eict.urlshortener.users.AuthService;
 import edu.pucmm.eict.urlshortener.users.BadCredentialsException;
 import edu.pucmm.eict.urlshortener.users.User;
 import edu.pucmm.eict.urlshortener.users.UserService;
-import edu.pucmm.eict.urlshortener.webapp.SessionFlash;
+import edu.pucmm.eict.urlshortener.webapp.services.SessionFlash;
 import io.javalin.Javalin;
 import io.javalin.core.validation.Validator;
 import io.javalin.http.Context;
@@ -46,7 +46,7 @@ public class AuthController extends BaseController {
     private void processLogin(Context ctx) {
         String username = ctx.formParam("username", String.class).get();
         String password = ctx.formParam("password", String.class).get();
-        String rememberMe = ctx.formParam("remember-me", String.class).get();
+        String rememberMe = ctx.formParam("remember-me");
         User user = authService.login(username, password);
         if (rememberMe != null) {
             String secret = authService.assignSecret(user);
