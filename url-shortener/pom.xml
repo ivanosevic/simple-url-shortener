@@ -32,6 +32,7 @@
         <module>urls</module>
         <module>reports</module>
         <module>restapi</module>
+        <module>grpc</module>
     </modules>
 
     <properties>
