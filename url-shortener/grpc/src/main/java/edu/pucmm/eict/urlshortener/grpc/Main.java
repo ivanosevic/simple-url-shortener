@@ -17,17 +17,24 @@ import java.io.IOException;
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
-    private static final int SERVER_PORT = 7002;
-    private static final String PERSISTENCE_UNIT = "embedded";
-    private static final String DOMAIN = "wolfisc.com";
 
     public static void main(String[] args) throws IOException, InterruptedException {
+
+        /**
+         * Getting application.properties configuration
+         */
+        ApplicationConfig applicationConfig = new ApplicationConfigImpl("/application.properties");
+        applicationConfig.load();
+
+        int serverPort = applicationConfig.getPropertyAsInt("app.port");
+        String persistenceUnit = applicationConfig.getPropertyAsString("app.db.persistence-unit");
+        String redirectBaseDomain =  applicationConfig.getPropertyAsString("app.redirect.url");
 
         /**
          * Initializing database connection through Entity Manager Factory..
          */
         log.info("Initializing persistence services");
-        PersistenceService persistenceService = new PersistenceService(PERSISTENCE_UNIT);
+        PersistenceService persistenceService = new PersistenceService(persistenceUnit);
         persistenceService.start();
 
         EntityManagerFactory entityManagerFactory = persistenceService.getEntityManagerFactory();
@@ -42,7 +49,7 @@ public class Main {
         Base62 base62Encoder = Base62.createInstance();
         org.apache.commons.validator.routines.UrlValidator apacheUrlValidator = new org.apache.commons.validator.routines.UrlValidator();
         UrlValidator urlValidator = new UrlValidator(apacheUrlValidator);
-        RedirectUrlBuilder redirectUrlBuilder = new BasicRedirectUrlBuilder(DOMAIN);
+        RedirectUrlBuilder redirectUrlBuilder = new BasicRedirectUrlBuilder(redirectBaseDomain);
 
         ShortUrlDao shortUrlDao = new ShortUrlDao(entityManagerFactory);
         ShortUrlService shortUrlService = new ShortUrlService(shortUrlDao, base62Encoder, urlValidator);
@@ -58,8 +65,8 @@ public class Main {
         /**
          * Creating gRPC server
          */
-        log.info("Creating gRPC server on port " + SERVER_PORT);
-        Server server = ServerBuilder.forPort(SERVER_PORT)
+        log.info("Creating gRPC server on port " + serverPort);
+        Server server = ServerBuilder.forPort(serverPort)
                 .intercept(new ExceptionHandler())
                 .addService(new ShortUrlServicesGrpc(urlStatisticsService, shortUrlService, modelMapper, shortUrlDao, userDao))
                 .build();
