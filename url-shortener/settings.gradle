@@ -1,0 +1,7 @@
+rootProject.name = 'simple-url-shortener'
+include 'persistence'
+include 'users'
+include 'urls'
+include 'reports'
+include 'webapp'
+

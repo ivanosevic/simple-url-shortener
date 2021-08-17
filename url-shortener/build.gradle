@@ -1,0 +1,8 @@
+group 'edu.pucmm.eict'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+}
