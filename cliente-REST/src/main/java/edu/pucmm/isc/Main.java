@@ -1,18 +1,10 @@
 package edu.pucmm.isc;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
-import edu.pucmm.isc.urls.URL_Info;
 import edu.pucmm.isc.urls.URL_POST;
-import kong.unirest.GenericType;
-import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -182,12 +174,7 @@ public class Main {
                         }
 
                         break;
-                      /*  System.out.println(Unirest.get("http://localhost:7001/users/"+otherUser+"/urls?page=1")
-                                .header("Authorization", loggedUser.getToken())
-                                .header("Content-Type","application/json")
-                                .asJson().getBody().toPrettyString());
-                        break;
-*/
+                  
                     case 3:
                         loggedUser = null;
                         logged = false;
