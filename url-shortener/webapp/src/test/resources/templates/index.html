@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/css/global.css">
+  <link rel="stylesheet" href="/public/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/public/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/bootstrap.min.css">
+  <title>Simple Url Shortener</title>
+</head>
+<body>
+
+<!-- Main Header -->
+<header>
+  <nav class="navbar navbar-expand navbar-light bg-light p-3">
+    <div class="container">
+      <a class="navbar-brand me-auto" href="/">Url Shortener</a>
+      <ul class="navbar-nav list-inline ms-auto">
+        <li class="nav-item list-inline-item">
+          <a class="btn btn-primary" href="/login">Log in</a>
+        </li>
+        <li class="nav-item list-inline-item">
+          <a class="btn btn-primary" href="/signup">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- Page Content -->
+<main>
+  <div class="container mt-5 mb-5">
+    <section class="row mb-5">
+      <div class="col">
+        <h1 class="text-center">Start shorting your links</h1>
+        <p class="text-center lead mb-0">A Simple Url Shortener to short links and track statistics.</p>
+      </div>
+    </section>
+
+    <!--/* Handle message error here */-->
+    <!--/*@thymesVar id="errorShortingUrl" type="java.lang.String"*/-->
+    <section class="row mb-5" th:if="${ errorShortingUrl }">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p th:text="${ errorShortingUrl }" class="text-center"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    </section>
+
+    <!--/* Handle success message here */-->
+    <!--/*@thymesVar id="successOnShortingUrl" type="java.lang.Boolean"*/-->
+    <section class="row mb-5" th:if="${ successOnShortingUrl }">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p class="text-center">Url shortened successfully!</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    </section>
+
+    <section class="row mb-3">
+      <div class="col">
+        <form method="post" action="/short" accept-charset="UTF-8">
+          <div class="input-group input-group-lg">
+            <label for="url"></label>
+            <input id="url" name="url" type="text" class="form-control"
+                   placeholder="Enter your long link here." required/>
+            <button class="input-group-text btn btn-primary" type="submit">Shorten</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="row justify-content-center">
+      <p class="text-center">
+        By clicking SHORTEN, you are agreeing to Simple Url Shortener
+        <a th:href="@{/terms-of-service}">Terms of Service and Privacy Policy</a>
+      </p>
+    </section>
+  </div>
+</main>
+
+<!--/* Session URLs */-->
+
+<!--/*@thymesVar id="sessionUrls" type="java.util.ArrayList<edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl>"*/-->
+<article class="generated-urls container" th:if="${!sessionUrls.isEmpty()}">
+  <header>
+    <h3 class="text-center mt-3 mb-3">Recent Links</h3>
+  </header>
+  <section class="card mb-3" th:each="url : ${ sessionUrls }">
+    <div class="card-body bg-body shadow">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 align-items-center">
+          <p th:text="${ url.name }" class="text-center text-sm-center text-md-start text-lg-start fw-bold"></p>
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 shorten-url text-center mb-3">
+          <a th:href="${ url.shortUrl }" th:text="${ url.shortUrl }" target="_blank" class="text-sm-center text-md-start"></a>
+        </div>
+        <div class="col-sm-12 col-md-1 col-lg-1 url-actions d-grip gap-2 mb-2 p-1">
+          <a class="btn d-block btn-warning" th:href="'/statistics/temp/' + ${ url.temporaryCode }" target="_blank">
+            <i class="fa fa-chart-pie fs-6"></i>
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-1 col-lg-1 url-actions d-grip gap-2 mb-2 p-1">
+          <a class="qr-code btn d-block btn-light" th:data-code-id="${ url.urlCode }" th:qr-image="${ url.qrCode }">
+            <i class="fa fa-qrcode fs-6"></i>
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-1 col-lg-1 url-actions d-grip gap-2 mb-2 p-1">
+          <a class="copyable btn d-block btn-light" th:data-clipboard-text="${ url.shortUrl }">
+            <i class="fa fa-copy fs-6"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<script type="text/javascript" src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/vendor/clipboard-js/clipboard.min.js"></script>
+<script type="text/javascript" src="/public/vendor/alertify-js/alertify.min.js"></script>
+<script type="text/javascript" src="/public/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="/public/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/css/global.css">
+  <link rel="stylesheet" href="/public/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/public/vendor/bootstrap/css/bootstrap.min.css">
+  <title>Sign in | Simple Url Shortener</title>
+</head>
+<body>
+<div class="container d-flex h-100">
+  <div class="row container-fluid align-items-center justify-content-center">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+      <section class="card shadow">
+        <header class="card-header p-3 bg-primary text-white">
+          <h1 class="card-title mt-5">Simple Url Shortener</h1>
+          <p class="lead">Simple way to short your long URLs</p>
+        </header>
+        <main class="card-body p-4">
+          <form action="/signup/process" method="post" accept-charset="UTF-8">
+
+            <!--/*@thymesVar id="errorOnSignup" type="java.lang.Boolean"*/-->
+            <section th:if="${ errorOnSignup }" class="alert alert-danger mb-4 alert-dismissible fade show"
+                     role="alert">
+              <p class="text-center">Oops! Check the form to see what went wrong.</p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </section>
+
+            <div class="mb-4">
+              <h2>Sign up</h2>
+            </div>
+
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="name">Name</label>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <input type="text" name="name" id="name" class="form-control" th:classappend="${ signupFormErrors.containsKey('name') } ? 'is-invalid' : '' " minlength="2" maxlength="100" required/>
+              <div th:if="${ signupFormErrors.containsKey('name') }"  class="invalid-feedback">
+                <div class="name-feedback" th:each="error: ${ signupFormErrors.get('name') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lastname input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="lastname">Lastname</label>
+              <input type="text" name="lastname" id="lastname" class="form-control" th:classappend="${ signupFormErrors.containsKey('lastname') } ? 'is-invalid' : '' " minlength="2" maxlength="100"
+                     required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('lastname') }"  class="invalid-feedback">
+                <div class="lastname-feedback" th:each="error: ${ signupFormErrors.get('lastname') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Username input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" name="username" id="username" class="form-control" th:classappend="${ signupFormErrors.containsKey('username') } ? 'is-invalid' : '' " minlength="2" maxlength="50"
+                     required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('username') }"  class="invalid-feedback">
+                <div class="username-feedback" th:each="error: ${ signupFormErrors.get('username') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="email">Email address</label>
+              <input type="email" name="email" id="email" class="form-control" th:classappend="${ signupFormErrors.containsKey('email') } ? 'is-invalid' : '' " maxlength="320" required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('email') }"  class="invalid-feedback">
+                <div class="email-feedback" th:each="error: ${ signupFormErrors.get('email') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" name="password" id="password" class="form-control"
+                     data-mdb-showcounter="true" th:classappend="${ signupFormErrors.containsKey('password') } ? 'is-invalid' : '' " minlength="6" maxlength="24" required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('password') }"  class="invalid-feedback">
+                <div class="password-feedback" th:each="error: ${ signupFormErrors.get('password') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
+              <div class="form-helper"></div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="mb-4">
+              <button type="submit" class="btn btn-primary w-100">Sign up</button>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <p>Already have an account? Log in <a href="/login">here</a></p>
+            </div>
+          </form>
+        </main>
+      </section>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
