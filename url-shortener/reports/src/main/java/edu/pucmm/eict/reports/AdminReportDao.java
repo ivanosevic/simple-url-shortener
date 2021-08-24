@@ -2,6 +2,7 @@ package edu.pucmm.eict.reports;
 
 import edu.pucmm.eict.persistence.GenericDao;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.Optional;
 
 public class AdminReportDao extends GenericDao {
 
+    @Inject
     public AdminReportDao(EntityManagerFactory entityManagerFactory) {
         super(entityManagerFactory);
     }

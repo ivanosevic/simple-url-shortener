@@ -1,4 +1,4 @@
-package edu.pucmm.eict.webapp.routes;
+package edu.pucmm.eict.webapp.controllers;
 
 import io.javalin.Javalin;
 

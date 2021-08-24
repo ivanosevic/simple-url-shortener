@@ -5,6 +5,7 @@ import edu.pucmm.eict.urls.ShortUrl;
 import edu.pucmm.eict.urls.ShortUrlBuilder;
 import io.javalin.http.Context;
 
+import javax.inject.Inject;
 import java.util.*;
 
 public class SessionUrlService {
@@ -12,6 +13,7 @@ public class SessionUrlService {
     private final ShortUrlBuilder shortUrlBuilder;
     private final QrGenerator qrGenerator;
 
+    @Inject
     public SessionUrlService(ShortUrlBuilder redirectUrlBuilder, QrGenerator qrGenerator) {
         this.shortUrlBuilder = redirectUrlBuilder;
         this.qrGenerator = qrGenerator;

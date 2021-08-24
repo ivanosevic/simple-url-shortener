@@ -3,6 +3,7 @@ package edu.pucmm.eict.urls;
 import edu.pucmm.eict.persistence.Page;
 import edu.pucmm.eict.persistence.PaginationDao;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public class ShortUrlDao extends PaginationDao<ShortUrl, Long> {
 
+    @Inject
     public ShortUrlDao(EntityManagerFactory entityManagerFactory) {
         super(ShortUrl.class, entityManagerFactory);
     }

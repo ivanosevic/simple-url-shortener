@@ -9,12 +9,14 @@ import io.javalin.http.Handler;
 import org.eclipse.jetty.http.HttpStatus;
 import org.jetbrains.annotations.NotNull;
 
+import javax.inject.Inject;
 import java.util.Set;
 
 public class SecurityConfig implements AccessManager {
 
     private final AuthService authService;
 
+    @Inject
     public SecurityConfig(AuthService authService) {
         this.authService = authService;
     }

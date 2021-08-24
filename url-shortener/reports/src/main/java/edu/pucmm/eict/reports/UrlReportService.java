@@ -1,10 +1,13 @@
 package edu.pucmm.eict.reports;
 
+import javax.inject.Inject;
+
 public class UrlReportService {
 
     private final UrlReportDao urlReportDao;
     private final DataConverter dataConverter;
 
+    @Inject
     public UrlReportService(UrlReportDao urlStatisticsDao, DataConverter dataConverter) {
         this.urlReportDao = urlStatisticsDao;
         this.dataConverter = dataConverter;

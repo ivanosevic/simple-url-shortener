@@ -3,7 +3,8 @@ package edu.pucmm.eict.users;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.jasypt.util.password.PasswordEncryptor;
-import org.jasypt.util.password.StrongPasswordEncryptor;
+
+import javax.inject.Inject;
 
 public class JasyptEncryptor implements MyEncryptor {
 
@@ -11,6 +12,7 @@ public class JasyptEncryptor implements MyEncryptor {
     private final StandardPBEStringEncryptor textEncryptor;
     private final String EMPTY = "";
 
+    @Inject
     public JasyptEncryptor(PasswordEncryptor passwordEncryptor, StandardPBEStringEncryptor textEncryptor) {
         this.passwordEncryptor = passwordEncryptor;
         this.textEncryptor = textEncryptor;

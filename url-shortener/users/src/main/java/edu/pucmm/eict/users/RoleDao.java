@@ -2,11 +2,13 @@ package edu.pucmm.eict.users;
 
 import edu.pucmm.eict.persistence.Dao;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import java.util.Optional;
 
 public class RoleDao extends Dao<Role, Integer> {
 
+    @Inject
     public RoleDao(EntityManagerFactory entityManagerFactory) {
         super(Role.class, entityManagerFactory);
     }

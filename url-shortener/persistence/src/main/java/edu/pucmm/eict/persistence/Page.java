@@ -10,6 +10,9 @@ public class Page<T> {
     private boolean isEmpty;
     private List<T> results;
 
+    public Page() {
+    }
+
     public Page(boolean isEmpty) {
         this.isEmpty = isEmpty;
     }

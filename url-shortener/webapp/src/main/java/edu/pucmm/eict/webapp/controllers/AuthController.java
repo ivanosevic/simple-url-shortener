@@ -1,22 +1,27 @@
 package edu.pucmm.eict.webapp.controllers;
 
 import edu.pucmm.eict.users.AuthService;
+import edu.pucmm.eict.users.BadCredentialsException;
 import edu.pucmm.eict.users.User;
 import edu.pucmm.eict.users.UserService;
 import edu.pucmm.eict.webapp.configuration.SessionFlash;
+import io.javalin.Javalin;
 import io.javalin.core.validation.Validator;
 import io.javalin.http.Context;
 import org.eclipse.jetty.http.HttpStatus;
 
+import javax.inject.Inject;
 import java.util.*;
 
-public class AuthController {
+public class AuthController extends BaseRoute {
 
     private final UserService userService;
     private final AuthService authService;
     private final SessionFlash sessionFlash;
 
-    public AuthController(UserService userService, AuthService authService, SessionFlash sessionFlash) {
+    @Inject
+    public AuthController(Javalin app, UserService userService, AuthService authService, SessionFlash sessionFlash) {
+        super(app);
         this.userService = userService;
         this.authService = authService;
         this.sessionFlash = sessionFlash;
@@ -59,6 +64,10 @@ public class AuthController {
         Map<String, Object> data = new HashMap<>();
         Boolean errorOnSignup = sessionFlash.get("errorOnSignup", ctx);
         Map<String, List<String>> signupFormErrors = sessionFlash.get("signupFormErrors", ctx);
+        // Map could be null and ruin the template
+        if(signupFormErrors == null) {
+            signupFormErrors = new HashMap<>();
+        }
         data.put("errorOnSignup", errorOnSignup);
         data.put("signupFormErrors", signupFormErrors);
         return data;
@@ -72,7 +81,7 @@ public class AuthController {
     @SuppressWarnings("rawtypes")
     private Map<String, List<String>> validateUserForm(Context ctx) {
         var email = ctx.formParam("email", String.class)
-                .check(s -> userService.findByUsername(s).isEmpty(), "There's an account associated with this email.")
+                .check(s -> userService.findByEmail(s).isEmpty(), "There's an account associated with this email.")
                 .check(s -> !s.isBlank(), "Email can't be empty.")
                 .check(s -> s.length() < 320, "Email can't be larger than 320 characters.");
 
@@ -118,13 +127,13 @@ public class AuthController {
         if (!errors.isEmpty()) {
             sessionFlash.add("errorOnSignup", true, ctx);
             sessionFlash.add("signupFormErrors", errors, ctx);
-            ctx.redirect("/signup", HttpStatus.BAD_REQUEST_400);
+            ctx.redirect("/signup", HttpStatus.SEE_OTHER_303);
             return;
         }
         User user = parseUserFromForm(ctx);
         userService.create(user);
         sessionFlash.add("successOnSignup", true, ctx);
-        ctx.redirect("/login", HttpStatus.OK_200);
+        ctx.redirect("/login", HttpStatus.SEE_OTHER_303);
     }
 
     public void logout(Context ctx) {
@@ -139,6 +148,16 @@ public class AuthController {
 
     public void handleBadCredentialsException(Exception ex, Context ctx) {
         sessionFlash.add("errorOnLogin", true, ctx);
-        ctx.redirect("/login", HttpStatus.UNAUTHORIZED_401);
+        ctx.redirect("/login", HttpStatus.SEE_OTHER_303);
+    }
+
+    @Override
+    public void applyRoutes() {
+        app.get("/login", this::loginView);
+        app.post("/login/process", this::login);
+        app.get("/signup", this::signupView);
+        app.post("/signup/process", this::signup);
+        app.get("/logout", this::logout);
+        app.exception(BadCredentialsException.class, this::handleBadCredentialsException);
     }
 }

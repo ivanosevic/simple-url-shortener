@@ -1,9 +1,9 @@
 package edu.pucmm.eict.users;
 
-
 import edu.pucmm.eict.persistence.Page;
 import edu.pucmm.eict.persistence.PaginationDao;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class UserDao extends PaginationDao<User, Long> {
 
+    @Inject
     public UserDao(EntityManagerFactory entityManagerFactory) {
         super(User.class, entityManagerFactory);
     }

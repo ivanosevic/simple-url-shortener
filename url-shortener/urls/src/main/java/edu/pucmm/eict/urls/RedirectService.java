@@ -3,6 +3,7 @@ package edu.pucmm.eict.urls;
 import nl.basjes.parse.useragent.UserAgent;
 import nl.basjes.parse.useragent.UserAgentAnalyzer;
 
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
@@ -12,6 +13,7 @@ public class RedirectService {
     private final IpInfoService ipInfoService;
     private final UserAgentAnalyzer uaa;
 
+    @Inject
     public RedirectService(ClickDao clickDao,
                            ShortUrlDao shortUrlDao,
                            IpInfoService ipInfoService,

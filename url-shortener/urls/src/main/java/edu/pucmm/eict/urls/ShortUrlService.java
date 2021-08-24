@@ -3,6 +3,7 @@ package edu.pucmm.eict.urls;
 import edu.pucmm.eict.persistence.Page;
 import edu.pucmm.eict.users.User;
 
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -12,12 +13,13 @@ public class ShortUrlService {
 
     private final ShortUrlDao shortUrlDao;
     private final UrlEncoder urlEncoder;
-    private final UrlValidator urlValidator;
+    private final MyUrlValidator myUrlValidator;
 
-    public ShortUrlService(ShortUrlDao shortUrlDao, UrlEncoder urlEncoder, UrlValidator urlValidator) {
+    @Inject
+    public ShortUrlService(ShortUrlDao shortUrlDao, UrlEncoder urlEncoder, MyUrlValidator myUrlValidator) {
         this.shortUrlDao = shortUrlDao;
         this.urlEncoder = urlEncoder;
-        this.urlValidator = urlValidator;
+        this.myUrlValidator = myUrlValidator;
     }
 
     @Transactional
@@ -61,12 +63,12 @@ public class ShortUrlService {
         }
 
         ShortUrl shortUrl = new ShortUrl();
-        String parsedUrl = urlValidator.attachSchema(url);
-        if (!urlValidator.isValid(parsedUrl)) {
+        String parsedUrl = myUrlValidator.attachSchema(url);
+        if (!myUrlValidator.isValid(parsedUrl)) {
             throw new InvalidUrlException("The given URL is not valid.");
         }
 
-        String alias = urlValidator.getHost(parsedUrl);
+        String alias = myUrlValidator.getHost(parsedUrl);
         shortUrl.setName(alias);
         shortUrl.setUser(user);
         shortUrl.setUrl(parsedUrl);

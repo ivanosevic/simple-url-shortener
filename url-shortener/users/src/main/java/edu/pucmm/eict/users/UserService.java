@@ -3,6 +3,7 @@ package edu.pucmm.eict.users;
 
 import edu.pucmm.eict.persistence.Page;
 
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ public class UserService {
     private final UserDao userDao;
     private final MyEncryptor myEncryptor;
 
+    @Inject
     public UserService(UserDao userDao, MyEncryptor myEncryptor) {
         this.userDao = userDao;
         this.myEncryptor = myEncryptor;

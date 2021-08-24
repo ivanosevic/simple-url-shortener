@@ -22,6 +22,13 @@
         <main class="card-body p-4">
           <form action="/signup/process" method="post" accept-charset="UTF-8">
 
+            <!--/*@thymesVar id="errorOnSignup" type="java.lang.Boolean"*/-->
+            <section th:if="${ errorOnSignup }" class="alert alert-danger mb-4 alert-dismissible fade show"
+                     role="alert">
+              <p class="text-center">Oops! Check the form to see what went wrong.</p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </section>
+
             <div class="mb-4">
               <h2>Sign up</h2>
             </div>
@@ -29,37 +36,67 @@
             <!-- Name input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="name">Name</label>
-              <input type="text" name="name" id="name" class="form-control" minlength="2" maxlength="100" required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <input type="text" name="name" id="name" class="form-control" th:classappend="${ signupFormErrors.containsKey('name') } ? 'is-invalid' : '' " minlength="2" maxlength="100" required/>
+              <div th:if="${ signupFormErrors.containsKey('name') }"  class="invalid-feedback">
+                <div class="name-feedback" th:each="error: ${ signupFormErrors.get('name') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
             </div>
 
             <!-- Lastname input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="lastname">Lastname</label>
-              <input type="text" name="lastname" id="lastname" class="form-control" minlength="2" maxlength="100"
+              <input type="text" name="lastname" id="lastname" class="form-control" th:classappend="${ signupFormErrors.containsKey('lastname') } ? 'is-invalid' : '' " minlength="2" maxlength="100"
                      required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('lastname') }"  class="invalid-feedback">
+                <div class="lastname-feedback" th:each="error: ${ signupFormErrors.get('lastname') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
             </div>
 
             <!-- Username input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="username">Username</label>
-              <input type="text" name="username" id="username" class="form-control" minlength="2" maxlength="50"
+              <input type="text" name="username" id="username" class="form-control" th:classappend="${ signupFormErrors.containsKey('username') } ? 'is-invalid' : '' " minlength="2" maxlength="50"
                      required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('username') }"  class="invalid-feedback">
+                <div class="username-feedback" th:each="error: ${ signupFormErrors.get('username') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="email">Email address</label>
-              <input type="email" name="email" id="email" class="form-control" maxlength="320" required/>
+              <input type="email" name="email" id="email" class="form-control" th:classappend="${ signupFormErrors.containsKey('email') } ? 'is-invalid' : '' " maxlength="320" required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('email') }"  class="invalid-feedback">
+                <div class="email-feedback" th:each="error: ${ signupFormErrors.get('email') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="password">Password</label>
-              <input type="password" name="password" id="password" class="form-control" data-mdb-showcounter="true"
-                     minlength="6" maxlength="20" required/>
+              <input type="password" name="password" id="password" class="form-control"
+                     data-mdb-showcounter="true" th:classappend="${ signupFormErrors.containsKey('password') } ? 'is-invalid' : '' " minlength="6" maxlength="24" required/>
+              <!--/*@thymesVar id="signupFormErrors" type="java.util.Map<String, java.util.List<String>>"*/-->
+              <div th:if="${ signupFormErrors.containsKey('password') }"  class="invalid-feedback">
+                <div class="password-feedback" th:each="error: ${ signupFormErrors.get('password') }">
+                  <p th:text="${ error }"></p>
+                </div>
+              </div>
               <div class="form-helper"></div>
             </div>
-
+            
             <!-- Submit button -->
             <div class="mb-4">
               <button type="submit" class="btn btn-primary w-100">Sign up</button>

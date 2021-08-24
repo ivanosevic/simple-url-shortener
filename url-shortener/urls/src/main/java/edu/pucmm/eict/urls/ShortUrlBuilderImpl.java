@@ -1,10 +1,14 @@
 package edu.pucmm.eict.urls;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public class ShortUrlBuilderImpl implements ShortUrlBuilder {
 
     private final String domain;
 
-    public ShortUrlBuilderImpl(String domain) {
+    @Inject
+    public ShortUrlBuilderImpl(@Named("domain") String domain) {
         this.domain = domain;
     }
 

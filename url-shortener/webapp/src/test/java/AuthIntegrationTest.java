@@ -8,8 +8,6 @@ import edu.pucmm.eict.webapp.configuration.SecurityConfig;
 import edu.pucmm.eict.webapp.configuration.SessionFlash;
 import edu.pucmm.eict.webapp.controllers.AuthController;
 import edu.pucmm.eict.webapp.controllers.ShortUrlController;
-import edu.pucmm.eict.webapp.routes.AuthRoute;
-import edu.pucmm.eict.webapp.routes.ShortUrlRoute;
 import edu.pucmm.eict.webapp.sessionurls.SessionUrlService;
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
@@ -34,7 +32,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AuthIntegrationTest {
@@ -78,12 +75,12 @@ public class AuthIntegrationTest {
         IpInfoService ipInfoService = new IpInfoServiceImpl(client);
         QrGenerator qrGenerator = new PngQrGenerator();
         UrlEncoder urlEncoder = new Base62UrlEncoder(base62Encoder);
-        UrlValidator urlValidator = new UrlValidator(apacheUrlValidator);
+        MyUrlValidator myUrlValidator = new MyUrlValidator(apacheUrlValidator);
         ShortUrlBuilder shortUrlBuilder = new ShortUrlBuilderImpl("short.wolfisc.com");
 
         ClickDao clickDao = new ClickDao(emf);
         ShortUrlDao shortUrlDao = new ShortUrlDao(emf);
-        ShortUrlService shortUrlService = new ShortUrlService(shortUrlDao, urlEncoder, urlValidator);
+        ShortUrlService shortUrlService = new ShortUrlService(shortUrlDao, urlEncoder, myUrlValidator);
         RedirectService redirectService = new RedirectService(clickDao, shortUrlDao, ipInfoService, userAgentAnalyzer);
 
         /**
@@ -105,12 +102,8 @@ public class AuthIntegrationTest {
 
         SessionFlash sessionFlash = new SessionFlash();
         SessionUrlService sessionUrlService = new SessionUrlService(shortUrlBuilder, qrGenerator);
-
-        AuthController authController = new AuthController(userService, authService, sessionFlash);
-        ShortUrlController shortUrlController = new ShortUrlController(shortUrlService, sessionUrlService, sessionFlash);
-
-        new AuthRoute(javalin, authController).applyRoutes();
-        new ShortUrlRoute(javalin, shortUrlController).applyRoutes();
+        new AuthController(javalin, userService, authService, sessionFlash).applyRoutes();
+        new ShortUrlController(javalin, shortUrlService, sessionUrlService, sessionFlash).applyRoutes();
 
         javalin.start(7000);
     }
@@ -144,9 +137,7 @@ public class AuthIntegrationTest {
                 .field("username", "fakeuser")
                 .field("password", "fakepassword")
                 .asEmpty();
-        String redirect = response.getHeaders().get("Location").get(0);
-        assertEquals(HttpStatus.UNAUTHORIZED_401, response.getStatus());
-        assertEquals("/login", redirect);
+        assertEquals(HttpStatus.SEE_OTHER_303, response.getStatus());
     }
 
     @Test
@@ -171,7 +162,7 @@ public class AuthIntegrationTest {
                 .field("lastname", empty)
                 .field("email", empty)
                 .asString();
-        assertEquals(HttpStatus.BAD_REQUEST_400, response.getStatus());
+        assertEquals(HttpStatus.SEE_OTHER_303, response.getStatus());
     }
 
     @Test
@@ -183,7 +174,7 @@ public class AuthIntegrationTest {
                 .field("lastname", "Big Evil")
                 .field("email", "20170874@ce.pucmm.edu.do")
                 .asString();
-        assertEquals(HttpStatus.BAD_REQUEST_400, response.getStatus());
+        assertEquals(HttpStatus.SEE_OTHER_303, response.getStatus());
     }
 
     @Test
@@ -206,8 +197,6 @@ public class AuthIntegrationTest {
         HttpResponse logout = Unirest.get("http://localhost:7000/logout")
                 .cookie(JSESSIONID)
                 .asEmpty();
-
-        JSESSIONID = logout.getCookies().getNamed("JSESSIONID");
 
         assertEquals(HttpStatus.OK_200, performSignup.getStatus());
         assertEquals(HttpStatus.OK_200, performLogin.getStatus());

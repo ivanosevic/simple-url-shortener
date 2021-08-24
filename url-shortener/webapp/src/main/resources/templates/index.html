@@ -5,6 +5,13 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="title" content="Wolfisc Simple Url Shortener | Short your Long URLs">
+  <meta name="description" content="Simple way to short your long URLs. Short your URLs now!">
+  <meta name="keywords" content="url, long url, short url, shortener, simple, wolfisc, powerful links, free, statistics, url statistics, free url shortener, web programming, final exam">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="1 days">
   <link rel="stylesheet" href="/public/css/global.css">
   <link rel="stylesheet" href="/public/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="/public/vendor/bootstrap/css/bootstrap.min.css">
@@ -85,7 +92,7 @@
 
 <!--/* Session URLs */-->
 
-<!--/*@thymesVar id="sessionUrls" type="java.util.ArrayList<edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl>"*/-->
+<!--/*@thymesVar id="sessionUrls" type="java.util.ArrayList<edu.pucmm.eict.webapp.sessionurls.SessionUrl>"*/-->
 <article class="generated-urls container" th:if="${!sessionUrls.isEmpty()}">
   <header>
     <h3 class="text-center mt-3 mb-3">Recent Links</h3>
@@ -93,11 +100,8 @@
   <section class="card mb-3" th:each="url : ${ sessionUrls }">
     <div class="card-body bg-body shadow">
       <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-4 align-items-center">
-          <p th:text="${ url.name }" class="text-center text-sm-center text-md-start text-lg-start fw-bold"></p>
-        </div>
-        <div class="col-sm-12 col-md-5 col-lg-5 shorten-url text-center mb-3">
-          <a th:href="${ url.shortUrl }" th:text="${ url.shortUrl }" target="_blank" class="text-sm-center text-md-start"></a>
+        <div class="col-sm-12 col-md-9 col-lg-9 mb-3 align-items-center" th:with="jsonLink = '{&quot;title&quot; : &quot;' + ${ url.shortUrl } + '&quot;}'">
+          <a th:href="${ url.url }" target="_blank" class="link-preview tag-preview-url" th:data-short-url="${ url.shortUrl }" th:data-set-data="${ jsonLink }" th:text="${ url.shortUrl }"></a>
         </div>
         <div class="col-sm-12 col-md-1 col-lg-1 url-actions d-grip gap-2 mb-2 p-1">
           <a class="btn d-block btn-warning" th:href="'/statistics/temp/' + ${ url.temporaryCode }" target="_blank">
@@ -123,6 +127,7 @@
 <script type="text/javascript" src="/public/vendor/clipboard-js/clipboard.min.js"></script>
 <script type="text/javascript" src="/public/vendor/alertify-js/alertify.min.js"></script>
 <script type="text/javascript" src="/public/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="/public/vendor/microlink/microlink.min.js"></script>
 <script type="text/javascript" src="/public/js/index.js"></script>
 </body>
 </html>

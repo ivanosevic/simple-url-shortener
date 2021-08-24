@@ -12,6 +12,7 @@ dependencies {
     implementation "org.hibernate:hibernate-core:5.4.32.Final"
     implementation "io.javalin:javalin:3.13.10"
     implementation "org.jasypt:jasypt:1.9.3"
+    implementation 'com.google.inject:guice:5.0.1'
 }
 
 test {

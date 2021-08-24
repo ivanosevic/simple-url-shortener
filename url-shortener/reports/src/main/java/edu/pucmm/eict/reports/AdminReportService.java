@@ -1,8 +1,11 @@
 package edu.pucmm.eict.reports;
 
+import javax.inject.Inject;
+
 public class AdminReportService {
     private final AdminReportDao adminReportDao;
 
+    @Inject
     public AdminReportService(AdminReportDao adminReportDao) {
         this.adminReportDao = adminReportDao;
     }

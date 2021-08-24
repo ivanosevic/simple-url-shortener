@@ -1,13 +1,17 @@
 package edu.pucmm.eict.urls;
 
+import org.apache.commons.validator.routines.UrlValidator;
+
+import javax.inject.Inject;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class UrlValidator {
-    private final org.apache.commons.validator.routines.UrlValidator urlValidator;
+public class MyUrlValidator {
+    private final UrlValidator urlValidator;
 
-    public UrlValidator(org.apache.commons.validator.routines.UrlValidator urlValidator) {
+    @Inject
+    public MyUrlValidator(UrlValidator urlValidator) {
         this.urlValidator = urlValidator;
     }
 

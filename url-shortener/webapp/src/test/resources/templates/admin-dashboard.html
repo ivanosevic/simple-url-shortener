@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>My Dashboard | Simple URL Shortener</title>
+  <link rel="stylesheet" type="text/css" href="/public/css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/sweetalert2/sweetalert2.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/bootstrap.min.css">
+</head>
+<body>
+
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar-->
+  <div class="border-end bg-white" id="sidebar-wrapper">
+    <div class="sidebar-heading border-bottom bg-light">Admin Panel</div>
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin-panel">Dashboard</a>
+      <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin-panel/urls/all">All
+        Shortened
+        Links</a>
+      <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin-panel/urls">My
+        Shortened Links</a>
+      <a class="list-group-item list-group-item-action list-group-item-light p-3"
+         href="/admin-panel/users/all">Users</a>
+    </div>
+  </div>
+  <!-- Page content wrapper-->
+  <div id="page-content-wrapper" class="bg-light">
+    <!-- Top navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+        <button class="btn btn-primary fa fa-list" id="sidebarToggle"></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <!--/*@thymesVar id="user" type="edu.pucmm.eict.urlshortener.users.User"*/-->
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false" th:text="'Welcome, ' + ${ user.username }"></a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/my-account">Account Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="shadow-sm p-3 mb-4 bg-body rounded text-center">
+      <h1 class="fs-2 display-6">Dashboard</h1>
+    </header>
+    <!-- Page content-->
+    <div class="container-fluid">
+      <main id="report" class="container mt-4">
+        <div class="row p-2">
+          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+            <!--/*@thymesVar id="adminReport" type="edu.pucmm.eict.urlshortener.reports.AdminReport"*/-->
+            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${adminReport.totalClicks}"></p>
+            <p class="lead text-center">Clicks</p>
+          </div>
+
+          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+            <!--/*@thymesVar id="adminReport" type="edu.pucmm.eict.urlshortener.reports.AdminReport"*/-->
+            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${adminReport.totalUsers}">$</p>
+            <p class="lead text-center">Users</p>
+          </div>
+
+          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+            <!--/*@thymesVar id="adminReport" type="edu.pucmm.eict.urlshortener.reports.AdminReport"*/-->
+            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${adminReport.totalLinks}">$</p>
+            <p class="lead text-center">Shortened URLs</p>
+          </div>
+
+          <div class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+            <!--/*@thymesVar id="adminReport" type="edu.pucmm.eict.urlshortener.reports.AdminReport"*/-->
+            <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${adminReport.totalLinksLastDay}"></p>
+            <p class="lead text-center">Shortened URLs last 24 hours</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/vendor/sweetalert2/sweetalert2.min.js"></script>
+<script type="text/javascript" src="/public/vendor/alertify-js/alertify.min.js"></script>
+<script type="text/javascript" src="/public/js/navbar.js"></script>
+</body>
+</html>

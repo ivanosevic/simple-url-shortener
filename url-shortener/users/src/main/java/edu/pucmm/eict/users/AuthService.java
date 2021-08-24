@@ -1,6 +1,6 @@
 package edu.pucmm.eict.users;
 
-
+import javax.inject.Inject;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -9,6 +9,7 @@ public class AuthService {
     private final UserDao userDao;
     private final MyEncryptor myEncryptor;
 
+    @Inject
     public AuthService(UserDao userDao, MyEncryptor myEncryptor) {
         this.userDao = userDao;
         this.myEncryptor = myEncryptor;

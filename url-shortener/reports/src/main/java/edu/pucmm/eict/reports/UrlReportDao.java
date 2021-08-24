@@ -2,6 +2,7 @@ package edu.pucmm.eict.reports;
 
 import edu.pucmm.eict.persistence.GenericDao;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Tuple;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class UrlReportDao extends GenericDao {
 
+    @Inject
     public UrlReportDao(EntityManagerFactory entityManagerFactory) {
         super(entityManagerFactory);
     }

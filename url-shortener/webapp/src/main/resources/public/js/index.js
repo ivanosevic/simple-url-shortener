@@ -1,7 +1,12 @@
 /**
  * Until document is ready...
  */
+
 document.addEventListener("DOMContentLoaded", function (event) {
+  microlink('.link-preview', {
+    media: ['image','logo']
+  });
+
   const clipboard = new ClipboardJS('.copyable');
 
   clipboard.on('success', function () {
@@ -14,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   document.addEventListener('click', function (clickEvent) {
     qrCodeBtn(clickEvent);
+    microLinkBtn(clickEvent);
   });
 
 });
@@ -29,5 +35,14 @@ const qrCodeBtn = function (evt) {
       showConfirmButton: false,
       showCloseButton: true
     });
+  }
+};
+
+const microLinkBtn = function (evt) {
+  console.log("I'm here!");
+  if(evt.target.matches('.link-preview')) {
+    evt.preventDefault();
+    console.log("I'm inside  the link preview event.");
+    let shortUrl = evt.target.getAttribute('data-short-url');
   }
 };

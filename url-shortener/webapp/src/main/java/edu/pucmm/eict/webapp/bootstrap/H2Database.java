@@ -4,6 +4,8 @@ import org.h2.tools.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.sql.SQLException;
 
 public class H2Database implements EmbeddedDb {
@@ -11,7 +13,8 @@ public class H2Database implements EmbeddedDb {
     private final int port;
     private Server server;
 
-    public H2Database(int port) {
+    @Inject
+    public H2Database(@Named("h2Port") int port) {
         this.port = port;
     }
 

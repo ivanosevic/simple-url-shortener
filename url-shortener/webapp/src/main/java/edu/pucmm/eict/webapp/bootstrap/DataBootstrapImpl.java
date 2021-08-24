@@ -1,8 +1,8 @@
 package edu.pucmm.eict.webapp.bootstrap;
 
 import edu.pucmm.eict.users.*;
-import edu.pucmm.eict.webapp.bootstrap.DataBootstrap;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +11,7 @@ public class DataBootstrapImpl implements DataBootstrap {
     private final RoleDao roleDao;
     private final UserService userService;
 
+    @Inject
     public DataBootstrapImpl(RoleDao roleDao, UserService userService) {
         this.roleDao = roleDao;
         this.userService = userService;

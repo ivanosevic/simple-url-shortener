@@ -23,19 +23,24 @@
           <form action="/login/process" method="post" accept-charset="UTF-8">
 
             <!--/*@thymesVar id="successSignup" type="java.lang.Boolean"*/-->
-            <section th:if="${ successSignup }" class="alert alert-success mb-4">
-              <p class="text-center">User registered successfully.</p>
+            <section th:if="${ successSignup }" class="alert alert-success mb-4 alert-dismissible fade show"
+                     role="alert">
+              <p class="text-center">Use created successfully. You may now log in.</p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </section>
 
             <!--/*@thymesVar id="successLogout" type="java.lang.Boolean"*/-->
-            <section th:if="${ successLogout }" class="alert alert-success mb-4">
-              <p class="text-center">You have been logged out successfully.</p>
+            <section th:if="${ successLogout }" class="alert alert-info mb-4 alert-dismissible fade show"
+                     role="alert">
+              <p class="text-center">You've been logged out successfully.</p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </section>
 
             <!--/*@thymesVar id="errorOnLogin" type="java.lang.Boolean"*/-->
-            <section th:if="${ errorOnLogin }" class="alert alert-danger mb-4">
-              <!--/*@thymesVar id="errorOnLoginMsg" type="java.lang.String"*/-->
+            <section th:if="${ errorOnLogin }" class="alert alert-danger mb-4 alert-dismissible fade show"
+                     role="alert">
               <p class="text-center">Incorrect username or password. Please, make sure your username or password are correct.</p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </section>
 
             <div class="mb-4">

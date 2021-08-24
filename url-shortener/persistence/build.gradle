@@ -10,6 +10,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation "org.hibernate:hibernate-core:5.4.32.Final"
     implementation "com.h2database:h2:1.4.200"
+    // https://mvnrepository.com/artifact/com.google.inject/guice
+    implementation 'com.google.inject:guice:5.0.1'
 }
 
 test {
