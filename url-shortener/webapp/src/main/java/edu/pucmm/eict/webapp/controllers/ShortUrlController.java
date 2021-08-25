@@ -9,15 +9,12 @@ import edu.pucmm.eict.webapp.sessionurls.SessionUrl;
 import edu.pucmm.eict.webapp.sessionurls.SessionUrlService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import io.javalin.http.HttpResponseException;
-import io.javalin.http.util.RateLimit;
 import org.eclipse.jetty.http.HttpStatus;
 
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class ShortUrlController extends BaseRoute {
     private final ShortUrlService shortUrlService;
@@ -50,9 +47,6 @@ public class ShortUrlController extends BaseRoute {
     }
 
     public void shortUrl(Context ctx) {
-        // People who haven't signed up are allowed to create
-        // 10 links per day...
-        new RateLimit(ctx).requestPerTimeUnit(25, TimeUnit.DAYS);
         String url = ctx.formParam("url");
         ShortUrl shortUrl = shortUrlService.doShort(null, url);
         sessionUrlService.addToSession(ctx, shortUrl);
@@ -78,18 +72,10 @@ public class ShortUrlController extends BaseRoute {
         redirectAfterShortError(ctx);
     }
 
-    public void handleRateLimitException(HttpResponseException ex, Context ctx) {
-        if(ex.getStatus() == HttpStatus.TOO_MANY_REQUESTS_429) {
-            sessionFlash.add("errorShortingUrl", ex.getMessage(), ctx);
-        }
-        redirectAfterShortError(ctx);
-    }
-
     @Override
     public void applyRoutes() {
         app.get("/", this::mainView);
         app.post("/short", this::shortUrl);
         app.exception(InvalidUrlException.class, this::handleInvalidUrlException);
-        app.exception(HttpResponseException.class, this::handleRateLimitException);
     }
 }
