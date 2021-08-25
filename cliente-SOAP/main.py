@@ -36,6 +36,7 @@ def main():
         option = get_option()
 
         if option == 1:
+            print()
             url = input("Digite URL a acortar")
             response = client.service.shortUrl(url)
             print()
@@ -56,8 +57,10 @@ def main():
             print("Agrupado por plataforma: " + statistics.groupedByPlatform)
 
         elif option == 2:
+            print()
             username = input("Digite el nombre usuario")
-            response = client.service.getPageByUser(username, 1)
+            page = int(input("Digite el numero de pagina"))
+            response = client.service.getPageByUser(username, page)
             if response is not None:
                 print(response)
 
