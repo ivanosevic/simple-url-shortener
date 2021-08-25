@@ -16,8 +16,7 @@ class URL:
 def show_menu():
     print("")
     print("1. Acortar URL")
-
-
+    print("2. Ver URLs de un usuario")
 
 def get_option():
     option = int(input("Digite una opcion: "))
@@ -35,9 +34,32 @@ def main():
     while (running):
         show_menu()
         option = get_option()
+
         if option == 1:
-            url = input("Digite url a acortar")
-            print(client.service.doShort("user",url))
+            url = input("Digite URL a acortar")
+            response = client.service.shortUrl(url)
+            print()
+            print("URL acortada con exito. Mostrando informacion: ")
+            print("Usuario: " + response.user)
+            print("Fecha de creacion: " + response.createdAt)
+            print("URL original: " + response.longUrl)
+            print("URL acortada: " + response.shortUrl)
+
+            print("Estadisticas:")
+            statistics = response.statistics
+            print("Clicks: " + str(statistics.clicks))
+            print("Clicks unicos: " + str(statistics.uniqueClicks))
+            print("Clicks por pais: " + str(statistics.clicksByCountry))
+            print("Clicks en las ultimas 24 horas: " + str(statistics.clicksLast24Hours))
+            print("Agrupado por navegador: " + statistics.groupedByBrowser)
+            print("Agrupado por sistema operativo: " + statistics.groupedByOs)
+            print("Agrupado por plataforma: " + statistics.groupedByPlatform)
+
+        elif option == 2:
+            username = input("Digite el nombre usuario")
+            response = client.service.getPageByUser(username, 1)
+            if response is not None:
+                print(response)
 
 
 main()
