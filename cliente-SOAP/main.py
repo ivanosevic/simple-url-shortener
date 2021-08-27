@@ -62,6 +62,7 @@ def main():
             page = int(input("Digite el numero de pagina"))
             response = client.service.getPageByUser(username, page)
             if response is not None:
+                print()
                 print(response)
 
 
