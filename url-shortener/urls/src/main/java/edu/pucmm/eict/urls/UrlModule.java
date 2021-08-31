@@ -43,6 +43,7 @@ public class UrlModule extends AbstractModule {
         bind(IpInfoService.class).to(IpInfoServiceImpl.class).in(Singleton.class);
         bind(ShortUrlBuilder.class).to(ShortUrlBuilderImpl.class).in(Singleton.class);
         bind(UrlEncoder.class).to(Base62UrlEncoder.class).in(Singleton.class);
+        bind(UrlPreviewer.class).to(UrlPreviewerImpl.class).in(Singleton.class);
         bind(MyUrlValidator.class).in(Singleton.class);
         bind(ShortUrlService.class).in(Singleton.class);
         bind(RedirectService.class).in(Singleton.class);

@@ -22,6 +22,7 @@ public class ShortUrlDtoConverter extends AbstractConverter<ShortUrl, ShortUrlDt
         String createdAt = source.getCreatedAt().format(DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm:ss"));
         String shortUrl = shortUrlBuilder.redirectUrl(source.getCode());
         String user = (source.getUser() != null) ? source.getUser().getUsername() : ANONYMOUS_USER;
-        return new ShortUrlDto(source.getUrl(), shortUrl, createdAt, user);
+        String preview = source.getPreview();
+        return new ShortUrlDto(source.getUrl(), shortUrl, createdAt, user, preview);
     }
 }

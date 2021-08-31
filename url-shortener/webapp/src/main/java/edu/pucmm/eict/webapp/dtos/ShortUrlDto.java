@@ -8,6 +8,7 @@ public class ShortUrlDto {
     private String shortUrl;
     private String createdAt;
     private String user;
+    private String previewUrl;
 
     public ShortUrlDto() {
     }
@@ -20,6 +21,17 @@ public class ShortUrlDto {
         this.shortUrl = shortUrl;
         this.createdAt = createdAt;
         this.user = user;
+    }
+
+    public ShortUrlDto(String name, String code, String qrCode, String url, String shortUrl, String createdAt, String user, String previewUrl) {
+        this.name = name;
+        this.code = code;
+        this.qrCode = qrCode;
+        this.url = url;
+        this.shortUrl = shortUrl;
+        this.createdAt = createdAt;
+        this.user = user;
+        this.previewUrl = previewUrl;
     }
 
     public String getName() {
@@ -76,5 +88,13 @@ public class ShortUrlDto {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
+
+    public void setPreviewUrl(String previewUrl) {
+        this.previewUrl = previewUrl;
     }
 }

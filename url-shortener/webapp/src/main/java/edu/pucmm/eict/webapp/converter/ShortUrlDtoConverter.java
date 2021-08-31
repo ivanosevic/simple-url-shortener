@@ -27,6 +27,7 @@ public class ShortUrlDtoConverter extends AbstractConverter<ShortUrl, ShortUrlDt
         if(shortUrl.getUser() != null) {
             user = shortUrl.getUser().getUsername();
         }
+        String previewUrl = shortUrl.getPreview();
         return new ShortUrlDto(
                 shortUrl.getName(),
                 shortUrl.getCode(),
@@ -34,7 +35,8 @@ public class ShortUrlDtoConverter extends AbstractConverter<ShortUrl, ShortUrlDt
                 shortUrl.getUrl(),
                 redirectUrl,
                 shortUrl.getCreatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                user
+                user,
+                previewUrl
         );
     }
 }

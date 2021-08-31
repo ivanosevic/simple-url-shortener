@@ -106,6 +106,7 @@ public class ShortUrlServicesGrpc extends ShortUrlServiceRnGrpc.ShortUrlServiceR
                 .setShortUrl(shortUrlDto.getShortUrl())
                 .setStatistics(transformToStatistics(shortUrl))
                 .setUser(shortUrlDto.getUser())
+                .setPreview(shortUrl.getPreview())
                 .build();
     }
 }

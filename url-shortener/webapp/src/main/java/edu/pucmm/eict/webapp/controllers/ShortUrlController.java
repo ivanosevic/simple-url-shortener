@@ -41,7 +41,6 @@ public class ShortUrlController extends BaseRoute {
     }
 
     public void mainView(Context ctx) {
-        List<SessionUrl> sessionUrls = sessionUrlService.getList(ctx);
         var data = mainViewData(ctx);
         ctx.render("index.html", data);
     }

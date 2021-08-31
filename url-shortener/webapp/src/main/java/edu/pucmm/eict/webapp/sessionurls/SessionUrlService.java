@@ -30,7 +30,8 @@ public class SessionUrlService {
         String code = shortUrl.getCode();
         String url = shortUrl.getUrl();
         String qrCode = qrGenerator.base64Qr(redirectUrl);
-        return new SessionUrl(temporaryCode, alias, code, url, redirectUrl, qrCode);
+        String preview = shortUrl.getPreview();
+        return new SessionUrl(temporaryCode, alias, code, url, redirectUrl, qrCode, preview);
     }
 
     public void addToSession(Context ctx, ShortUrl shortUrl) {

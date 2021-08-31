@@ -7,6 +7,7 @@ public class SessionUrl {
     private String url;
     private String shortUrl;
     private String qrCode;
+    private String urlPreview;
 
     public SessionUrl(String temporaryCode, String alias, String urlCode, String url, String shortUrl, String qrCode) {
         this.temporaryCode = temporaryCode;
@@ -15,6 +16,16 @@ public class SessionUrl {
         this.url = url;
         this.shortUrl = shortUrl;
         this.qrCode = qrCode;
+    }
+
+    public SessionUrl(String temporaryCode, String name, String urlCode, String url, String shortUrl, String qrCode, String urlPreview) {
+        this.temporaryCode = temporaryCode;
+        this.name = name;
+        this.urlCode = urlCode;
+        this.url = url;
+        this.shortUrl = shortUrl;
+        this.qrCode = qrCode;
+        this.urlPreview = urlPreview;
     }
 
     public String getTemporaryCode() {
@@ -63,5 +74,13 @@ public class SessionUrl {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public String getUrlPreview() {
+        return urlPreview;
+    }
+
+    public void setUrlPreview(String urlPreview) {
+        this.urlPreview = urlPreview;
     }
 }

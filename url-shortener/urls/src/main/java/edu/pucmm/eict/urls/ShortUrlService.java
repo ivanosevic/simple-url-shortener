@@ -14,12 +14,14 @@ public class ShortUrlService {
     private final ShortUrlDao shortUrlDao;
     private final UrlEncoder urlEncoder;
     private final MyUrlValidator myUrlValidator;
+    private final UrlPreviewer urlPreviewer;
 
     @Inject
-    public ShortUrlService(ShortUrlDao shortUrlDao, UrlEncoder urlEncoder, MyUrlValidator myUrlValidator) {
+    public ShortUrlService(ShortUrlDao shortUrlDao, UrlEncoder urlEncoder, MyUrlValidator myUrlValidator, UrlPreviewer urlPreviewer) {
         this.shortUrlDao = shortUrlDao;
         this.urlEncoder = urlEncoder;
         this.myUrlValidator = myUrlValidator;
+        this.urlPreviewer = urlPreviewer;
     }
 
     @Transactional
@@ -72,6 +74,7 @@ public class ShortUrlService {
         shortUrl.setName(alias);
         shortUrl.setUser(user);
         shortUrl.setUrl(parsedUrl);
+        shortUrl.setPreview(urlPreviewer.getPreviewImg(url));
         ShortUrl saved = shortUrlDao.create(shortUrl);
 
         // Now, we generate and assign the code

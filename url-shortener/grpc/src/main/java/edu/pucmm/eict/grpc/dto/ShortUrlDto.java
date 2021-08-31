@@ -5,13 +5,15 @@ public class ShortUrlDto {
     private String shortUrl;
     private String createdAt;
     private String user;
+    private String preview;
     private UrlReportDto statistics;
 
-    public ShortUrlDto(String longUrl, String shortUrl, String createdAt, String user) {
+    public ShortUrlDto(String longUrl, String shortUrl, String createdAt, String user, String preview) {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
         this.createdAt = createdAt;
         this.user = user;
+        this.preview = preview;
     }
 
     public String getLongUrl() {
@@ -52,5 +54,13 @@ public class ShortUrlDto {
 
     public void setStatistics(UrlReportDto statistics) {
         this.statistics = statistics;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 }

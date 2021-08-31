@@ -27,6 +27,7 @@ message ShortUrlResponse {
   string createdAt = 3;
   string user = 4;
   UrlStatistics statistics = 5;
+  string preview = 6;
 }
 
 message PageShortUrlResponse {

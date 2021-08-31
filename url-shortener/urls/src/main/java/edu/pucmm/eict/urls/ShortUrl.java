@@ -25,6 +25,9 @@ public class ShortUrl implements Serializable {
 
     private String code;
 
+    @Lob
+    private String preview;
+
     @Column(length = 2048, nullable = false)
     private String url;
 
@@ -42,6 +45,14 @@ public class ShortUrl implements Serializable {
         this.name = name;
         this.code = code;
         this.url = url;
+    }
+
+    public ShortUrl(User user, String name, String code, String url, String preview) {
+        this.user = user;
+        this.name = name;
+        this.code = code;
+        this.url = url;
+        this.preview = preview;
     }
 
     @PrePersist
@@ -104,5 +115,13 @@ public class ShortUrl implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 }
