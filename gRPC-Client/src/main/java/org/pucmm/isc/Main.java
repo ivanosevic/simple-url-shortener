@@ -14,7 +14,7 @@ public class Main {
     public static void main(String args[])
     {
         String host = "localhost";
-        int port = 7002;
+        int port = 7003;
 
         Scanner inputOption = new Scanner(System.in);
         Scanner inputUrl = new Scanner(System.in);
