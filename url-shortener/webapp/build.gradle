@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+group 'edu.pucmm.eict'
+version '1.0'
+
+mainClassName = 'edu.pucmm.eict.webapp.Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
+    testImplementation 'org.mockito:mockito-inline:3.11.2'
+    testImplementation 'com.konghq:unirest-java:3.11.12'
+
+    implementation project(":persistence")
+    implementation project(":users")
+    implementation project(":urls")
+    implementation project(":reports")
+
+    implementation 'org.slf4j:slf4j-simple:1.7.32'
+    implementation 'com.google.inject:guice:5.0.1'
+    implementation "io.javalin:javalin:3.13.10"
+    implementation "org.thymeleaf:thymeleaf:3.0.12.RELEASE"
+    implementation "org.modelmapper:modelmapper:2.4.4"
+    implementation "org.hibernate:hibernate-core:5.4.32.Final"
+    implementation "com.h2database:h2:1.4.200"
+    implementation 'org.hibernate:hibernate-validator:6.0.13.Final'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/*
+* Shadow jar tasks to create a
+* fat jar executable
+* */
+shadowJar {
+    baseName = 'webapp'
+    classifier = ''
+    archiveVersion = ''
+}
+
+task stage {
+    dependsOn shadowJar
+}

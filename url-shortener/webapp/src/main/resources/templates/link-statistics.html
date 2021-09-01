@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/css/global.css">
+  <link rel="stylesheet" href="/public/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/public/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/alertify.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/default.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/alertify-js/css/themes/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/vendor/leaflet-js/leaflet.css">
+  <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+  <!--/*@thymesVar id="sessionUrl" type="edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl"*/-->
+  <title th:text="${ title } + ' for ' + ${ sessionUrl.shortUrl }"></title>
+</head>
+<body class="bg-light">
+
+<header class="shadow-sm p-3 mb-4 bg-body rounded">
+  <h1 class="text-center text-md-start text-lg-start">Url Statistics</h1>
+  <p class="lead text-center text-md-start text-lg-start">Url Statistics for
+    <!--/*@thymesVar id="sessionUrl" type="edu.pucmm.eict.urlshortener.webapp.domain.SessionUrl"*/-->
+    <strong th:text="${ sessionUrl.shortUrl }"></strong></p>
+</header>
+
+<main id="report" class="container">
+  <article id="basic-information" class="row p-2">
+    <section id="click-section" class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <!--/*@thymesVar id="report" type="edu.pucmm.eict.urlshortener.reports.UrlReport"*/-->
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${ report.clicks }"></p>
+      <p class="lead text-center">Clicks</p>
+    </section>
+
+    <section id="unique-clicks-section" class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <!--/*@thymesVar id="report" type="edu.pucmm.eict.urlshortener.reports.UrlReport"*/-->
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${ report.uniqueClicks }"></p>
+      <p class="lead text-center">Unique Clicks</p>
+    </section>
+
+    <section id="clicks-last-24hours-section" class="col-sm mb-3 me-3 shadow-sm p-2 bg-body rounded">
+      <!--/*@thymesVar id="report" type="edu.pucmm.eict.urlshortener.reports.UrlReport"*/-->
+      <p class="text-center mb-0 p-0 fs-4 display-3 fw-bold" th:text="${ report.clicksLast24Hours }"></p>
+      <p class="lead text-center">Clicks during last 24 hours</p>
+    </section>
+  </article>
+
+  <article class="row p-2 col-sm mb-3 shadow-sm p-2 bg-body rounded">
+    <div class="col-sm mb-3">
+      <p class="lead text-center">Clicks by country</p>
+      <div id="shorten-links-by-country" style="width: 100%; height: 400px;"></div>
+    </div>
+  </article>
+
+  <article id="chart-information" class="row p-2 bg-body shadow-sm">
+    <section class="col-sm-4">
+      <p class="lead text-center">Clicks by platform</p>
+      <canvas id="clicks-by-platform"></canvas>
+    </section>
+    <div class="col-sm-4">
+      <p class="lead text-center">Clicks by browser</p>
+      <canvas id="clicks-by-browser"></canvas>
+    </div>
+    <section class="col-sm-4">
+      <p class="lead text-center">Clicks by OS</p>
+      <canvas id="clicks-by-os"></canvas>
+    </section>
+  </article>
+</main>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const groupedByBrowser = [[${ report.groupedByBrowser }]];
+  const groupedByOs = [[${ report.groupedByOs }]];
+  const groupedByPlatform = [[${ report.groupedByPlatform }]];
+  const groupedByCountry = [[${ report.clicksByCountry }]];
+  /*]]>*/
+</script>
+
+<script type="text/javascript" src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/vendor/alertify-js/alertify.min.js"></script>
+<script type="text/javascript" src="/public/vendor/chart-js/chart.min.js"></script>
+<script type="text/javascript" src="/public/vendor/axios/axios.min.js"></script>
+<script type="text/javascript" src="/public/vendor/leaflet-js/leaflet.js"></script>
+<script type="text/javascript" src="/public/vendor/leaflet-js/leaflet-providers.js"></script>
+<script type="text/javascript" src="/public/js/util.js"></script>
+<script type="text/javascript" src="/public/js/link-statistics.js"></script>
+</body>
+</html>

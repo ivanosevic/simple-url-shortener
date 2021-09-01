@@ -1,0 +1,90 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+    id 'com.google.protobuf' version '0.8.17'
+}
+
+mainClassName='edu.pucmm.eict.grpc.Main'
+
+group 'edu.pucmm.eict'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation project(":persistence")
+    implementation project(":users")
+    implementation project(":urls")
+    implementation project(":reports")
+
+    implementation "io.javalin:javalin-bundle:3.13.10"
+    implementation 'com.google.inject:guice:5.0.1'
+    implementation "org.modelmapper:modelmapper:2.4.4"
+    implementation "org.hibernate:hibernate-core:5.4.32.Final"
+    implementation "com.h2database:h2:1.4.200"
+
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+    implementation 'io.grpc:grpc-netty-shaded:1.39.0'
+    implementation 'io.grpc:grpc-protobuf:1.39.0'
+    implementation 'io.grpc:grpc-stub:1.39.0'
+    implementation 'com.google.protobuf:protobuf-java:3.17.3'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/*
+* For PROTO Library
+* */
+//Tareas para la generación del código.
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.17.2"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.39.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+
+    generatedFilesBaseDir = "$projectDir/generated"
+}
+
+clean {
+    delete protobuf.generatedFilesBaseDir
+}
+
+idea {
+    module {
+        // proto files and generated Java files are automatically added as
+        // source dirs.
+        // If you have additional sources, add them here:
+        sourceDirs += file("src/generated");
+    }
+}
+
+/*
+* Shadow jar tasks to create a
+* fat jar executable
+* */
+shadowJar {
+    baseName = 'webapp'
+    classifier = ''
+    archiveVersion = ''
+}
+
+task stage {
+    dependsOn shadowJar
+}

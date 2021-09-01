@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/public/css/global.css">
+  <link rel="stylesheet" href="/public/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/public/vendor/bootstrap/css/bootstrap.min.css">
+  <title>Log in | Simple Url Shortener</title>
+</head>
+<body>
+<div class="container h-100">
+  <div class="h-100 row align-items-center justify-content-center">
+    <div class="col-sm-12 col-md-8 col-lg-6">
+      <section class="card shadow">
+        <header class="card-header p-3 bg-primary text-white">
+          <h1 class="card-title mt-5">Simple Url Shortener</h1>
+          <p class="lead">Simple way to short your long URLs</p>
+        </header>
+        <main class="card-body p-4">
+          <form action="/login/process" method="post" accept-charset="UTF-8">
+
+            <!--/*@thymesVar id="successSignup" type="java.lang.Boolean"*/-->
+            <section th:if="${ successSignup }" class="alert alert-success mb-4">
+              <p class="text-center">User registered successfully.</p>
+            </section>
+
+            <!--/*@thymesVar id="successLogout" type="java.lang.Boolean"*/-->
+            <section th:if="${ successLogout }" class="alert alert-success mb-4">
+              <p class="text-center">You have been logged out successfully.</p>
+            </section>
+
+            <!--/*@thymesVar id="errorOnLogin" type="java.lang.Boolean"*/-->
+            <section th:if="${ errorOnLogin }" class="alert alert-danger mb-4">
+              <!--/*@thymesVar id="errorOnLoginMsg" type="java.lang.String"*/-->
+              <p class="text-center">Incorrect username or password. Please, make sure your username or password are correct.</p>
+            </section>
+
+            <div class="mb-4">
+              <h2>Log in</h2>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" name="username" id="username" class="form-control" required/>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" name="password" id="password" class="form-control" required/>
+            </div>
+
+            <!-- Remember me -->
+            <div class="d-flex justify-content-center mb-4">
+              <input class="form-check-input me-2" type="checkbox" value="remember-me" name="remember-me" id="remember-me" checked/>
+              <label class="form-check-label" for="remember-me"> Remember me </label>
+            </div>
+
+            <!-- Submit button -->
+            <div class="mb-4">
+              <button type="submit" class="btn btn-primary w-100">Log in</button>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <p>Don't have an account? Make one by clicking <a href="/signup">here</a></p>
+            </div>
+          </form>
+        </main>
+      </section>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
