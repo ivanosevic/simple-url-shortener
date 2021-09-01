@@ -3,6 +3,9 @@ package edu.pucmm.eict.restapi.forms;
 public class ShortUrlForm {
     private String url;
 
+    public ShortUrlForm() {
+    }
+
     public ShortUrlForm(String url) {
         this.url = url;
     }

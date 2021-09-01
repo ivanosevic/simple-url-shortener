@@ -163,7 +163,7 @@ public class ShortUrlEndpoint extends BaseEndpoint {
         String username = jwtUtils.getUserFromToken(token);
         User user = userDao.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User with username " + username + " was not found."));
-        ShortUrlForm form = ctx.bodyValidator(ShortUrlForm.class).get();
+        ShortUrlForm form = ctx.bodyAsClass(ShortUrlForm.class);
         ShortUrl shortUrl = shortUrlService.doShort(user, form.getUrl());
         // Now parse the short url
         Long shortUrlId = shortUrl.getId();
