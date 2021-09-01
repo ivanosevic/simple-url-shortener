@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package edu.pucmm.eict.grpc.generated;
+
+message ChartData {
+  repeated int64 series = 1;
+  repeated string labels = 2;
+}
+
+message UrlStatistics {
+  int64 clicks = 1;
+  int64 uniqueClicks = 2;
+  int64 clicksLast24Hours = 3;
+  ChartData groupedByOs = 4;
+  ChartData groupedByBrowser = 5;
+  ChartData groupedByPlatform = 6;
+  ChartData clicksByCountry = 7;
+}
+
+message ShortUrlRequest {
+  string url = 1;
+}
+
+message ShortUrlResponse {
+  string longUrl = 1;
+  string shortUrl = 2;
+  string createdAt = 3;
+  string user = 4;
+  UrlStatistics statistics = 5;
+  string preview = 6;
+}
+
+message PageShortUrlResponse {
+  int32 totalPages = 1;
+  int32 currentPage = 2;
+  bool isFirst = 3;
+  bool isLast = 4;
+  bool isEmpty = 5;
+  repeated ShortUrlResponse results = 6;
+}
+
+message RequestPageShortUrlWithUser {
+  int32 page = 1;
+  string user = 2;
+}
+
+service ShortUrlServiceRn {
+  rpc getShortUrlsByUser(RequestPageShortUrlWithUser) returns (PageShortUrlResponse);
+  rpc shortUrl(ShortUrlRequest) returns (ShortUrlResponse);
+}
